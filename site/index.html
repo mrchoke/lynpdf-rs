@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="th">
+<html lang="en">
 
 <head>
   <meta charset="utf-8" />
@@ -54,8 +54,9 @@
     >
       <p class="eyebrow">LynPDF RS Project Portal</p>
       <h1>HTML/CSS + Markdown to PDF with a Pure Rust Pipeline</h1>
-      <p class="hero-lead">พอร์ทัลหลักของโปรเจกต์ LynPDF RS รวมภาพรวมความสามารถ, แนวทางใช้งานจริง, API/CLI,
-        สถาปัตยกรรม, ตัวอย่างเอกสาร และแนวทาง deploy แบบ production โดยไม่ต้องพึ่ง headless browser.</p>
+      <p class="hero-lead">The central portal for LynPDF RS with practical capabilities, API/CLI entry points,
+        architecture references, runnable examples, and production deployment guidance without relying on a
+        headless browser.</p>
 
       <div class="hero-actions">
         <a
@@ -165,7 +166,8 @@
           <h3>Bootstrap Fonts</h3>
           <pre><code>./scripts/download-fonts.sh --dest ./fonts
 ./scripts/download-fonts.ps1 -Dest ./fonts</code></pre>
-          <p>สคริปต์จะดาวน์โหลด Google/emoji fonts และแตก TLWG OTF ไปไว้ที่ fonts/tlwg/otf โดยอัตโนมัติ.</p>
+          <p>The scripts download Google/emoji fonts and automatically extract the TLWG OTF bundle into
+            fonts/tlwg/otf.</p>
         </article>
         <article class="step-card">
           <p class="step-index">02</p>
@@ -174,14 +176,14 @@
   -c tests/fixtures/test-styles.css \
   -o tests/output/test-01-thai-typography-rs.pdf \
   --font-dir ./fonts --verbose</code></pre>
-          <p>เริ่มจาก fixture ไทยเพื่อเช็ก font fallback และ shaping behavior ตั้งแต่รอบแรก.</p>
+          <p>Start with the Thai fixture to verify font fallback and shaping behavior from the first run.</p>
         </article>
         <article class="step-card">
           <p class="step-index">03</p>
           <h3>Run Full Validation</h3>
           <pre><code>cargo run --bin render-all-cases -- --all --verbose
 cargo test</code></pre>
-          <p>สร้างผลลัพธ์ batch จากทั้ง fixtures/examples และตรวจสอบ regression ด้วย test suite.</p>
+          <p>Generate batch outputs from fixtures and examples, then run regression checks with the test suite.</p>
         </article>
       </div>
     </section>
