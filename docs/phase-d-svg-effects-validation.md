@@ -1,5 +1,15 @@
 # Phase D SVG Effects Validation Report
 
+Companion example repository (clone-and-try):
+
+- `https://github.com/mrchoke/lynpdf-rs-example`
+
+```bash
+git clone https://github.com/mrchoke/lynpdf-rs-example
+cd lynpdf-rs-example
+cargo run
+```
+
 ## Scope
 
 This report validates the Phase D SVG effects parity work for:

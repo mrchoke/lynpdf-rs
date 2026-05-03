@@ -2,6 +2,16 @@
 
 LynPDF RS is prepared for production without shipping font binaries in the repository or crate package.
 
+Companion example repository for end-to-end Thai invoice testing:
+
+- `https://github.com/mrchoke/lynpdf-rs-example`
+
+```bash
+git clone https://github.com/mrchoke/lynpdf-rs-example
+cd lynpdf-rs-example
+cargo run
+```
+
 ## Policy
 
 - Do not commit runtime font files to this repository.

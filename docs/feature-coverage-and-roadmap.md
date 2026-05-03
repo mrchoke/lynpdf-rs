@@ -2,6 +2,16 @@
 
 This document maps what the current test corpus is exercising and defines a phased plan to support all functions, with font correctness as the top priority.
 
+Companion example repository for clone-and-try users:
+
+- `https://github.com/mrchoke/lynpdf-rs-example`
+
+```bash
+git clone https://github.com/mrchoke/lynpdf-rs-example
+cd lynpdf-rs-example
+cargo run
+```
+
 ## 1) Test Fixtures Coverage (tests/fixtures)
 
 ### Core language and typography

@@ -4,6 +4,18 @@
 
 ไฟล์นี้คือ API Guide หลักของโปรเจกต์ (`docs/api-guide-v0.1.0.md`)
 
+## Companion Example Repository
+
+สำหรับผู้ใช้ที่ต้องการ clone โปรเจกต์ตัวอย่างเพื่อทดลอง flow หน้าเว็บไทย -> ใบเสร็จ PDF โดยตรง:
+
+- `https://github.com/mrchoke/lynpdf-rs-example`
+
+```bash
+git clone https://github.com/mrchoke/lynpdf-rs-example
+cd lynpdf-rs-example
+cargo run
+```
+
 ---
 
 ## 1) Installation

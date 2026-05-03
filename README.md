@@ -6,6 +6,18 @@ Production policy: this repository does not need to publish bundled font binarie
 
 The first milestone is intentionally small but end-to-end: parse HTML/CSS, resolve a practical style subset, shape Thai text with `rustybuzz`, embed Thai fonts, and emit a PDF with CID Type0 fonts and ToUnicode data.
 
+## Companion Example Repository
+
+Try the full Thai checkout -> receipt PDF flow in:
+
+- `https://github.com/mrchoke/lynpdf-rs-example`
+
+```sh
+git clone https://github.com/mrchoke/lynpdf-rs-example
+cd lynpdf-rs-example
+cargo run
+```
+
 ## Try It
 
 ```toml

@@ -233,6 +233,10 @@ h1 {
   box-shadow: var(--shadow);
 }
 
+.terminal-alt {
+  margin-top: 12px;
+}
+
 .terminal-head {
   display: flex;
   align-items: center;

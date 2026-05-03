@@ -1,5 +1,15 @@
 # LynPDF RS Architecture Notes
 
+Companion example repository for clone-and-try workflows:
+
+- `https://github.com/mrchoke/lynpdf-rs-example`
+
+```bash
+git clone https://github.com/mrchoke/lynpdf-rs-example
+cd lynpdf-rs-example
+cargo run
+```
+
 This crate starts from the Thai text rendering report and keeps the pipeline split into stages that can be replaced independently:
 
 1. HTML parsing: `html5ever` via `markup5ever_rcdom`.
