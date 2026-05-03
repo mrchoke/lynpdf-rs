@@ -1,0 +1,154 @@
+<!-- ============================================================
+     Test 11: Variable Font Support (ฟอนต์แบบ Variable)
+     ============================================================
+     ทดสอบ: Inter Variable — single font file, multiple weights
+     ============================================================ -->
+<html>
+<head><title>Test 11 — Variable Font</title></head>
+<body>
+
+<h1>Test 11: Variable Font Support</h1>
+<p class="text-muted">ทดสอบฟอนต์แบบ Variable (Inter Variable) — ไฟล์เดียว รองรับหลาย weight</p>
+
+<!-- ─── Test 11.1: Variable Font Regular ─── -->
+<div class="test-section">
+  <h3>Test 11.1 — Inter Variable Regular</h3>
+
+  <div style="padding: 16px; background-color: #f0f4f8; margin-bottom: 12px;">
+    <div style="font-family: 'Inter Variable'; font-size: 24px; color: #1a1a2e; line-height: 1.6; margin-bottom: 12px;">
+      The quick brown fox jumps over the lazy dog.
+    </div>
+    <div style="font-family: 'Inter Variable'; font-size: 24px; color: #1a1a2e; line-height: 1.6;">
+      ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789
+    </div>
+  </div>
+</div>
+
+<!-- ─── Test 11.2: Variable Font Bold ─── -->
+<div class="test-section">
+  <h3>Test 11.2 — Inter Variable Bold (weight: bold)</h3>
+
+  <div style="padding: 16px; background-color: #f0f4f8; margin-bottom: 12px;">
+    <div style="font-family: 'Inter Variable'; font-weight: bold; font-size: 24px; color: #1a1a2e; line-height: 1.6; margin-bottom: 12px;">
+      Bold: The quick brown fox jumps over the lazy dog.
+    </div>
+    <div style="font-family: 'Inter Variable'; font-weight: bold; font-size: 18px; color: #333; line-height: 1.6;">
+      This text uses font-weight: bold with a variable font file.
+    </div>
+  </div>
+</div>
+
+<!-- ─── Test 11.3: Variable Font Italic ─── -->
+<div class="test-section">
+  <h3>Test 11.3 — Inter Variable Italic</h3>
+
+  <div style="padding: 16px; background-color: #f0f4f8; margin-bottom: 12px;">
+    <div style="font-family: 'Inter Variable'; font-style: italic; font-size: 24px; color: #1a1a2e; line-height: 1.6; margin-bottom: 12px;">
+      Italic: The quick brown fox jumps over the lazy dog.
+    </div>
+    <div style="font-family: 'Inter Variable'; font-style: italic; font-size: 16px; color: #555; line-height: 1.6;">
+      "Typography is the craft of endowing human language with a durable visual form." — Robert Bringhurst
+    </div>
+  </div>
+</div>
+
+<!-- ─── Test 11.4: Weight Comparison ─── -->
+<div class="test-section">
+  <h3>Test 11.4 — Variable Font Weight Comparison</h3>
+  <p class="test-label">เปรียบเทียบ weight ต่างๆ จากไฟล์ font เดียว:</p>
+
+  <div style="padding: 16px; background-color: #f8f9fa; margin-bottom: 12px;">
+    <div style="font-family: 'Inter Variable'; font-weight: 400; font-size: 20px; color: #1a1a2e; line-height: 1.8; margin-bottom: 4px;">
+      Weight 400 (Regular): Quick brown fox
+    </div>
+    <div style="font-family: 'Inter Variable'; font-weight: bold; font-size: 20px; color: #1a1a2e; line-height: 1.8; margin-bottom: 4px;">
+      Weight Bold (700): Quick brown fox
+    </div>
+  </div>
+
+  <div style="padding: 12px; background-color: #fff3cd; margin-bottom: 8px;">
+    <span style="font-size: 11px; color: #856404;">หมายเหตุ: Inter Variable รองรับ weight 100-900 แต่ปัจจุบัน LynPDF แมป bold → ไฟล์เดียวกัน (variable instance)</span>
+  </div>
+</div>
+
+<!-- ─── Test 11.5: Ligatures in Variable Font ─── -->
+<div class="test-section">
+  <h3>Test 11.5 — Ligatures (Variable Font)</h3>
+
+  <div style="padding: 16px; background-color: #f0fdf4; margin-bottom: 12px;">
+    <div style="font-family: 'Inter Variable'; font-size: 36px; color: #1a1a2e; line-height: 1.6; margin-bottom: 8px;">
+      fi fl ff ffi ffl
+    </div>
+    <div style="font-family: 'Inter Variable'; font-size: 20px; color: #333; line-height: 1.6; margin-bottom: 8px;">
+      office, difficult, affluent, efficient, traffic, sufficient
+    </div>
+    <div style="font-family: 'Inter Variable'; font-size: 20px; color: #333; line-height: 1.6;">
+      fifty, final, flame, float, buffer, coffee, offline
+    </div>
+  </div>
+</div>
+
+<!-- ─── Test 11.6: Kerning in Variable Font ─── -->
+<div class="test-section">
+  <h3>Test 11.6 — Kerning Pairs (Variable Font)</h3>
+
+  <div style="padding: 16px; background-color: #eef2ff; margin-bottom: 12px;">
+    <div style="font-family: 'Inter Variable'; font-size: 48px; color: #1a1a2e; line-height: 1.4; margin-bottom: 8px;">
+      AV AW AY AT VA
+    </div>
+    <div style="font-family: 'Inter Variable'; font-size: 48px; color: #1a1a2e; line-height: 1.4;">
+      To Te Ty We Yo
+    </div>
+  </div>
+</div>
+
+<!-- ─── Test 11.7: All Three Font Types ─── -->
+<div class="test-section">
+  <h3>Test 11.7 — Comparison: TTF vs OTF vs Variable</h3>
+
+  <div style="display: flex; flex-direction: column; margin-bottom: 12px;">
+    <div style="padding: 12px; border: 2px solid #2196f3; margin-bottom: 8px;">
+      <div style="font-size: 11px; color: #2196f3; font-weight: bold; margin-bottom: 4px;">Sarabun (TTF) — Thai font</div>
+      <div style="font-family: 'Sarabun'; font-size: 18px; color: #1a1a2e; line-height: 1.6;">
+        office fi fl ff AV To — สวัสดีครับ ทดสอบภาษาไทย
+      </div>
+    </div>
+    <div style="padding: 12px; border: 2px solid #4caf50; margin-bottom: 8px;">
+      <div style="font-size: 11px; color: #4caf50; font-weight: bold; margin-bottom: 4px;">Inter (TTF) — Latin with kerning &amp; ligatures</div>
+      <div style="font-family: 'Inter'; font-size: 18px; color: #1a1a2e; line-height: 1.6;">
+        office fi fl ff AV To — The quick brown fox
+      </div>
+    </div>
+    <div style="padding: 12px; border: 2px solid #ff9800; margin-bottom: 8px;">
+      <div style="font-size: 11px; color: #ff9800; font-weight: bold; margin-bottom: 4px;">IBM Plex Sans (OTF) — OpenType ligatures</div>
+      <div style="font-family: 'IBM Plex Sans'; font-size: 18px; color: #1a1a2e; line-height: 1.6;">
+        office fi fl ff AV To — The quick brown fox
+      </div>
+    </div>
+    <div style="padding: 12px; border: 2px solid #9c27b0;">
+      <div style="font-size: 11px; color: #9c27b0; font-weight: bold; margin-bottom: 4px;">Inter Variable (Variable TTF) — Single file</div>
+      <div style="font-family: 'Inter Variable'; font-size: 18px; color: #1a1a2e; line-height: 1.6;">
+        office fi fl ff AV To — The quick brown fox
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── Test 11.8: Paragraph ─── -->
+<div class="test-section">
+  <h3>Test 11.8 — Paragraph in Variable Font</h3>
+
+  <div style="padding: 16px; background-color: #f8f9fa; margin-bottom: 12px;">
+    <div style="font-family: 'Inter Variable'; font-size: 14px; color: #333; line-height: 1.8; text-align: justify;">
+      Inter is a typeface carefully crafted and designed for computer screens. It features a tall x-height to
+      aid in readability of mixed-case and lower-case text. Inter is a variable font with several OpenType
+      features like contextual alternates, tabular numbers, and case alternates. The variable font file
+      contains the full design space allowing continuous variation of the weight axis from Thin (100) to
+      Black (900). This test verifies that LynPDF can correctly render variable fonts with proper kerning
+      between letters like AV, AW, To and ligatures in words like office, efficient, and sufficient.
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

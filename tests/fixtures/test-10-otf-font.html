@@ -1,0 +1,150 @@
+<!-- ============================================================
+     Test 10: OTF Font Support (การรองรับฟอนต์ OTF)
+     ============================================================
+     ทดสอบ: IBM Plex Sans OTF — kerning, ligatures, bold, italic
+     ============================================================ -->
+<html>
+<head><title>Test 10 — OTF Font Support</title></head>
+<body>
+
+<h1>Test 10: OTF Font Support</h1>
+<p class="text-muted">ทดสอบการแสดงผลฟอนต์ OTF (IBM Plex Sans) — kerning, ligature, bold, italic</p>
+
+<!-- ─── Test 10.1: IBM Plex Sans Regular ─── -->
+<div class="test-section">
+  <h3>Test 10.1 — IBM Plex Sans Regular (OTF)</h3>
+
+  <div style="padding: 16px; background-color: #f0f4f8; margin-bottom: 12px;">
+    <div style="font-family: 'IBM Plex Sans'; font-size: 24px; color: #1a1a2e; line-height: 1.6; margin-bottom: 12px;">
+      The quick brown fox jumps over the lazy dog.
+    </div>
+    <div style="font-family: 'IBM Plex Sans'; font-size: 24px; color: #1a1a2e; line-height: 1.6; margin-bottom: 12px;">
+      ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    </div>
+    <div style="font-family: 'IBM Plex Sans'; font-size: 24px; color: #1a1a2e; line-height: 1.6;">
+      abcdefghijklmnopqrstuvwxyz 0123456789
+    </div>
+  </div>
+</div>
+
+<!-- ─── Test 10.2: IBM Plex Sans Bold ─── -->
+<div class="test-section">
+  <h3>Test 10.2 — IBM Plex Sans Bold</h3>
+
+  <div style="padding: 16px; background-color: #f0f4f8; margin-bottom: 12px;">
+    <div style="font-family: 'IBM Plex Sans'; font-weight: bold; font-size: 24px; color: #1a1a2e; line-height: 1.6; margin-bottom: 12px;">
+      Bold: The quick brown fox jumps over the lazy dog.
+    </div>
+    <div style="font-family: 'IBM Plex Sans'; font-weight: bold; font-size: 18px; color: #333; line-height: 1.6;">
+      Technology is best when it brings people together.
+    </div>
+  </div>
+</div>
+
+<!-- ─── Test 10.3: IBM Plex Sans Italic ─── -->
+<div class="test-section">
+  <h3>Test 10.3 — IBM Plex Sans Italic</h3>
+
+  <div style="padding: 16px; background-color: #f0f4f8; margin-bottom: 12px;">
+    <div style="font-family: 'IBM Plex Sans'; font-style: italic; font-size: 24px; color: #1a1a2e; line-height: 1.6; margin-bottom: 12px;">
+      Italic: The quick brown fox jumps over the lazy dog.
+    </div>
+    <div style="font-family: 'IBM Plex Sans'; font-style: italic; font-size: 16px; color: #555; line-height: 1.6;">
+      "Design is not just what it looks like and feels like. Design is how it works." — Steve Jobs
+    </div>
+  </div>
+</div>
+
+<!-- ─── Test 10.4: Kerning Pairs (OTF) ─── -->
+<div class="test-section">
+  <h3>Test 10.4 — Kerning Pairs in OTF</h3>
+
+  <div style="padding: 16px; background-color: #eef2ff; margin-bottom: 12px;">
+    <div style="margin-bottom: 8px;">
+      <span style="font-size: 11px; color: #888;">Kerning pairs at 48px — IBM Plex Sans OTF:</span>
+    </div>
+    <div style="font-family: 'IBM Plex Sans'; font-size: 48px; color: #1a1a2e; line-height: 1.4; margin-bottom: 8px;">
+      AV AW AY AT VA
+    </div>
+    <div style="font-family: 'IBM Plex Sans'; font-size: 48px; color: #1a1a2e; line-height: 1.4; margin-bottom: 8px;">
+      To Te Ty We Yo
+    </div>
+    <div style="font-family: 'IBM Plex Sans'; font-size: 48px; color: #1a1a2e; line-height: 1.4;">
+      PA P. F. r. f.
+    </div>
+  </div>
+</div>
+
+<!-- ─── Test 10.5: Ligatures (OTF) ─── -->
+<div class="test-section">
+  <h3>Test 10.5 — Ligatures in OTF</h3>
+
+  <div style="padding: 16px; background-color: #f0fdf4; margin-bottom: 12px;">
+    <div style="margin-bottom: 8px;">
+      <span style="font-size: 11px; color: #888;">Ligature pairs at 36px — IBM Plex Sans OTF:</span>
+    </div>
+    <div style="font-family: 'IBM Plex Sans'; font-size: 36px; color: #1a1a2e; line-height: 1.6; margin-bottom: 8px;">
+      fi fl ff ffi ffl
+    </div>
+    <div style="font-family: 'IBM Plex Sans'; font-size: 22px; color: #333; line-height: 1.6; margin-bottom: 8px;">
+      office, difficult, affluent, efficient, traffic, sufficient
+    </div>
+    <div style="font-family: 'IBM Plex Sans'; font-size: 22px; color: #333; line-height: 1.6;">
+      fifty, final, flame, float, buffer, coffee, offline
+    </div>
+  </div>
+</div>
+
+<!-- ─── Test 10.6: Mixed Font Sizes ─── -->
+<div class="test-section">
+  <h3>Test 10.6 — Multiple Font Sizes</h3>
+
+  <div style="padding: 16px; background-color: #fff7ed; margin-bottom: 12px;">
+    <div style="font-family: 'IBM Plex Sans'; font-size: 10px; color: #333; margin-bottom: 6px;">10px: The quick brown fox jumps over the lazy dog.</div>
+    <div style="font-family: 'IBM Plex Sans'; font-size: 14px; color: #333; margin-bottom: 6px;">14px: The quick brown fox jumps over the lazy dog.</div>
+    <div style="font-family: 'IBM Plex Sans'; font-size: 18px; color: #333; margin-bottom: 6px;">18px: The quick brown fox jumps over the lazy dog.</div>
+    <div style="font-family: 'IBM Plex Sans'; font-size: 24px; color: #333; margin-bottom: 6px;">24px: The quick brown fox jumps.</div>
+    <div style="font-family: 'IBM Plex Sans'; font-size: 32px; color: #333; margin-bottom: 6px;">32px: Quick brown fox.</div>
+    <div style="font-family: 'IBM Plex Sans'; font-size: 48px; color: #333;">48px: PLEX</div>
+  </div>
+</div>
+
+<!-- ─── Test 10.7: OTF vs TTF Comparison ─── -->
+<div class="test-section">
+  <h3>Test 10.7 — OTF vs TTF Comparison</h3>
+
+  <div style="display: flex; flex-direction: row; margin-bottom: 12px;">
+    <div style="flex: 1; padding: 16px; border: 2px solid #4361ee; margin-right: 8px;">
+      <div style="font-size: 12px; color: #4361ee; font-weight: bold; margin-bottom: 8px;">IBM Plex Sans (OTF)</div>
+      <div style="font-family: 'IBM Plex Sans'; font-size: 20px; color: #1a1a2e; line-height: 1.6;">
+        office fi fl ff ffi AV To
+      </div>
+    </div>
+    <div style="flex: 1; padding: 16px; border: 2px solid #e63946;">
+      <div style="font-size: 12px; color: #e63946; font-weight: bold; margin-bottom: 8px;">Inter (TTF)</div>
+      <div style="font-family: 'Inter'; font-size: 20px; color: #1a1a2e; line-height: 1.6;">
+        office fi fl ff ffi AV To
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── Test 10.8: Paragraph Text ─── -->
+<div class="test-section">
+  <h3>Test 10.8 — Long Paragraph in OTF</h3>
+
+  <div style="padding: 16px; background-color: #f8f9fa; margin-bottom: 12px;">
+    <div style="font-family: 'IBM Plex Sans'; font-size: 14px; color: #333; line-height: 1.8; text-align: justify;">
+      IBM Plex is the corporate typeface for IBM worldwide. It was designed to reflect the brand spirit, beliefs
+      and design principles of IBM and is an open-source project released under the SIL Open Font License. The
+      typeface comes in Sans, Serif, Mono, and Sans Condensed variants, each available in eight weights with
+      corresponding italics. This OTF (OpenType Font) format file contains advanced typographic features
+      including ligatures (fi, fl, ff, ffi, ffl), contextual alternates, and precise kerning tables that ensure
+      professional-quality text rendering in PDF documents. Testing efficient office workflow with sufficient
+      buffer and offline coffee.
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

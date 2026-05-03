@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Test 24 - Color Parser Exhaustive Cases</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 28px;
+      font-family: "Sarabun", sans-serif;
+      color: #0f172a;
+      background: #f8fafc;
+      line-height: 1.45;
+      font-size: 13.5px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      color: #0b1f44;
+    }
+
+    h2 {
+      margin: 20px 0 8px;
+      font-size: 16px;
+      border-bottom: 1px solid #cbd5e1;
+      padding-bottom: 3px;
+      color: #1e3a8a;
+    }
+
+    p.meta {
+      margin: 0 0 8px;
+      color: #334155;
+      font-size: 12px;
+    }
+
+    table.grid {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      background: #ffffff;
+      margin-bottom: 14px;
+    }
+
+    .grid th,
+    .grid td {
+      border: 1px solid #cbd5e1;
+      padding: 8px;
+      vertical-align: top;
+    }
+
+    .grid th {
+      background: #e2e8f0;
+      font-size: 12px;
+      color: #0f172a;
+    }
+
+    .expr {
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      color: #334155;
+      word-break: break-word;
+    }
+
+    .swatch-cell {
+      padding: 9px 10px;
+      border: 1px solid #94a3b8;
+      font-size: 11px;
+      line-height: 1.2;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .solid-black,
+    .hex-6,
+    .rgb-modern {
+      color: #f8fafc;
+    }
+
+    .solid-black {
+      background: black;
+    }
+
+    .solid-white {
+      background: white;
+    }
+
+    .solid-red {
+      background: red;
+    }
+
+    .solid-aliceblue {
+      background: aliceblue;
+    }
+
+    .hex-3 {
+      background: #0f8;
+    }
+
+    .hex-4 {
+      background: #0f8c;
+    }
+
+    .hex-6 {
+      background: #0f3460;
+    }
+
+    .hex-8 {
+      background: #336699cc;
+    }
+
+    .rgb-comma {
+      background: rgb(255, 128, 0);
+    }
+
+    .rgba-comma {
+      background: rgba(64, 32, 16, 0.35);
+    }
+
+    .rgb-modern {
+      background: rgb(20 40 60 / 75%);
+    }
+
+    .hsl-modern {
+      background: hsl(210 100% 56% / 0.5);
+    }
+
+    .hsla-comma {
+      background: hsla(330, 100%, 45%, 0.6);
+    }
+
+    .alpha-stage {
+      background: #0f172a;
+      padding: 10px;
+      border: 1px solid #1e293b;
+    }
+
+    .chip {
+      padding: 7px 8px;
+      margin-bottom: 6px;
+      border: 1px solid #64748b;
+      color: #ffffff;
+      font-size: 12px;
+    }
+
+    .chip:last-child {
+      margin-bottom: 0;
+    }
+
+    .chip-rgba {
+      background: rgba(255, 99, 71, 0.45);
+    }
+
+    .chip-hex8 {
+      background: #22c55e99;
+    }
+
+    .chip-hsl {
+      background: hsl(42 95% 55% / 0.55);
+    }
+
+    .text-samples {
+      padding: 10px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      font-size: 14px;
+    }
+
+    .txt-hex8 {
+      color: #1d4ed8cc;
+    }
+
+    .txt-rgba {
+      color: rgba(220, 38, 38, 0.65);
+    }
+
+    .txt-hsl {
+      color: hsl(280 75% 42% / 0.75);
+    }
+
+    .border-samples {
+      background: #ffffff;
+      padding: 10px;
+      border: 1px solid #cbd5e1;
+    }
+
+    .box {
+      padding: 8px;
+      margin-bottom: 7px;
+      background: #eff6ff;
+      font-size: 12px;
+    }
+
+    .box:last-child {
+      margin-bottom: 0;
+    }
+
+    .b-hex8 {
+      border: 3px solid #0284c799;
+    }
+
+    .b-rgba {
+      border: 3px solid rgba(16, 185, 129, 0.45);
+    }
+
+    .b-hsl {
+      border: 3px solid hsl(24 94% 50% / 0.58);
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Test 24: Dedicated Color Cases</h1>
+  <p class="meta">ครอบคลุม named colors, hex (3/4/6/8), rgb/rgba syntax แบบ comma และ modern syntax, hsl/hsla, รวมถึง
+    alpha ในพื้นหลัง, สีข้อความ, และเส้นขอบ</p>
+
+  <h2>A) Direct swatch matrix</h2>
+  <table class="grid">
+    <thead>
+      <tr>
+        <th class="expr">CSS expression</th>
+        <th>Rendered swatch</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="expr">black</td>
+        <td class="swatch-cell solid-black">swatch black</td>
+      </tr>
+      <tr>
+        <td class="expr">white</td>
+        <td class="swatch-cell solid-white">swatch white</td>
+      </tr>
+      <tr>
+        <td class="expr">red</td>
+        <td class="swatch-cell solid-red">swatch red</td>
+      </tr>
+      <tr>
+        <td class="expr">aliceblue</td>
+        <td class="swatch-cell solid-aliceblue">swatch aliceblue</td>
+      </tr>
+      <tr>
+        <td class="expr">#0f8</td>
+        <td class="swatch-cell hex-3">swatch #0f8</td>
+      </tr>
+      <tr>
+        <td class="expr">#0f8c</td>
+        <td class="swatch-cell hex-4">swatch #0f8c</td>
+      </tr>
+      <tr>
+        <td class="expr">#0f3460</td>
+        <td class="swatch-cell hex-6">swatch #0f3460</td>
+      </tr>
+      <tr>
+        <td class="expr">#336699cc</td>
+        <td class="swatch-cell hex-8">swatch #336699cc</td>
+      </tr>
+      <tr>
+        <td class="expr">rgb(255, 128, 0)</td>
+        <td class="swatch-cell rgb-comma">swatch rgb comma</td>
+      </tr>
+      <tr>
+        <td class="expr">rgba(64, 32, 16, 0.35)</td>
+        <td class="swatch-cell rgba-comma">swatch rgba comma</td>
+      </tr>
+      <tr>
+        <td class="expr">rgb(20 40 60 / 75%)</td>
+        <td class="swatch-cell rgb-modern">swatch rgb modern</td>
+      </tr>
+      <tr>
+        <td class="expr">hsl(210 100% 56% / 0.5)</td>
+        <td class="swatch-cell hsl-modern">swatch hsl modern</td>
+      </tr>
+      <tr>
+        <td class="expr">hsla(330, 100%, 45%, 0.6)</td>
+        <td class="swatch-cell hsla-comma">swatch hsla comma</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>B) Alpha composition on dark base</h2>
+  <div class="alpha-stage">
+    <div class="chip chip-rgba">rgba(255, 99, 71, 0.45)</div>
+    <div class="chip chip-hex8">#22c55e99</div>
+    <div class="chip chip-hsl">hsl(42 95% 55% / 0.55)</div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <h2>C) Text color alpha</h2>
+  <div class="text-samples">
+    <p class="txt-hex8">ข้อความตัวอย่าง #1: color: #1d4ed8cc (hex with alpha)</p>
+    <p class="txt-rgba">ข้อความตัวอย่าง #2: color: rgba(220, 38, 38, 0.65)</p>
+    <p class="txt-hsl">Sample #3: color: hsl(280 75% 42% / 0.75)</p>
+  </div>
+
+  <h2>D) Border color alpha</h2>
+  <div class="border-samples">
+    <div class="box b-hex8">border sample #0284c799</div>
+    <div class="box b-rgba">border sample rgba(16,185,129,0.45)</div>
+    <div class="box b-hsl">border sample hsl(24 94% 50% / 0.58)</div>
+  </div>
+
+  <h2>E) Foreground / background palette ramps</h2>
+  <table class="grid">
+    <thead>
+      <tr>
+        <th class="expr">step</th>
+        <th>Background palette</th>
+        <th>Foreground palette</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="expr">01</td>
+        <td style="background-color: #0f172a; color: #f8fafc;">BG #0f172a</td>
+        <td style="background-color: #ffffff; color: #0f172a;">FG #0f172a - The quick brown fox jumps over the lazy dog.
+        </td>
+      </tr>
+      <tr>
+        <td class="expr">02</td>
+        <td style="background-color: #1e3a8a; color: #f8fafc;">BG #1e3a8a</td>
+        <td style="background-color: #ffffff; color: #1e3a8a;">FG #1e3a8a - ตัวอย่างข้อความภาษาไทย</td>
+      </tr>
+      <tr>
+        <td class="expr">03</td>
+        <td style="background-color: #0369a1; color: #f8fafc;">BG #0369a1</td>
+        <td style="background-color: #ffffff; color: #0369a1;">FG #0369a1 - Color parser diagnostic sample</td>
+      </tr>
+      <tr>
+        <td class="expr">04</td>
+        <td style="background-color: #0f766e; color: #f8fafc;">BG #0f766e</td>
+        <td style="background-color: #ffffff; color: #0f766e;">FG #0f766e - พื้นฐานการทดสอบสี</td>
+      </tr>
+      <tr>
+        <td class="expr">05</td>
+        <td style="background-color: #65a30d; color: #0f172a;">BG #65a30d</td>
+        <td style="background-color: #ffffff; color: #65a30d;">FG #65a30d - Visual spectrum midpoint</td>
+      </tr>
+      <tr>
+        <td class="expr">06</td>
+        <td style="background-color: #d97706; color: #0f172a;">BG #d97706</td>
+        <td style="background-color: #ffffff; color: #d97706;">FG #d97706 - โทนอุ่นสำหรับทดสอบ contrast</td>
+      </tr>
+      <tr>
+        <td class="expr">07</td>
+        <td style="background-color: #c2410c; color: #f8fafc;">BG #c2410c</td>
+        <td style="background-color: #ffffff; color: #c2410c;">FG #c2410c - Hue ramp for foreground test</td>
+      </tr>
+      <tr>
+        <td class="expr">08</td>
+        <td style="background-color: #be123c; color: #f8fafc;">BG #be123c</td>
+        <td style="background-color: #ffffff; color: #be123c;">FG #be123c - สีเข้มสำหรับตรวจ alpha blend</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>

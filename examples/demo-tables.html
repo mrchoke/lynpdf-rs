@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>Tables Demo — PDF Creator</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .table-bordered th, .table-bordered td {
+            border: 2px solid #495057;
+            padding: 8px 10px;
+        }
+        .table-bordered th {
+            background-color: #495057;
+            color: #fff;
+        }
+        .table-minimal td, .table-minimal th {
+            border: none;
+            border-bottom: 1px solid #dee2e6;
+            padding: 10px 12px;
+        }
+        .table-minimal thead th {
+            background-color: transparent;
+            color: #333;
+            font-weight: bold;
+            border-bottom: 2px solid #333;
+        }
+        .colspan-center { text-align: center; background-color: #e9ecef; font-weight: bold; }
+        .grand-total td {
+            background-color: #0f2a45;
+            color: #fff;
+            font-weight: bold;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-header">
+        <h1>Tables Demo</h1>
+        <p>ทดสอบตารางรูปแบบต่าง ๆ — colspan, rowspan, bordered, striped, minimal</p>
+    </div>
+
+    <!-- ══ Table 1: Basic bordered ══ -->
+    <h2>1. ตารางพื้นฐาน (Basic Table with Header)</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>ชื่อสินค้า</th>
+                <th>หมวดหมู่</th>
+                <th>จำนวน</th>
+                <th>ราคาต่อหน่วย</th>
+                <th>รวม</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>โน้ตบุ๊ก Dell XPS 15</td>
+                <td>คอมพิวเตอร์</td>
+                <td>2</td>
+                <td>45,000 ฿</td>
+                <td>90,000 ฿</td>
+            </tr>
+            <tr class="alt-row">
+                <td>2</td>
+                <td>จอมอนิเตอร์ LG 27"</td>
+                <td>อุปกรณ์ต่อพ่วง</td>
+                <td>3</td>
+                <td>12,500 ฿</td>
+                <td>37,500 ฿</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>คีย์บอร์ด Keychron K2</td>
+                <td>อุปกรณ์ต่อพ่วง</td>
+                <td>5</td>
+                <td>3,200 ฿</td>
+                <td>16,000 ฿</td>
+            </tr>
+            <tr class="alt-row">
+                <td>4</td>
+                <td>เมาส์ Logitech MX3</td>
+                <td>อุปกรณ์ต่อพ่วง</td>
+                <td>5</td>
+                <td>2,800 ฿</td>
+                <td>14,000 ฿</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>USB-C Hub 7-in-1</td>
+                <td>อุปกรณ์ต่อพ่วง</td>
+                <td>10</td>
+                <td>1,500 ฿</td>
+                <td>15,000 ฿</td>
+            </tr>
+            <tr class="total-row">
+                <td colspan="5" class="text-right">ยอดรวมทั้งหมด</td>
+                <td>172,500 ฿</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ══ Table 2: colspan / rowspan ══ -->
+    <h2>2. ตารางที่มี Colspan และ Rowspan</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th colspan="2" class="text-center">ข้อมูลส่วนตัว</th>
+                <th colspan="3" class="text-center">ผลการทดสอบ (คะแนน)</th>
+                <th>สรุป</th>
+            </tr>
+            <tr>
+                <th>ชื่อ</th>
+                <th>ทีม</th>
+                <th>วิชา A</th>
+                <th>วิชา B</th>
+                <th>วิชา C</th>
+                <th>เฉลี่ย</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>สมชาย ใจดี</td>
+                <td>ทีม Alpha</td>
+                <td>85</td>
+                <td>92</td>
+                <td>78</td>
+                <td style="font-weight: bold; color: #28a745">85.0</td>
+            </tr>
+            <tr>
+                <td>วิไลวรรณ สุขใจ</td>
+                <td>ทีม Alpha</td>
+                <td>91</td>
+                <td>88</td>
+                <td>95</td>
+                <td style="font-weight: bold; color: #28a745">91.3</td>
+            </tr>
+            <tr>
+                <td>ประยุทธ์ เก่งมาก</td>
+                <td>ทีม Beta</td>
+                <td>70</td>
+                <td>65</td>
+                <td>72</td>
+                <td style="font-weight: bold; color: #ffc107">69.0</td>
+            </tr>
+            <tr>
+                <td>มีนา นักเรียนดี</td>
+                <td>ทีม Beta</td>
+                <td>55</td>
+                <td>60</td>
+                <td>58</td>
+                <td style="font-weight: bold; color: #dc3545">57.7</td>
+            </tr>
+            <tr class="total-row">
+                <td colspan="2" class="text-center">ค่าเฉลี่ยรวม</td>
+                <td>75.3</td>
+                <td>76.3</td>
+                <td>75.8</td>
+                <td>75.8</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ══ Table 3: Minimal / No-border ══ -->
+    <h2 class="page-break">3. ตารางแบบ Minimal (ไม่มีเส้นขอบ)</h2>
+    <table class="table table-minimal">
+        <thead>
+            <tr>
+                <th>วันที่</th>
+                <th>รายการ</th>
+                <th text-align="right">รายรับ</th>
+                <th text-align="right">รายจ่าย</th>
+                <th text-align="right">คงเหลือ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>01/02/2568</td>
+                <td>ยอดยกมา</td>
+                <td>—</td>
+                <td>—</td>
+                <td>50,000 ฿</td>
+            </tr>
+            <tr>
+                <td>05/02/2568</td>
+                <td>รับชำระจากลูกค้า</td>
+                <td style="color: #28a745">+25,000 ฿</td>
+                <td>—</td>
+                <td>75,000 ฿</td>
+            </tr>
+            <tr>
+                <td>08/02/2568</td>
+                <td>จ่ายค่าเช่าสำนักงาน</td>
+                <td>—</td>
+                <td style="color: #dc3545">-15,000 ฿</td>
+                <td>60,000 ฿</td>
+            </tr>
+            <tr>
+                <td>12/02/2568</td>
+                <td>รับชำระงวด 2</td>
+                <td style="color: #28a745">+40,000 ฿</td>
+                <td>—</td>
+                <td>100,000 ฿</td>
+            </tr>
+            <tr>
+                <td>15/02/2568</td>
+                <td>จ่ายค่าวัตถุดิบ</td>
+                <td>—</td>
+                <td style="color: #dc3545">-32,000 ฿</td>
+                <td>68,000 ฿</td>
+            </tr>
+            <tr>
+                <td>22/02/2568</td>
+                <td>ปิดงวด</td>
+                <td>—</td>
+                <td>—</td>
+                <td style="font-weight: bold">68,000 ฿</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ══ Table 4: Category grouping with colspan ══ -->
+    <h2>4. ตารางจัดกลุ่มด้วย Colspan</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ผลิตภัณฑ์</th>
+                <th>ยี่ห้อ</th>
+                <th>มกราคม</th>
+                <th>กุมภาพันธ์</th>
+                <th>มีนาคม</th>
+                <th>รวม</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="6" class="colspan-center">หมวด: อุปกรณ์ไอที</td>
+            </tr>
+            <tr>
+                <td>โน้ตบุ๊ก</td>
+                <td>Dell</td>
+                <td>12</td>
+                <td>15</td>
+                <td>18</td>
+                <td>45</td>
+            </tr>
+            <tr class="alt-row">
+                <td>Tablet</td>
+                <td>Apple</td>
+                <td>8</td>
+                <td>10</td>
+                <td>12</td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td colspan="6" class="colspan-center">หมวด: เครื่องใช้สำนักงาน</td>
+            </tr>
+            <tr>
+                <td>เก้าอี้</td>
+                <td>Herman Miller</td>
+                <td>3</td>
+                <td>5</td>
+                <td>4</td>
+                <td>12</td>
+            </tr>
+            <tr class="alt-row">
+                <td>โต๊ะทำงาน</td>
+                <td>IKEA</td>
+                <td>2</td>
+                <td>3</td>
+                <td>2</td>
+                <td>7</td>
+            </tr>
+            <tr class="total-row">
+                <td colspan="5" class="text-right">ยอดรวม</td>
+                <td>94 ชิ้น</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

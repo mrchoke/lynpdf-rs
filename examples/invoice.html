@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Invoice Compact - LynPDF RS</title>
+  <meta name="author" content="LynPDF RS Team">
+  <meta name="description" content="Compact enterprise invoice with modern table alignment and span-based totals.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    @page {
+      size: A4;
+      margin: 14mm;
+    }
+
+    body {
+      font-family: 'Sarabun', sans-serif;
+      font-size: 11px;
+      line-height: 1.4;
+      color: #22364a;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+    }
+
+    .invoice {
+      border: 1px solid #dce5ee;
+      background-color: #ffffff;
+    }
+
+    .header {
+      display: flex;
+      flex-direction: row;
+      background-color: #0f2a45;
+      color: #ffffff;
+      padding: 11px 13px;
+    }
+
+    .brand {
+      flex: 1;
+      padding-right: 8px;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 17px;
+      color: #ffffff;
+    }
+
+    .brand p {
+      margin: 1px 0;
+      font-size: 9px;
+      color: #c5d4e2;
+    }
+
+    .meta {
+      width: 190px;
+      text-align: right;
+    }
+
+    .meta .title {
+      font-size: 22px;
+      color: #f4bd84;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .meta .id {
+      font-size: 12px;
+      font-weight: bold;
+      color: #ffffff;
+    }
+
+    .meta .date {
+      font-size: 9px;
+      color: #c3d3e1;
+    }
+
+    .accent { height: 3px; background-color: #b87436; margin-bottom: 8px; }
+
+    .party {
+      display: flex;
+      flex-direction: row;
+      margin: 0 10px 8px 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e4ebf3;
+    }
+
+    .party .col {
+      flex: 1;
+      padding: 0 6px;
+    }
+
+    .party .col:first-child {
+      border-right: 1px solid #e4ebf3;
+    }
+
+    .party .label {
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #af723c;
+      font-weight: bold;
+      margin-bottom: 2px;
+    }
+
+    .party .name {
+      font-size: 12px;
+      font-weight: bold;
+      color: #133856;
+      margin-bottom: 1px;
+    }
+
+    .party .detail {
+      font-size: 9px;
+      color: #63788d;
+      line-height: 1.45;
+    }
+
+    table.items {
+      width: calc(100% - 20px);
+      margin: 8px 10px;
+      border-collapse: collapse;
+    }
+
+    .items th {
+      border: 1px solid #143a58;
+      background-color: #143a58;
+      color: #ffffff;
+      font-size: 9.8px;
+      text-align: left;
+      padding: 6px 7px;
+    }
+
+    .items td {
+      border: 1px solid #e5edf5;
+      font-size: 9.8px;
+      padding: 6px 7px;
+      vertical-align: top;
+    }
+
+    .items tr.alt td {
+      background-color: #f8fbfe;
+    }
+
+    .items .sum-empty {
+      border: none;
+      background-color: transparent;
+    }
+
+    .items .sum-label {
+      background-color: #f5f9fc;
+      color: #556a80;
+      font-weight: bold;
+    }
+
+    .items .sum-value {
+      text-align: right;
+      font-weight: bold;
+      color: #193e5c;
+    }
+
+    .items .sum-grand .sum-label,
+    .items .sum-grand .sum-value {
+      background-color: #143a58;
+      color: #ffffff;
+      border-color: #143a58;
+      font-size: 10.8px;
+      padding-top: 7px;
+      padding-bottom: 7px;
+    }
+
+    .notes {
+      margin: 0 10px 8px 10px;
+      border: 1px solid #d8e4ef;
+      border-left: 4px solid #6aa8c7;
+      background-color: #f7fbff;
+      color: #597086;
+      font-size: 9.2px;
+      line-height: 1.45;
+      padding: 7px 9px;
+    }
+
+    .signs {
+      display: flex;
+      flex-direction: row;
+      margin: 0 10px 8px 10px;
+      padding-top: 8px;
+      border-top: 1px solid #e5edf5;
+    }
+
+    .sign {
+      flex: 1;
+      text-align: center;
+      padding: 0 8px;
+    }
+
+    .sign .line {
+      border-top: 1px solid #94a6b6;
+      margin: 16px 10px 4px 10px;
+    }
+
+    .sign .name {
+      margin: 0;
+      font-size: 9.7px;
+      color: #1f3548;
+      font-weight: bold;
+    }
+
+    .sign .role {
+      margin: 0;
+      font-size: 8.6px;
+      color: #6e8295;
+    }
+
+    .footer {
+      margin: 0 10px;
+      border-top: 2px solid #b87436;
+      padding-top: 5px;
+      padding-bottom: 2px;
+      font-size: 8.8px;
+      color: #71869a;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+
+<div class="invoice">
+  <div class="header">
+    <div class="brand">
+      <h1>LynPDF RS Studio</h1>
+      <p>Commercial PDF Rendering Services</p>
+      <p>88 Rust Tower, Bangkok 10110 | TAX ID: 0105570001122</p>
+    </div>
+    <div class="meta">
+      <div class="title">INVOICE</div>
+      <div class="id">#LPR-INV-2026-1028</div>
+      <div class="date">Issue: 03-05-2026</div>
+      <div class="date">Due: 02-06-2026</div>
+    </div>
+  </div>
+
+  <div class="accent"></div>
+
+  <div class="party">
+    <div class="col">
+      <div class="label">From</div>
+      <div class="name">LynPDF RS Studio</div>
+      <div class="detail">billing@lynpdf.dev | +66 2 911 2048<br>Bank: KBank 742-1-99001-8</div>
+    </div>
+    <div class="col">
+      <div class="label">Bill To</div>
+      <div class="name">Novus Enterprise Systems</div>
+      <div class="detail">Contract: NOV-LPR-Q2<br>Project: PDF Migration Program</div>
+    </div>
+  </div>
+
+  <table class="items">
+    <thead>
+      <tr>
+        <th style="width: 30px; text-align: center;">#</th>
+        <th>Description</th>
+        <th style="width: 54px; text-align: center;">Qty</th>
+        <th style="width: 80px; text-align: right;">Unit</th>
+        <th style="width: 96px; text-align: right;">Unit Price</th>
+        <th style="width: 112px; text-align: right;">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: center;">1</td>
+        <td>Renderer migration audit and architecture mapping</td>
+        <td style="text-align: center;">32h</td>
+        <td style="text-align: right;">hour</td>
+        <td style="text-align: right;">120.00</td>
+        <td style="text-align: right;">3,840.00</td>
+      </tr>
+      <tr class="alt">
+        <td style="text-align: center;">2</td>
+        <td>SVG parity enhancement and fixture stabilization</td>
+        <td style="text-align: center;">28h</td>
+        <td style="text-align: right;">hour</td>
+        <td style="text-align: right;">135.00</td>
+        <td style="text-align: right;">3,780.00</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">3</td>
+        <td>Visual baseline setup and release checklist automation</td>
+        <td style="text-align: center;">18h</td>
+        <td style="text-align: right;">hour</td>
+        <td style="text-align: right;">110.00</td>
+        <td style="text-align: right;">1,980.00</td>
+      </tr>
+
+      <tr>
+        <td class="sum-empty" colspan="4"></td>
+        <td class="sum-label">Subtotal</td>
+        <td class="sum-value">9,600.00</td>
+      </tr>
+      <tr>
+        <td class="sum-empty" colspan="4"></td>
+        <td class="sum-label">Discount</td>
+        <td class="sum-value">-320.00</td>
+      </tr>
+      <tr>
+        <td class="sum-empty" colspan="4"></td>
+        <td class="sum-label">VAT 7%</td>
+        <td class="sum-value">649.60</td>
+      </tr>
+      <tr class="sum-grand">
+        <td class="sum-empty" colspan="4"></td>
+        <td class="sum-label">TOTAL DUE</td>
+        <td class="sum-value">9,929.60</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="notes">
+    Payment term NET 30. Please include invoice id in transfer memo for auto-reconciliation.
+    Late payment fee 1.25% per month may apply based on contract terms.
+  </div>
+
+  <div class="signs">
+    <div class="sign">
+      <div class="line"></div>
+      <p class="name">Authorized Signatory</p>
+      <p class="role">LynPDF RS Studio</p>
+    </div>
+    <div class="sign">
+      <div class="line"></div>
+      <p class="name">Client Representative</p>
+      <p class="role">Novus Enterprise Systems</p>
+    </div>
+    <div class="sign">
+      <div class="line"></div>
+      <p class="name">Finance Approval</p>
+      <p class="role">Accounting Unit</p>
+    </div>
+  </div>
+
+  <div class="footer">Generated by lynpdf-rs | REF: LPR-INV-2026-1028</div>
+</div>
+
+</body>
+</html>

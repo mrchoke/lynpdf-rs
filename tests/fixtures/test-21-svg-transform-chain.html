@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  />
+  <title>Test 21: SVG Transform Chain</title>
+</head>
+
+<body>
+  <h1>Test 21: SVG Transform Chain</h1>
+  <p>Regression fixture for nested transform stacks, gradient fills, and shape opacity.</p>
+
+  <svg
+    width="420"
+    height="260"
+    viewBox="0 0 420 260"
+    role="img"
+    aria-label="Transform chain artboard"
+  >
+    <defs>
+      <linearGradient
+        id="chain-fill"
+        x1="0%"
+        y1="0%"
+        x2="100%"
+        y2="0%"
+        gradientTransform="rotate(18)"
+      >
+        <stop
+          offset="0%"
+          stop-color="#ff004d"
+        />
+        <stop
+          offset="52%"
+          stop-color="#ffcc00"
+          stop-opacity="0.72"
+        />
+        <stop
+          offset="100%"
+          stop-color="#2f7dff"
+        />
+      </linearGradient>
+    </defs>
+
+    <g transform="translate(64 26) rotate(17 90 78)">
+      <g transform="scale(1.08 0.92) skewX(7)">
+        <rect
+          x="20"
+          y="22"
+          width="150"
+          height="102"
+          rx="14"
+          fill="url(#chain-fill)"
+          fill-opacity="0.84"
+          stroke="#1f1f1f"
+          stroke-width="5"
+          stroke-opacity="0.66"
+        />
+        <path
+          d="M 26 120 C 64 142, 136 138, 170 110"
+          fill="none"
+          stroke="#1f1f1f"
+          stroke-width="4"
+          stroke-opacity="0.58"
+        />
+        <text
+          x="61"
+          y="82"
+          font-size="26"
+          fill="#ffffff"
+          opacity="0.9"
+        >T21</text>
+      </g>
+    </g>
+
+    <line
+      x1="14"
+      y1="14"
+      x2="406"
+      y2="14"
+      stroke="#555"
+      stroke-width="1"
+    />
+  </svg>
+</body>
+
+</html>

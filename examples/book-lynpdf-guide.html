@@ -1,0 +1,2278 @@
+<!-- ============================================================
+     LynPDF Book — คู่มือการใช้งาน LynPDF RS ฉบับสมบูรณ์
+     Complete guide: all features including Pali/Sanskrit,
+     thead-repeat toggle, custom margins, text-justify,
+     OTF/Variable fonts, kerning & ligatures, metadata.
+     ============================================================ -->
+<html>
+
+<head>
+  <title>คู่มือการใช้งาน LynPDF RS</title>
+  <meta
+    name="author"
+    content="LynPDF RS Team"
+  >
+  <meta
+    name="description"
+    content="คู่มือการใช้งาน LynPDF RS — HTML/CSS to PDF Creator ฉบับสมบูรณ์"
+  >
+  <meta
+    name="keywords"
+    content="LynPDF, PDF, Rust, HTML to PDF, Thai, Pali, Sanskrit"
+  >
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
+  <style>
+    @page {
+      margin: 50pt;
+
+      @top-left {
+        content: "คู่มือ LynPDF";
+        font-size: 9px;
+        color: #888;
+      }
+
+      @top-right {
+        content: "v2026.05";
+        font-size: 9px;
+        color: #888;
+      }
+
+      @bottom-center {
+        content: "— " counter(page) " / " counter(pages) " —";
+        font-size: 9px;
+        color: #666;
+      }
+    }
+
+    body {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    h1 {
+      font-size: 22px;
+      color: #0f2a45;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 17px;
+      color: #153757;
+      margin-bottom: 6px;
+      border-bottom: 2px solid #b87436;
+      padding-bottom: 4px;
+    }
+
+    h3 {
+      font-size: 15px;
+      color: #1d4a73;
+      margin-bottom: 4px;
+    }
+
+    p {
+      margin-bottom: 8px;
+    }
+
+    .chapter-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #0f2a45;
+      padding: 16px 0;
+      border-bottom: 3px solid #b87436;
+      margin-bottom: 14px;
+      page-break-before: always;
+      break-before: page;
+    }
+
+    .code-block {
+      background-color: #0f2a45;
+      color: #e8e8e8;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      font-family: monospace;
+      font-size: 11px;
+      border-radius: 6px;
+      border-left: 4px solid #b87436;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .token-comment {
+      color: #84a3bf;
+    }
+
+    .token-keyword {
+      color: #f0c07f;
+      font-weight: bold;
+    }
+
+    .token-type {
+      color: #7ec5ff;
+    }
+
+    .token-function {
+      color: #c0dcff;
+    }
+
+    .token-string {
+      color: #9fd39a;
+    }
+
+    .token-number {
+      color: #f4d18f;
+    }
+
+    .token-operator {
+      color: #dbe6f1;
+    }
+
+    .note-box {
+      background-color: #fff3cd;
+      border: 1px solid #ffc107;
+      border-left: 4px solid #ffc107;
+      padding: 8px 12px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .tip-box {
+      background-color: #d1ecf1;
+      border: 1px solid #5f9dbc;
+      border-left: 4px solid #5f9dbc;
+      padding: 8px 12px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .feature-card {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 8px;
+      border-radius: 6px;
+      background-color: #fafafa;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .feature-card h3 {
+      color: #b87436;
+      margin-bottom: 4px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 10px;
+    }
+
+    th {
+      background-color: #0f2a45;
+      color: #fff;
+      padding: 6px 8px;
+      font-weight: bold;
+      font-size: 13px;
+      border: 1px solid #0f2a45;
+    }
+
+    td {
+      padding: 6px 8px;
+      font-size: 13px;
+      border: 1px solid #dee2e6;
+    }
+
+    tr.alt td {
+      background-color: #f8f9fa;
+    }
+
+    .page-break {
+      page-break-before: always;
+      break-before: page;
+    }
+
+    .sample-box {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+     COVER PAGE
+     ═══════════════════════════════════════════════════════════════ -->
+
+  <div style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 40px 20px;">
+
+    <svg
+      width="380"
+      height="280"
+      viewBox="0 0 380 280"
+      style="display: block; margin: 0 auto;"
+    >
+      <defs>
+        <linearGradient
+          id="coverGrad"
+          x1="0%"
+          y1="0%"
+          x2="100%"
+          y2="100%"
+        >
+          <stop
+            offset="0%"
+            style="stop-color:#0f2a45;stop-opacity:1"
+          />
+          <stop
+            offset="50%"
+            style="stop-color:#153757;stop-opacity:1"
+          />
+          <stop
+            offset="100%"
+            style="stop-color:#1d4a73;stop-opacity:1"
+          />
+        </linearGradient>
+      </defs>
+      <rect
+        x="0"
+        y="0"
+        width="380"
+        height="280"
+        rx="12"
+        fill="url(#coverGrad)"
+      />
+      <circle
+        cx="310"
+        cy="55"
+        r="70"
+        fill="#b87436"
+        opacity="0.1"
+      />
+      <circle
+        cx="50"
+        cy="230"
+        r="50"
+        fill="#5f9dbc"
+        opacity="0.1"
+      />
+      <rect
+        x="155"
+        y="40"
+        width="70"
+        height="90"
+        rx="4"
+        fill="#fff"
+        opacity="0.9"
+      />
+      <rect
+        x="165"
+        y="55"
+        width="35"
+        height="3"
+        rx="1"
+        fill="#0f2a45"
+        opacity="0.3"
+      />
+      <rect
+        x="165"
+        y="63"
+        width="45"
+        height="3"
+        rx="1"
+        fill="#0f2a45"
+        opacity="0.3"
+      />
+      <rect
+        x="165"
+        y="71"
+        width="40"
+        height="3"
+        rx="1"
+        fill="#0f2a45"
+        opacity="0.3"
+      />
+      <rect
+        x="165"
+        y="79"
+        width="42"
+        height="3"
+        rx="1"
+        fill="#0f2a45"
+        opacity="0.3"
+      />
+      <rect
+        x="165"
+        y="87"
+        width="30"
+        height="3"
+        rx="1"
+        fill="#b87436"
+        opacity="0.5"
+      />
+      <rect
+        x="165"
+        y="95"
+        width="45"
+        height="3"
+        rx="1"
+        fill="#0f2a45"
+        opacity="0.3"
+      />
+      <rect
+        x="165"
+        y="103"
+        width="35"
+        height="3"
+        rx="1"
+        fill="#0f2a45"
+        opacity="0.3"
+      />
+      <polygon
+        points="190,140 180,153 186,153 186,170 194,170 194,153 200,153"
+        fill="#b87436"
+      />
+      <rect
+        x="168"
+        y="178"
+        width="44"
+        height="30"
+        rx="3"
+        fill="#b87436"
+      />
+      <text
+        x="190"
+        y="197"
+        text-anchor="middle"
+        font-size="13"
+        font-weight="bold"
+        fill="#fff"
+      >PDF</text>
+      <text
+        x="190"
+        y="240"
+        text-anchor="middle"
+        font-size="22"
+        font-weight="bold"
+        fill="#fff"
+      >LynPDF</text>
+      <text
+        x="190"
+        y="260"
+        text-anchor="middle"
+        font-size="11"
+        fill="#ccc"
+      >HTML/CSS → PDF Creator</text>
+    </svg>
+
+    <p style="font-size: 27px; font-weight: bold; color: #0f2a45; margin-top: 20px; margin-bottom: 6px;">คู่มือการใช้งาน
+      LynPDF RS</p>
+    <p style="font-size: 15px; color: #4b5d70; margin-bottom: 4px;">API-first HTML/CSS/Markdown to PDF Toolkit</p>
+    <p style="font-size: 13px; color: #7a8795;">Version 0.1.0 — Production Guide &amp; Reference</p>
+
+    <div
+      style="margin-top: 24px; padding: 14px; border: 1px solid #ddd; border-radius: 8px; background-color: #f8f9fa; width: 86%;"
+    >
+      <p style="font-size: 12px; color: #536273; margin-bottom: 4px;">ครอบคลุม API, CLI, layout engine, typography
+        และแนวทางทดสอบ regression แบบ end-to-end</p>
+      <p style="font-size: 12px; color: #536273; margin-bottom: 4px;">รองรับ Thai/CJK typography, color emoji, syntax
+        highlighting, certificate templates, tables ข้ามหน้า</p>
+      <p style="font-size: 12px; color: #536273; margin-bottom: 0;">เผยแพร่โดย LynPDF RS Team · MIT License</p>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+     TABLE OF CONTENTS
+     ═══════════════════════════════════════════════════════════════ -->
+
+  <h1>สารบัญ (Table of Contents)</h1>
+
+  <div style="padding: 8px 0;">
+    <p style="margin-bottom: 5px;"><a href="#ch1-intro"><strong>บทที่ 1</strong> — แนะนำ LynPDF</a></p>
+    <p style="margin-bottom: 5px;"><a href="#ch2-install"><strong>บทที่ 2</strong> — การติดตั้งและเริ่มต้นใช้งาน</a></p>
+    <p style="margin-bottom: 5px;"><a href="#ch3-architecture"><strong>บทที่ 3</strong> — สถาปัตยกรรมระบบ</a></p>
+    <p style="margin-bottom: 5px;"><a href="#ch4-css"><strong>บทที่ 4</strong> — CSS และ Layout</a></p>
+    <p style="margin-bottom: 5px;"><a href="#ch5-fonts"><strong>บทที่ 5</strong> — ระบบฟอนต์ (Thai, OTF, Variable)</a>
+    </p>
+    <p style="margin-bottom: 5px;"><a href="#ch6-tables"><strong>บทที่ 6</strong> — ตารางและ Thead Repeat</a></p>
+    <p style="margin-bottom: 5px;"><a href="#ch7-text"><strong>บทที่ 7</strong> — คุณสมบัติข้อความ (Justify, Kerning,
+        Ligatures)</a></p>
+    <p style="margin-bottom: 5px;"><a href="#ch8-pali"><strong>บทที่ 8</strong> — บาลี / สันสกฤต</a></p>
+    <p style="margin-bottom: 5px;"><a href="#ch9-advanced"><strong>บทที่ 9</strong> — ตั้งค่าขั้นสูง (Page Size,
+        Orientation, Margins, Metadata, PDFOptions)</a></p>
+    <p style="margin-bottom: 5px;"><a href="#ch10-graphics"><strong>บทที่ 10</strong> — กราฟิกและสี</a></p>
+    <p style="margin-bottom: 5px;"><a href="#ch11-markdown"><strong>บทที่ 11</strong> — Markdown → PDF (Syntax
+        Highlighting, Containers, Alerts)</a></p>
+    <p style="margin-bottom: 5px;"><a href="#appendix"><strong>ภาคผนวก</strong> — ข้อมูลอ้างอิง</a></p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+     CHAPTER 1: Introduction
+     ═══════════════════════════════════════════════════════════════ -->
+
+  <div
+    id="ch1-intro"
+    class="chapter-title"
+  >บทที่ 1: แนะนำ LynPDF</div>
+
+  <h2>1.1 LynPDF คืออะไร?</h2>
+
+  <p>LynPDF เป็นไลบรารี Rust สำหรับแปลง HTML/CSS เป็นไฟล์ PDF คุณภาพสูง โดยไม่ต้องพึ่งพา Headless Browser เช่น
+    Chrome หรือ Puppeteer ทำให้มีน้ำหนักเบา ทำงานรวดเร็ว และเหมาะสำหรับใช้งานฝั่ง Server-side</p>
+
+  <p>ออกแบบมาเพื่อรองรับภาษาไทยเป็นพิเศษ — ตัดคำไทยอัตโนมัติ, จัดการสระลอย/วรรณยุกต์, รองรับฟอนต์ไทยมากกว่า 20 ตระกูล
+    และรองรับอักขระบาลี/สันสกฤต</p>
+
+  <h2>1.2 คุณสมบัติเด่น</h2>
+
+  <div class="feature-card">
+    <h3>Rust Layout Engine + Native PDF Emitter</h3>
+    <p>ใช้ Flex-like layout engine (จาก Meta) เป็น Flexbox layout engine และ native PDF emitter สำหรับสร้าง PDF รองรับ
+      compression, metadata,
+      hyperlinks</p>
+  </div>
+
+  <div class="feature-card">
+    <h3>ฟอนต์ครบทุกรูปแบบ</h3>
+    <p>รองรับ TTF, OTF (IBM Plex Sans), Variable Fonts (Inter Variable) พร้อม kerning และ ligatures อัตโนมัติผ่าน
+      HarfBuzz</p>
+  </div>
+
+  <div class="feature-card">
+    <h3>ภาษาไทยและบาลี/สันสกฤต</h3>
+    <p>ฟอนต์ไทย 20+ ตระกูล, ตัดคำไทยอัตโนมัติ, text-align: justify, นิคหิต/พินทุ/ทัณฑฆาต แสดงผลถูกต้อง</p>
+  </div>
+
+  <div class="feature-card">
+    <h3>ตารางข้ามหน้า + Thead Repeat</h3>
+    <p>ตารางยาวข้ามหลายหน้าได้อัตโนมัติ, thead ซ้ำทุกหน้า, สามารถปิด thead repeat ได้ด้วย -lynpdf-repeat: none</p>
+  </div>
+
+  <div class="feature-card">
+    <h3>SVG + Color Emoji + ขนาดกระดาษ &amp; Orientation</h3>
+    <p>แสดงผล SVG แบบ Vector, รองรับ Color Emoji (Twemoji), กำหนดขนาดกระดาษและการจัดวางหน้าได้ผ่าน @page { size: A4
+      landscape; margin: 2cm; } หรือ API</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+     CHAPTER 2: Installation
+     ═══════════════════════════════════════════════════════════════ -->
+
+  <div
+    id="ch2-install"
+    class="chapter-title"
+  >บทที่ 2: การติดตั้งและเริ่มต้นใช้งาน</div>
+
+  <h2>2.1 ความต้องการของระบบ</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>รายการ</th>
+        <th>เวอร์ชันขั้นต่ำ</th>
+        <th>หมายเหตุ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Rust Toolchain</td>
+        <td>1.76+</td>
+        <td>แนะนำ rustup + cargo เวอร์ชันล่าสุด</td>
+      </tr>
+      <tr class="alt">
+        <td>Cargo + Rustup</td>
+        <td>stable</td>
+        <td>ใช้ build/test/run และจัดการ toolchain</td>
+      </tr>
+      <tr>
+        <td>Poppler (pdftoppm)</td>
+        <td>optional</td>
+        <td>จำเป็นเมื่อทำ visual diff จาก PDF เป็น PNG</td>
+      </tr>
+      <tr class="alt">
+        <td>พื้นที่ดิสก์</td>
+        <td>~200 MB</td>
+        <td>รวม target/ + output artifacts</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>2.2 การติดตั้ง</h2>
+
+  <div class="code-block">
+    <p>cargo add lynpdf-rs</p>
+  </div>
+
+  <p>หรือติดตั้งจาก source:</p>
+
+  <div class="code-block">
+    <p>git clone https://github.com/lynpdf/lynpdf.git</p>
+    <p>cd lynpdf/lynpdf-rs &amp;&amp; cargo build</p>
+  </div>
+
+  <h2>2.3 ตัวอย่างการใช้งานพื้นฐาน</h2>
+
+  <div class="code-block">
+    <p>use lynpdf_rs::{render_file_to_pdf, RenderOptions};</p>
+    <p>fn main() {</p>
+    <p>&nbsp;</p>
+    <p>let options = RenderOptions::default();</p>
+    <p>render_file_to_pdf(</p>
+    <p>&nbsp;&nbsp;"examples/demo-invoice.html",</p>
+    <p>&nbsp;&nbsp;Some("examples/styles.css"),</p>
+    <p>&nbsp;&nbsp;"examples/output/demo-invoice-rust.pdf",</p>
+    <p>&nbsp;&nbsp;options,</p>
+    <p>).unwrap();</p>
+    <p>&nbsp;</p>
+    <p>}</p>
+  </div>
+
+  <h2>2.4 การใช้งานผ่าน CLI</h2>
+
+  <div class="code-block">
+    <p>cargo run --bin lynpdf-rs -- input.html -o output.pdf</p>
+    <p>cargo run --bin lynpdf-rs -- input.html -c styles.css -o output.pdf</p>
+    <p>cargo run --bin lynpdf-rs -- input.html --font-dir ./fonts -o output.pdf</p>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ตัวเลือก</th>
+        <th>คำอธิบาย</th>
+        <th>ค่าเริ่มต้น</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>-o, --output</td>
+        <td>ชื่อไฟล์ PDF ที่จะสร้าง</td>
+        <td>output.pdf</td>
+      </tr>
+      <tr class="alt">
+        <td>-c, --css</td>
+        <td>ไฟล์ CSS ภายนอก</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>--font-dir</td>
+        <td>เพิ่มโฟลเดอร์ฟอนต์สำหรับค้นหาแบบอัตโนมัติ</td>
+        <td>—</td>
+      </tr>
+      <tr class="alt">
+        <td>-v, --verbose</td>
+        <td>แสดงรายละเอียดการทำงาน</td>
+        <td>false</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+     CHAPTER 3: Architecture
+     ═══════════════════════════════════════════════════════════════ -->
+
+  <div
+    id="ch3-architecture"
+    class="chapter-title"
+  >บทที่ 3: สถาปัตยกรรมระบบ</div>
+
+  <h2>3.1 Rendering Pipeline</h2>
+
+  <p>LynPDF ทำงานตาม Pipeline 6 ขั้นตอน:</p>
+
+  <div style="padding: 10px; background-color: #f0f0f0; border-radius: 8px; margin-bottom: 14px;">
+    <div style="text-align: center; margin-bottom: 4px;"><strong>1. HTML Parsing</strong> (Rust HTML parser)</div>
+    <div style="text-align: center; margin-bottom: 4px;">↓</div>
+    <div style="text-align: center; margin-bottom: 4px;"><strong>2. CSS Parsing</strong> (Rust CSS parser)</div>
+    <div style="text-align: center; margin-bottom: 4px;">↓</div>
+    <div style="text-align: center; margin-bottom: 4px;"><strong>3. Style Resolution</strong> (Selector matching)</div>
+    <div style="text-align: center; margin-bottom: 4px;">↓</div>
+    <div style="text-align: center; margin-bottom: 4px;"><strong>4. Layout Calculation</strong> (Rust layout pipeline)
+    </div>
+    <div style="text-align: center; margin-bottom: 4px;">↓</div>
+    <div style="text-align: center; margin-bottom: 4px;"><strong>5. Post-Layout Passes</strong> (page-break,
+      thead-repeat, compaction)</div>
+    <div style="text-align: center; margin-bottom: 4px;">↓</div>
+    <div style="text-align: center;"><strong>6. PDF Rendering</strong> (native PDF emitter)</div>
+  </div>
+
+  <h2>3.2 โครงสร้างโปรเจกต์</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ไฟล์</th>
+        <th>หน้าที่</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>src/renderer.rs</td>
+        <td>API หลัก — ประสานงานทุกขั้นตอน</td>
+      </tr>
+      <tr class="alt">
+        <td>src/html.rs</td>
+        <td>แปลง HTML เป็น DOM และดึง metadata/head content</td>
+      </tr>
+      <tr>
+        <td>src/style.rs</td>
+        <td>จับคู่ CSS selector กับ DOM element</td>
+      </tr>
+      <tr class="alt">
+        <td>src/layout.rs</td>
+        <td>คำนวณ layout, pagination, table fragmentation และ paint ops</td>
+      </tr>
+      <tr>
+        <td>src/pdf.rs</td>
+        <td>แปลง paint ops เป็น PDF objects/resources จริง</td>
+      </tr>
+      <tr class="alt">
+        <td>src/text.rs</td>
+        <td>text shaping, Thai dictionary break, kerning, ligature</td>
+      </tr>
+      <tr>
+        <td>src/markdown.rs</td>
+        <td>แปลง Markdown เป็น HTML พร้อม container/alert preprocess</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>3.3 การจัดการหน้า (Pagination)</h2>
+
+  <p>LynPDF ใช้วิธี "virtual scroll" — Flex-like layout engine คำนวณ layout เป็นเอกสารเดียวยาวต่อเนื่อง จากนั้น
+    post-layout passes จะจัดการ
+    page-break และ renderer จะแยกเนื้อหาออกเป็นหน้าๆ:</p>
+
+  <div class="code-block">
+    <p>pageIndex = Math.floor(node.ly / PAGE_HEIGHT)</p>
+    <p>localY = node.ly - pageIndex * PAGE_HEIGHT</p>
+  </div>
+
+  <p>ขนาดกระดาษ A4 = 595.28 × 841.89 points (ค่าเริ่มต้น), ระยะขอบ = 50 points ทุกด้าน (กำหนดเองได้ผ่าน @page). การใช้
+    <code>@page { size: A4 landscape; }</code> หรือ <code>@page { size: 297mm 210mm; }</code> จะเปลี่ยนขนาดกระดาษใน PDF
+    โดยอัตโนมัติ — รองรับ A0–A6, B4, B5, letter, legal, ledger, tabloid
+  </p>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+     CHAPTER 4: CSS & Layout
+     ═══════════════════════════════════════════════════════════════ -->
+
+  <div
+    id="ch4-css"
+    class="chapter-title"
+  >บทที่ 4: CSS และ Layout</div>
+
+  <h2>4.1 Box Model</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Property</th>
+        <th>ตัวอย่าง</th>
+        <th>สถานะ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>width, height</td>
+        <td>width: 200px;</td>
+        <td>✓</td>
+      </tr>
+      <tr class="alt">
+        <td>min/max-width/height</td>
+        <td>max-width: 500px;</td>
+        <td>✓</td>
+      </tr>
+      <tr>
+        <td>margin</td>
+        <td>margin: 10px 20px;</td>
+        <td>✓</td>
+      </tr>
+      <tr class="alt">
+        <td>padding</td>
+        <td>padding: 8px 16px;</td>
+        <td>✓</td>
+      </tr>
+      <tr>
+        <td>border</td>
+        <td>border: 1px solid #333;</td>
+        <td>✓</td>
+      </tr>
+      <tr class="alt">
+        <td>border-radius</td>
+        <td>border-radius: 8px;</td>
+        <td>✓</td>
+      </tr>
+      <tr>
+        <td>border-collapse</td>
+        <td>border-collapse: collapse;</td>
+        <td>✓</td>
+      </tr>
+      <tr class="alt">
+        <td>overflow</td>
+        <td>overflow: hidden;</td>
+        <td>✓</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>4.2 Flexbox Layout</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Property</th>
+        <th>ค่าที่รองรับ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>display</td>
+        <td>flex, block, inline</td>
+      </tr>
+      <tr class="alt">
+        <td>flex-direction</td>
+        <td>row, column, row-reverse, column-reverse</td>
+      </tr>
+      <tr>
+        <td>flex-wrap</td>
+        <td>nowrap, wrap, wrap-reverse</td>
+      </tr>
+      <tr class="alt">
+        <td>justify-content</td>
+        <td>flex-start, center, flex-end, space-between, space-around, space-evenly</td>
+      </tr>
+      <tr>
+        <td>align-items</td>
+        <td>flex-start, center, flex-end, stretch, baseline</td>
+      </tr>
+      <tr class="alt">
+        <td>flex-grow, flex-shrink</td>
+        <td>0, 1, 2, ...</td>
+      </tr>
+      <tr>
+        <td>flex-basis</td>
+        <td>auto, px values</td>
+      </tr>
+      <tr class="alt">
+        <td>gap</td>
+        <td>10px (row-gap, column-gap)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>4.3 Page Break</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Property</th>
+        <th>ค่า</th>
+        <th>คำอธิบาย</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>page-break-before</td>
+        <td>always</td>
+        <td>ขึ้นหน้าใหม่ก่อน element</td>
+      </tr>
+      <tr class="alt">
+        <td>page-break-after</td>
+        <td>always</td>
+        <td>ขึ้นหน้าใหม่หลัง element</td>
+      </tr>
+      <tr>
+        <td>page-break-inside</td>
+        <td>avoid</td>
+        <td>ป้องกันไม่ให้ตัดกลาง element</td>
+      </tr>
+      <tr class="alt">
+        <td>break-before</td>
+        <td>page</td>
+        <td>เหมือน page-break-before: always</td>
+      </tr>
+      <tr>
+        <td>break-inside</td>
+        <td>avoid</td>
+        <td>เหมือน page-break-inside: avoid</td>
+      </tr>
+      <tr class="alt">
+        <td>orphans / widows</td>
+        <td>2, 3, ...</td>
+        <td>จำนวนบรรทัดขั้นต่ำบน/ล่างหน้า</td>
+      </tr>
+      <tr>
+        <td>@page { size }</td>
+        <td>A4 landscape, A3, letter, 297mm 210mm</td>
+        <td>กำหนดขนาดและทิศทางกระดาษ</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+     CHAPTER 5: Font System
+     ═══════════════════════════════════════════════════════════════ -->
+
+  <div
+    id="ch5-fonts"
+    class="chapter-title"
+  >บทที่ 5: ระบบฟอนต์</div>
+
+  <h2>5.1 ฟอนต์ไทย (Google Fonts)</h2>
+
+  <div class="sample-box">
+    <p style="font-family: Sarabun; font-size: 16px; margin-bottom: 4px;">
+      <strong>Sarabun</strong> — สวัสดีครับ กขคงจ ฉชซฌ ญฎฏฐ (ฟอนต์เริ่มต้น)
+    </p>
+    <p style="font-family: Prompt; font-size: 16px; margin-bottom: 4px;">
+      <strong>Prompt</strong> — สวัสดีครับ กขคงจ ฉชซฌ ญฎฏฐ
+    </p>
+    <p style="font-family: Kanit; font-size: 16px; margin-bottom: 4px;">
+      <strong>Kanit</strong> — สวัสดีครับ กขคงจ ฉชซฌ ญฎฏฐ
+    </p>
+    <p style="font-family: Mitr; font-size: 16px; margin-bottom: 4px;">
+      <strong>Mitr</strong> — สวัสดีครับ กขคงจ ฉชซฌ ญฎฏฐ
+    </p>
+    <p style="font-family: 'Chakra Petch'; font-size: 16px;">
+      <strong>Chakra Petch</strong> — สวัสดีครับ กขคงจ ฉชซฌ ญฎฏฐ
+    </p>
+  </div>
+
+  <h2>5.2 ฟอนต์ TLWG</h2>
+
+  <div class="sample-box">
+    <p style="font-family: Garuda; font-size: 16px; margin-bottom: 4px;">
+      <strong>Garuda</strong> (Sans-serif) — กขคงจ ฉชซฌ ไทยสากล
+    </p>
+    <p style="font-family: Norasi; font-size: 16px; margin-bottom: 4px;">
+      <strong>Norasi</strong> (Serif) — กขคงจ ฉชซฌ ไทยสากล
+    </p>
+    <p style="font-family: Loma; font-size: 16px; margin-bottom: 4px;">
+      <strong>Loma</strong> (Sans-serif) — กขคงจ ฉชซฌ ไทยสากล
+    </p>
+    <p style="font-family: Kinnari; font-size: 16px; margin-bottom: 4px;">
+      <strong>Kinnari</strong> (Serif) — กขคงจ ฉชซฌ ไทยสากล
+    </p>
+    <p style="font-family: Laksaman; font-size: 16px; margin-bottom: 4px;">
+      <strong>Laksaman</strong> (Serif) — กขคงจ ฉชซฌ ไทยสากล
+    </p>
+    <p style="font-family: Sawasdee; font-size: 16px; margin-bottom: 4px;">
+      <strong>Sawasdee</strong> (Sans-serif) — กขคงจ ฉชซฌ ไทยสากล
+    </p>
+    <p style="font-family: Purisa; font-size: 16px; margin-bottom: 4px;">
+      <strong>Purisa</strong> (Handwriting) — กขคงจ ฉชซฌ ไทยสากล
+    </p>
+    <p style="font-family: Waree; font-size: 16px;">
+      <strong>Waree</strong> (Sans-serif) — กขคงจ ฉชซฌ ไทยสากล
+    </p>
+  </div>
+
+  <h2>5.3 OTF Font — IBM Plex Sans</h2>
+
+  <p>LynPDF รองรับไฟล์ OTF (.otf) โดยตรง พร้อม kerning pairs และ ligatures อัตโนมัติ:</p>
+
+  <div class="sample-box">
+    <p style="font-family: 'IBM Plex Sans'; font-size: 20px; margin-bottom: 4px;">
+      <strong>IBM Plex Sans (OTF)</strong> — office fi fl ff ffi ffl
+    </p>
+    <p style="font-family: 'IBM Plex Sans'; font-size: 20px; margin-bottom: 4px;">
+      Kerning: AV AW AY AT VA To Te Ty We Yo PA
+    </p>
+    <p style="font-family: 'IBM Plex Sans'; font-size: 20px; font-style: italic;">
+      <em>IBM Plex Sans Italic — The quick brown fox jumps over</em>
+    </p>
+  </div>
+
+  <h2>5.4 Variable Font — Inter Variable</h2>
+
+  <p>Variable font คือไฟล์ฟอนต์เดียวที่รวมหลาย weight/style ไว้ด้วยกัน:</p>
+
+  <div class="sample-box">
+    <p style="font-family: 'Inter Variable'; font-size: 18px; font-weight: 400; margin-bottom: 4px;">
+      Inter Variable (Weight 400) — Hello World, fi fl ff
+    </p>
+    <p style="font-family: 'Inter Variable'; font-size: 18px; font-weight: bold; margin-bottom: 4px;">
+      <strong>Inter Variable (Bold)</strong> — Hello World, fi fl ff
+    </p>
+    <p style="font-family: 'Inter Variable'; font-size: 18px; font-style: italic;">
+      <em>Inter Variable (Italic) — Hello World, fi fl ff</em>
+    </p>
+  </div>
+
+  <h2>5.5 Font Fallback</h2>
+
+  <p>เมื่อฟอนต์หลักไม่มี glyph สำหรับอักขระบางตัว ระบบจะสลับไปใช้ฟอนต์สำรองอัตโนมัติ:</p>
+
+  <div class="sample-box">
+    <p>ตัวอย่าง: ✓ สำเร็จ ✗ ล้มเหลว ★ สำคัญ → ถัดไป ← ย้อนกลับ</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+     CHAPTER 6: Tables & Thead Repeat
+     ═══════════════════════════════════════════════════════════════ -->
+
+  <div
+    id="ch6-tables"
+    class="chapter-title"
+  >บทที่ 6: ตารางและ Thead Repeat</div>
+
+  <h2>6.1 ตารางพื้นฐาน</h2>
+
+  <p>LynPDF รองรับตาราง HTML มาตรฐาน (table, thead, tbody, tfoot, tr, td, th) โดยใช้ Flexbox สำหรับ layout:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>คุณสมบัติ</th>
+        <th>คำอธิบาย</th>
+        <th>สถานะ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>border-collapse</td>
+        <td>รวมเส้นขอบเซลล์ที่อยู่ติดกัน</td>
+        <td>✓</td>
+      </tr>
+      <tr class="alt">
+        <td>colspan (ผ่าน flex)</td>
+        <td>รวมเซลล์ในแนวนอน</td>
+        <td>✓</td>
+      </tr>
+      <tr>
+        <td>thead repeat</td>
+        <td>ซ้ำหัวตารางทุกหน้าอัตโนมัติ</td>
+        <td>✓</td>
+      </tr>
+      <tr class="alt">
+        <td>Cross-page tables</td>
+        <td>ตารางยาวข้ามหลายหน้า</td>
+        <td>✓</td>
+      </tr>
+      <tr>
+        <td>-lynpdf-repeat: none</td>
+        <td>ปิดการซ้ำ thead</td>
+        <td>✓ ใหม่!</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>6.2 Thead Repeat (ค่าเริ่มต้น: เปิด)</h2>
+
+  <p>เมื่อตารางยาวข้ามหลายหน้า LynPDF จะ repeat หัวตาราง (thead) อัตโนมัติทุกหน้า:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 35px;">#</th>
+        <th>รายการ</th>
+        <th>คำอธิบาย</th>
+        <th style="width: 60px;">สถานะ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>HTML Parsing</td>
+        <td>แปลง HTML string เป็น DOM tree ด้วย Rust HTML parser</td>
+        <td>✓</td>
+      </tr>
+      <tr class="alt">
+        <td>2</td>
+        <td>CSS Parsing</td>
+        <td>แปลง CSS string เป็น AST ด้วย Rust CSS parser</td>
+        <td>✓</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Style Resolution</td>
+        <td>จับคู่ CSS selector กับ DOM element</td>
+        <td>✓</td>
+      </tr>
+      <tr class="alt">
+        <td>4</td>
+        <td>Layout Engine</td>
+        <td>คำนวณขนาดและตำแหน่งด้วย Flex-like layout engine Layout</td>
+        <td>✓</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Text Measurement</td>
+        <td>วัดความกว้างข้อความด้วย fontkit + HarfBuzz</td>
+        <td>✓</td>
+      </tr>
+      <tr class="alt">
+        <td>6</td>
+        <td>Thai Word Break</td>
+        <td>ตัดคำไทยด้วย Thai dictionary segmenter</td>
+        <td>✓</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>PDF Rendering</td>
+        <td>วาดเนื้อหาลง native PDF emitter document</td>
+        <td>✓</td>
+      </tr>
+      <tr class="alt">
+        <td>8</td>
+        <td>SVG Rendering</td>
+        <td>แสดงผล SVG vector ด้วย native SVG paint ops</td>
+        <td>✓</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>Color Parser</td>
+        <td>แปลงสี hex, rgb, rgba, named ทุกรูปแบบ</td>
+        <td>✓</td>
+      </tr>
+      <tr class="alt">
+        <td>10</td>
+        <td>Emoji Support</td>
+        <td>ดาวน์โหลดและแสดง Twemoji PNG</td>
+        <td>✓</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>6.3 ปิด Thead Repeat ด้วย -lynpdf-repeat: none</h2>
+
+  <p>ในบางกรณีอาจต้องการปิดการ repeat thead เช่น ตารางที่ header ไม่สำคัญมาก:</p>
+
+  <div class="code-block">
+    <p>/* วิธีที่ 1: กำหนดที่ thead */</p>
+    <p>thead { -lynpdf-repeat: none; }</p>
+    <p>&nbsp;</p>
+    <p>/* วิธีที่ 2: กำหนดที่ table */</p>
+    <p>table.no-repeat { -lynpdf-repeat: none; }</p>
+  </div>
+
+  <p>ตารางตัวอย่างที่ปิด thead repeat:</p>
+
+  <table>
+    <thead style="-lynpdf-repeat: none;">
+      <tr>
+        <th>#</th>
+        <th>รายการ (thead ไม่ repeat)</th>
+        <th>หมายเหตุ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>รายการที่ 1</td>
+        <td>thead จะแสดงเฉพาะหน้าแรกเท่านั้น</td>
+      </tr>
+      <tr class="alt">
+        <td>2</td>
+        <td>รายการที่ 2</td>
+        <td>หน้าถัดไปจะไม่มี thead</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>รายการที่ 3</td>
+        <td>ประหยัดพื้นที่ในกรณีตารางยาว</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip-box">
+    <p><strong>Tip:</strong> -lynpdf-repeat เป็น CSS property เฉพาะของ LynPDF ไม่มีผลในเบราว์เซอร์ทั่วไป
+      สามารถใส่ได้ทั้ง inline style หรือใน stylesheet</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+     CHAPTER 7: Text Features
+     ═══════════════════════════════════════════════════════════════ -->
+
+  <div
+    id="ch7-text"
+    class="chapter-title"
+  >บทที่ 7: คุณสมบัติข้อความ</div>
+
+  <h2>7.1 text-align: justify</h2>
+
+  <p>LynPDF รองรับ text-justify สำหรับทั้งภาษาไทยและอังกฤษ โดยใช้ Thai dictionary segmenter
+    สำหรับตัดคำไทยแล้วกระจายช่องว่างระหว่างคำเท่าๆ กัน:</p>
+
+  <div class="sample-box">
+    <p style="font-size: 11px; color: #888; margin-bottom: 4px;">text-align: justify</p>
+    <p style="text-align: justify;">
+      การจัดรูปแบบข้อความแบบกระจายเต็มบรรทัด (Justify)
+      ในภาษาไทยนั้นมีความท้าทายอย่างมากเนื่องจากภาษาไทยไม่มีการเว้นวรรคระหว่างคำเหมือนภาษาอังกฤษหากใช้การกระจายช่องว่างระหว่างคำเพียงอย่างเดียว
+      จะทำให้เกิดช่องว่างขนาดใหญ่ที่ดูไม่สวยงามและอ่านยากดังนั้นระบบจึงต้องใช้เทคนิคการกระจายช่องว่างระดับคลัสเตอร์(Cluster-based
+      Justification) โดยอาศัย HarfBuzz ในการแยกแยะพยัญชนะ
+      สระและวรรณยุกต์ให้อยู่เป็นกลุ่มเดียวกันแล้วจึงกระจายช่องว่างเล็กๆ
+      แทรกเข้าไปอย่างแนบเนียนพร้อมทั้งให้น้ำหนักกับรอยต่อระหว่างคำมากกว่ารอยต่อระหว่างคลัสเตอร์เพื่อรักษารูปแบบการอ่านที่เป็นธรรมชาติ
+    </p>
+  </div>
+
+  <div class="sample-box">
+    <p style="font-size: 11px; color: #888; margin-bottom: 4px;">text-align: left (เปรียบเทียบ)</p>
+    <p style="text-align: left;">
+      การจัดรูปแบบข้อความแบบกระจายเต็มบรรทัด (Justify) ในภาษาไทยนั้นมีความท้าทายอย่างมาก
+      เนื่องจากภาษาไทยไม่มีการเว้นวรรคระหว่างคำเหมือนภาษาอังกฤษ หากใช้การกระจายช่องว่างระหว่างคำเพียงอย่างเดียว
+      จะทำให้เกิดช่องว่างขนาดใหญ่ที่ดูไม่สวยงามและอ่านยาก ดังนั้นระบบจึงต้องใช้เทคนิคการกระจายช่องว่างระดับคลัสเตอร์
+      (Cluster-based Justification) โดยอาศัย HarfBuzz ในการแยกแยะพยัญชนะ สระ และวรรณยุกต์ให้อยู่เป็นกลุ่มเดียวกัน
+      แล้วจึงกระจายช่องว่างเล็กๆ แทรกเข้าไปอย่างแนบเนียน
+      พร้อมทั้งให้น้ำหนักกับรอยต่อระหว่างคำมากกว่ารอยต่อระหว่างคลัสเตอร์
+      เพื่อรักษารูปแบบการอ่านที่เป็นธรรมชาติ
+    </p>
+  </div>
+
+  <h2>7.2 การตัดคำภาษาไทย</h2>
+
+  <p>ใช้ Thai dictionary segmenter (locale: th-TH) ตัดคำอัตโนมัติ ช่วยให้ข้อความยาวขึ้นบรรทัดใหม่ได้ถูกต้อง:</p>
+
+  <div class="sample-box">
+    <p style="font-size: 13px; line-height: 1.8;">
+      สำนักงานพัฒนาธุรกรรมทางอิเล็กทรอนิกส์เป็นหน่วยงานภายใต้กระทรวงดิจิทัลเพื่อเศรษฐกิจและสังคมมีหน้าที่ส่งเสริมและสนับสนุนการทำธุรกรรมทางอิเล็กทรอนิกส์ของประเทศไทยรวมถึงการพัฒนามาตรฐานและกฎเกณฑ์ที่เกี่ยวข้อง
+    </p>
+  </div>
+
+  <h2>7.3 Kerning และ Ligatures</h2>
+
+  <p>LynPDF ใช้ HarfBuzz สำหรับ OpenType shaping — GSUB (glyph substitution) และ GPOS (glyph positioning):</p>
+
+  <div class="sample-box">
+    <p style="font-size: 11px; color: #888; margin-bottom: 4px;">Kerning Pairs (Sarabun 24px):</p>
+    <p style="font-family: Sarabun; font-size: 24px; margin-bottom: 6px;">
+      AV AW AY AT VA To Te Ty We Yo PA
+    </p>
+    <p style="font-size: 11px; color: #888; margin-bottom: 4px;">Standard Ligatures (Sarabun 24px):</p>
+    <p style="font-family: Sarabun; font-size: 24px;">
+      fi fl ff ffi ffl — office, difficult, waffle
+    </p>
+  </div>
+
+  <h2>7.4 Typography Properties</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Property</th>
+        <th>ตัวอย่าง</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>font-family</td>
+        <td>Sarabun, Prompt, Kanit, IBM Plex Sans, Inter Variable</td>
+      </tr>
+      <tr class="alt">
+        <td>font-size</td>
+        <td>14px, 1.2em</td>
+      </tr>
+      <tr>
+        <td>font-weight</td>
+        <td>normal, bold, 100-900</td>
+      </tr>
+      <tr class="alt">
+        <td>font-style</td>
+        <td>normal, italic</td>
+      </tr>
+      <tr>
+        <td>color</td>
+        <td>#hex, rgb(), rgba(), named colors</td>
+      </tr>
+      <tr class="alt">
+        <td>text-align</td>
+        <td>left, center, right, justify</td>
+      </tr>
+      <tr>
+        <td>line-height</td>
+        <td>1.5, 24px</td>
+      </tr>
+      <tr class="alt">
+        <td>letter-spacing</td>
+        <td>2px, -0.5px</td>
+      </tr>
+      <tr>
+        <td>word-spacing</td>
+        <td>4px</td>
+      </tr>
+      <tr class="alt">
+        <td>text-decoration</td>
+        <td>underline, line-through</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+     CHAPTER 8: Pali / Sanskrit
+     ═══════════════════════════════════════════════════════════════ -->
+
+  <div
+    id="ch8-pali"
+    class="chapter-title"
+  >บทที่ 8: บาลี / สันสกฤต</div>
+
+  <h2>8.1 อักขระพิเศษในบาลี/สันสกฤต</h2>
+
+  <p>LynPDF รองรับอักขระพิเศษที่ใช้ในบาลี/สันสกฤตเขียนด้วยอักษรไทย ผ่าน HarfBuzz text shaping:</p>
+
+  <div class="sample-box">
+    <p style="font-size: 11px; color: #888; margin-bottom: 4px;">พยัญชนะเฉพาะ ฎ ฏ ฐ ญ ฬ (Sarabun 28px):</p>
+    <p style="font-family: Sarabun; font-size: 28px; line-height: 1.8; margin-bottom: 6px;">
+      ฎ ฏ ฐ ญ ฬ
+    </p>
+    <p style="font-size: 11px; color: #888; margin-bottom: 4px;">พยัญชนะ + สระบน + วรรณยุกต์ (ซ้อน 2-3 ชั้น):</p>
+    <p style="font-family: Sarabun; font-size: 26px; line-height: 2.0; margin-bottom: 6px;">
+      ฎี ฎี่ ฎี้ ฏิ ฏิ่ ฏิ้ ฐึ ฐึ่ ญี ญี้ ฬี ฬี้
+    </p>
+    <p style="font-size: 11px; color: #888; margin-bottom: 4px;">สระล่าง ( ุ ู ):</p>
+    <p style="font-family: Sarabun; font-size: 26px; line-height: 2.0;">
+      ฎุ ฎู ฏุ ฏู ฐุ ฐู ญุ ญู ฬุ ฬู
+    </p>
+  </div>
+
+  <h2>8.2 สัญลักษณ์พิเศษ</h2>
+
+  <div class="sample-box">
+    <p style="font-size: 11px; color: #888; margin-bottom: 4px;">นิคหิต ( ํ ) — วงกลมบนอักษร:</p>
+    <p style="font-family: Sarabun; font-size: 26px; line-height: 2.0; margin-bottom: 6px;">
+      อํ กํ คํ ปํ สํ ตํ ภํ ธํ
+    </p>
+    <p style="font-size: 11px; color: #888; margin-bottom: 4px;">พินทุ ( ฺ ) — จุดล่างอักษร (สันสกฤต):</p>
+    <p style="font-family: Sarabun; font-size: 26px; line-height: 2.0; margin-bottom: 6px;">
+      กฺ ขฺ คฺ ตฺ ทฺ ปฺ พฺ สฺ
+    </p>
+    <p style="font-size: 11px; color: #888; margin-bottom: 4px;">ทัณฑฆาต ( ์ ) / ยามักการ ( ๆ ) / อังคั่น ( ฯ ):</p>
+    <p style="font-family: Sarabun; font-size: 26px; line-height: 2.0;">
+      สมฺภว กรฺม ธรฺม ฯลฯ นมัสฺการ ญาณ์ จิตฺต สุตฺต
+    </p>
+  </div>
+
+  <h2>8.3 ประโยคบาลี/สันสกฤตจริง</h2>
+
+  <div class="sample-box">
+    <p style="font-size: 12px; font-weight: bold; color: #666; margin-bottom: 6px;">Sarabun (20px):</p>
+    <p style="font-family: Sarabun; font-size: 20px; line-height: 1.8; margin-bottom: 8px;">
+      สพฺเพ ธมฺมา อนตฺตา ฯ สพฺเพ สงฺขารา อนิจฺจา ฯ สพฺเพ สงฺขารา ทุกฺขา ฯ
+    </p>
+
+    <p style="font-size: 12px; font-weight: bold; color: #666; margin-bottom: 6px;">Norasi (20px):</p>
+    <p style="font-family: Norasi; font-size: 20px; line-height: 1.8; margin-bottom: 8px;">
+      ธรฺมจกฺรปฺรวรฺตนสูตฺร — กฺริยา ปฺรชฺญา สมฺภว ปฺรตีตฺยสมุทฺปาท
+    </p>
+
+    <p style="font-size: 12px; font-weight: bold; color: #666; margin-bottom: 6px;">Garuda (20px):</p>
+    <p style="font-family: Garuda; font-size: 20px; line-height: 1.8; margin-bottom: 8px;">
+      นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ
+    </p>
+
+    <p style="font-size: 12px; font-weight: bold; color: #666; margin-bottom: 6px;">Kinnari (20px):</p>
+    <p style="font-family: Kinnari; font-size: 20px; line-height: 1.8;">
+      อิติปิ โส ภะคะวา อะระหํ สัมมาสัมพุทโธ วิชชาจะระณะสัมปันโน
+    </p>
+  </div>
+
+  <div class="note-box">
+    <p><strong>หมายเหตุ:</strong> HarfBuzz จัดตำแหน่ง glyph ได้ถูกต้องโดยอัตโนมัติ — สระบน/ล่าง วรรณยุกต์ นิคหิต พินทุ
+      ไม่ทับกัน ทุกฟอนต์ที่มี GSUB/GPOS tables จะทำงานได้ดี</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+     CHAPTER 9: Advanced Features
+     ═══════════════════════════════════════════════════════════════ -->
+
+  <div
+    id="ch9-advanced"
+    class="chapter-title"
+  >บทที่ 9: ตั้งค่าขั้นสูง</div>
+
+  <h2>9.1 Custom Page Margins &amp; Page Size (@page)</h2>
+
+  <p>กำหนดระยะขอบหน้ากระดาษผ่าน CSS @page rule (ค่าเริ่มต้น: 50pt):</p>
+
+  <div class="code-block">
+    <p>/* ตั้ง margin ด้วยหน่วยต่างๆ */</p>
+    <p>@page { margin: 1in; } /* 72pt ทุกด้าน */</p>
+    <p>@page { margin: 2cm; } /* ~56.7pt */</p>
+    <p>@page { margin: 30px; } /* 22.5pt */</p>
+    <p>@page { margin: 40pt; } /* 40pt */</p>
+  </div>
+
+  <p>หรือกำหนดผ่าน PDFOptions API:</p>
+
+  <div class="code-block">
+    <p>let options = RenderOptions::default();</p>
+    <p>let options = RenderOptions { margin_pt: 72.0, ..RenderOptions::default() };</p>
+    <p>render_file_to_pdf("input.html", Some("styles.css"), "output.pdf", options)?;</p>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>หน่วย</th>
+        <th>ตัวอย่าง</th>
+        <th>เทียบเท่า (pt)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>pt (points)</td>
+        <td>50pt</td>
+        <td>50</td>
+      </tr>
+      <tr class="alt">
+        <td>px (pixels)</td>
+        <td>30px</td>
+        <td>22.5</td>
+      </tr>
+      <tr>
+        <td>in (inches)</td>
+        <td>1in</td>
+        <td>72</td>
+      </tr>
+      <tr class="alt">
+        <td>cm</td>
+        <td>2cm</td>
+        <td>56.69</td>
+      </tr>
+      <tr>
+        <td>mm</td>
+        <td>25mm</td>
+        <td>70.87</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>📐 Page Size &amp; Orientation</h3>
+
+  <p>กำหนดขนาดกระดาษและทิศทางผ่าน CSS @page rule:</p>
+
+  <div class="code-block">
+    <p>/* รูปแบบแนวนอน (Named size) */</p>
+    <p>@page { size: A4; } /* 595.28 × 841.89 pt */</p>
+    <p>@page { size: A3; } /* 841.89 × 1190.55 pt */</p>
+    <p>@page { size: letter; } /* 612 × 792 pt */</p>
+    <p>&nbsp;</p>
+    <p>/* Landscape — แนวนอนหัน */</p>
+    <p>@page { size: A4 landscape; } /* 841.89 × 595.28 pt */</p>
+    <p>@page { size: A3 landscape; } /* 1190.55 × 841.89 pt */</p>
+    <p>&nbsp;</p>
+    <p>/* ขนาดกำหนดเอง (Explicit dimensions) */</p>
+    <p>@page { size: 297mm 210mm; } /* A4 landscape */</p>
+    <p>@page { size: 200mm 150mm; } /* เล็มพาอเน็กเชต */</p>
+    <p>@page { size: 500pt 700pt; } /* pt โดยตรง */</p>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Named Size</th>
+        <th>Portrait (pt)</th>
+        <th>Landscape (pt)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>A3</td>
+        <td>841.89 × 1190.55</td>
+        <td>1190.55 × 841.89</td>
+      </tr>
+      <tr class="alt">
+        <td>A4 (ค่าเริ่มต้น)</td>
+        <td>595.28 × 841.89</td>
+        <td>841.89 × 595.28</td>
+      </tr>
+      <tr>
+        <td>A5</td>
+        <td>419.53 × 595.28</td>
+        <td>595.28 × 419.53</td>
+      </tr>
+      <tr class="alt">
+        <td>letter</td>
+        <td>612 × 792</td>
+        <td>792 × 612</td>
+      </tr>
+      <tr>
+        <td>legal</td>
+        <td>612 × 1008</td>
+        <td>1008 × 612</td>
+      </tr>
+      <tr class="alt">
+        <td>ledger / tabloid</td>
+        <td>792 × 1224</td>
+        <td>1224 × 792</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip-box">
+    <p><strong>Tip:</strong> @page { size } ใน CSS จะ override ค่า pageSize ใน PDFOptions เสมอ —
+      ตัวเลือกการควบคุมขนาดกระดาษผ่าน CSS ทำให้ไฟล์ HTML อิสระจาก code</p>
+  </div>
+
+  <h2>9.2 PDF Metadata</h2>
+
+  <p>LynPDF สร้าง metadata จาก HTML meta tags อัตโนมัติ:</p>
+
+  <div class="code-block">
+    <p>&lt;head&gt;</p>
+    <p> &lt;title&gt;ชื่อเอกสาร&lt;/title&gt;</p>
+    <p> &lt;meta name="author" content="ผู้เขียน"&gt;</p>
+    <p> &lt;meta name="description" content="คำอธิบาย"&gt;</p>
+    <p> &lt;meta name="keywords" content="คำค้นหา"&gt;</p>
+    <p>&lt;/head&gt;</p>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>HTML Source</th>
+        <th>PDF Key</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>&lt;title&gt;</td>
+        <td>/Title</td>
+      </tr>
+      <tr class="alt">
+        <td>meta name="author"</td>
+        <td>/Author</td>
+      </tr>
+      <tr>
+        <td>meta name="description"</td>
+        <td>/Subject</td>
+      </tr>
+      <tr class="alt">
+        <td>meta name="keywords"</td>
+        <td>/Keywords</td>
+      </tr>
+      <tr>
+        <td>meta name="creator"</td>
+        <td>/Creator (default: LynPDF)</td>
+      </tr>
+      <tr class="alt">
+        <td>meta name="producer"</td>
+        <td>/Producer (default: LynPDF/native PDF emitter)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip-box">
+    <p><strong>Tip:</strong> รองรับ prefix "pdf-" ด้วย เช่น pdf-title, pdf-author API-level metadata จะ override ค่าจาก
+      HTML</p>
+  </div>
+
+  <h2>9.3 PDFOptions (API สมบูรณ์)</h2>
+
+  <div class="code-block">
+    <p>interface PDFOptions {</p>
+    <p> pageSize?: string | [number, number] // 'A4' | 'A3' | 'letter' | [w, h]</p>
+    <p> margin?: number | [t, r, b, l] // points</p>
+    <p> css?: string // CSS เพิ่มเติม</p>
+    <p> defaultFont?: string // path to .ttf/.otf</p>
+    <p> colorEmoji?: boolean // Twemoji (default: true)</p>
+    <p> verbose?: boolean // logs (default: false)</p>
+    <p> compress?: boolean // compression (default: true)</p>
+    <p> pdfVersion?: string // '1.3'–'1.7ext3'</p>
+    <p> metadata?: { Title, Author, Subject, Keywords, Creator, Producer }</p>
+    <p>}</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+     CHAPTER 10: Graphics & Colors
+     ═══════════════════════════════════════════════════════════════ -->
+
+  <div
+    id="ch10-graphics"
+    class="chapter-title"
+  >บทที่ 10: กราฟิกและสี</div>
+
+  <h2>10.1 Inline SVG</h2>
+
+  <p>LynPDF รองรับ SVG แบบ inline ด้วย native SVG paint ops:</p>
+
+  <div style="display: flex; flex-direction: row; flex-wrap: wrap; margin-bottom: 14px;">
+    <div style="flex: 1; padding: 6px; text-align: center;">
+      <svg
+        width="90"
+        height="90"
+        viewBox="0 0 90 90"
+      >
+        <circle
+          cx="45"
+          cy="45"
+          r="40"
+          fill="#b87436"
+          opacity="0.8"
+        />
+        <text
+          x="45"
+          y="50"
+          text-anchor="middle"
+          font-size="13"
+          fill="white"
+        >Circle</text>
+      </svg>
+      <p style="font-size: 10px; color: #666;">วงกลม</p>
+    </div>
+    <div style="flex: 1; padding: 6px; text-align: center;">
+      <svg
+        width="90"
+        height="90"
+        viewBox="0 0 90 90"
+      >
+        <rect
+          x="8"
+          y="8"
+          width="74"
+          height="74"
+          rx="8"
+          fill="#1d4a73"
+          opacity="0.8"
+        />
+        <text
+          x="45"
+          y="50"
+          text-anchor="middle"
+          font-size="13"
+          fill="white"
+        >Rect</text>
+      </svg>
+      <p style="font-size: 10px; color: #666;">สี่เหลี่ยม</p>
+    </div>
+    <div style="flex: 1; padding: 6px; text-align: center;">
+      <svg
+        width="90"
+        height="90"
+        viewBox="0 0 90 90"
+      >
+        <polygon
+          points="45,8 82,82 8,82"
+          fill="#f39c12"
+          opacity="0.8"
+        />
+        <text
+          x="45"
+          y="65"
+          text-anchor="middle"
+          font-size="13"
+          fill="white"
+        >Tri</text>
+      </svg>
+      <p style="font-size: 10px; color: #666;">สามเหลี่ยม</p>
+    </div>
+    <div style="flex: 1; padding: 6px; text-align: center;">
+      <svg
+        width="90"
+        height="90"
+        viewBox="0 0 90 90"
+      >
+        <polygon
+          points="45,5 55,35 88,35 61,55 71,85 45,68 19,85 29,55 2,35 35,35"
+          fill="#b87436"
+        />
+      </svg>
+      <p style="font-size: 10px; color: #666;">ดาว</p>
+    </div>
+  </div>
+
+  <h2 style="page-break-before: always;">10.2 SVG Gradients</h2>
+
+  <div style="text-align: center; margin-bottom: 14px;">
+    <svg
+      width="380"
+      height="50"
+      viewBox="0 0 380 50"
+    >
+      <defs>
+        <linearGradient
+          id="grad1"
+          x1="0%"
+          y1="0%"
+          x2="100%"
+          y2="0%"
+        >
+          <stop
+            offset="0%"
+            style="stop-color:#b87436;stop-opacity:1"
+          />
+          <stop
+            offset="50%"
+            style="stop-color:#f39c12;stop-opacity:1"
+          />
+          <stop
+            offset="100%"
+            style="stop-color:#5f9dbc;stop-opacity:1"
+          />
+        </linearGradient>
+      </defs>
+      <rect
+        x="0"
+        y="0"
+        width="380"
+        height="50"
+        rx="8"
+        fill="url(#grad1)"
+      />
+      <text
+        x="190"
+        y="30"
+        text-anchor="middle"
+        font-size="15"
+        fill="white"
+        font-weight="bold"
+      >Linear Gradient</text>
+    </svg>
+  </div>
+
+  <h2>10.3 Color Support</h2>
+
+  <p>รองรับสีหลายรูปแบบ:</p>
+
+  <div style="display: flex; flex-direction: row; flex-wrap: wrap; margin-bottom: 14px;">
+    <div
+      style="flex: 1; min-width: 70px; height: 45px; background-color: #b87436; margin: 3px; border-radius: 4px; padding: 6px;"
+    >
+      <p style="color: white; font-size: 10px;">#b87436</p>
+    </div>
+    <div
+      style="flex: 1; min-width: 70px; height: 45px; background-color: rgb(15, 52, 96); margin: 3px; border-radius: 4px; padding: 6px;"
+    >
+      <p style="color: white; font-size: 10px;">rgb(15,52,96)</p>
+    </div>
+    <div
+      style="flex: 1; min-width: 70px; height: 45px; background-color: rgba(233, 69, 96, 0.5); margin: 3px; border-radius: 4px; padding: 6px;"
+    >
+      <p style="color: white; font-size: 10px;">rgba(.5)</p>
+    </div>
+    <div
+      style="flex: 1; min-width: 70px; height: 45px; background-color: steelblue; margin: 3px; border-radius: 4px; padding: 6px;"
+    >
+      <p style="color: white; font-size: 10px;">steelblue</p>
+    </div>
+    <div
+      style="flex: 1; min-width: 70px; height: 45px; background-color: gold; margin: 3px; border-radius: 4px; padding: 6px;"
+    >
+      <p style="font-size: 10px;">gold</p>
+    </div>
+  </div>
+
+  <h2>10.4 Visual Properties</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Property</th>
+        <th>คำอธิบาย</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>background-color</td>
+        <td>สีพื้นหลัง — รองรับ rgba ด้วย</td>
+      </tr>
+      <tr class="alt">
+        <td>opacity</td>
+        <td>ความโปร่งใส (0 ถึง 1)</td>
+      </tr>
+      <tr>
+        <td>border-radius</td>
+        <td>มุมโค้ง (px)</td>
+      </tr>
+      <tr class="alt">
+        <td>box-shadow</td>
+        <td>เงา CSS (จำกัด)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+     CHAPTER 11: Markdown → PDF
+     ═══════════════════════════════════════════════════════════════ -->
+
+  <div
+    id="ch11-markdown"
+    class="chapter-title"
+  >บทที่ 11: Markdown → PDF</div>
+
+  <p>LynPDF รองรับการแปลง Markdown เป็น PDF โดยตรง ผ่าน CLI หรือ Rust API
+    โดยไม่ต้องเขียน HTML เองแม้แต่บรรทัดเดียว รองรับ GitHub Flavored Markdown (GFM)
+    พร้อมฟีเจอร์เสริมหลัก: custom containers, GitHub-style alerts, tables,
+    task lists, footnotes และการจัดรูปแบบ code block สำหรับเอกสารเทคนิค</p>
+
+  <h2>11.1 การใช้งานผ่าน CLI</h2>
+
+  <div class="sample-box">
+    <p style="font-size: 11px; color: #888; margin-bottom: 6px;">Terminal</p>
+    <p style="font-family: monospace; font-size: 12px; line-height: 1.8; color: #24292e;">
+      # แปลง .md เป็น PDF (ตรวจจาก extension อัตโนมัติ)<br>
+      cargo run --bin lynpdf-rs -- README.md -o readme.pdf<br>
+      <br>
+      # เพิ่ม CSS เสริม<br>
+      cargo run --bin lynpdf-rs -- doc.md -c custom.css -o doc.pdf<br>
+      <br>
+      # รันแบบ verbose เพื่อดู diagnostics<br>
+      cargo run --bin lynpdf-rs -- doc.md -o doc.pdf --verbose
+    </p>
+  </div>
+
+  <h2>11.2 การใช้งานผ่าน Rust API</h2>
+
+  <div class="sample-box">
+    <p style="font-size: 11px; color: #888; margin-bottom: 6px;">Rust API</p>
+    <p style="font-family: monospace; font-size: 11px; line-height: 1.8; color: #24292e;">
+      use lynpdf_rs::{render_file_to_pdf, render_html_to_pdf, RenderOptions, RenderRequest};<br>
+      <br>
+      let options = RenderOptions::default();<br>
+      <br>
+      // จากไฟล์ .md (แปลง Markdown แล้วเรนเดอร์อัตโนมัติ)<br>
+      render_file_to_pdf("docs/guide.md", Some("examples/styles.css"), "guide.pdf", options.clone())?;<br>
+      <br>
+      // low-level: จาก HTML string โดยตรง<br>
+      let doc = render_html_to_pdf(RenderRequest {<br>
+      &nbsp;&nbsp;html: "&lt;h1&gt;Hello&lt;/h1&gt;".into(),<br>
+      &nbsp;&nbsp;css: "h1{color:#b87436;}".into(),<br>
+      &nbsp;&nbsp;base_dir: std::path::PathBuf::from("."),<br>
+      &nbsp;&nbsp;css_base_dir: None,<br>
+      &nbsp;&nbsp;options,<br>
+      })?;
+    </p>
+  </div>
+
+  <h2>11.3 Syntax Highlighting</h2>
+
+  <p>Code block สามารถทำ syntax highlight ได้ด้วย class token เช่น
+    <code>token-keyword</code>, <code>token-string</code>, <code>token-function</code>
+    ผ่าน CSS ธีมเดียวกับเอกสาร (ดูตัวอย่างด้านล่าง) เพื่อ lock สีและรูปแบบให้สม่ำเสมอในการ render PDF
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Token</th>
+        <th>สี (GitHub Light)</th>
+        <th>ตัวอย่าง</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>keyword</td>
+        <td style="color: #d73a49;">#d73a49</td>
+        <td><code style="color: #d73a49;">const, function, return, if</code></td>
+      </tr>
+      <tr class="alt">
+        <td>string</td>
+        <td style="color: #032f62;">#032f62</td>
+        <td><code style="color: #032f62;">"hello world"</code></td>
+      </tr>
+      <tr>
+        <td>number</td>
+        <td style="color: #005cc5;">#005cc5</td>
+        <td><code style="color: #005cc5;">42, 3.14, 0xFF</code></td>
+      </tr>
+      <tr class="alt">
+        <td>function / title</td>
+        <td style="color: #6f42c1;">#6f42c1</td>
+        <td><code style="color: #6f42c1;">myFunction()</code></td>
+      </tr>
+      <tr>
+        <td>built-in</td>
+        <td style="color: #e36209;">#e36209</td>
+        <td><code style="color: #e36209;">console, print, len</code></td>
+      </tr>
+      <tr class="alt">
+        <td>comment</td>
+        <td style="color: #6a737d;">#6a737d</td>
+        <td><code style="color: #6a737d;">// comment, # remark</code></td>
+      </tr>
+      <tr>
+        <td>type / class</td>
+        <td style="color: #005cc5;">#005cc5</td>
+        <td><code style="color: #005cc5;">string, boolean, MyClass</code></td>
+      </tr>
+      <tr class="alt">
+        <td>operator</td>
+        <td style="color: #d73a49;">#d73a49</td>
+        <td><code style="color: #d73a49;">=&gt;, ===, +, -&gt;</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="sample-box">
+    <p style="font-size: 11px; color: #888; margin-bottom: 6px;">Markdown source</p>
+    <p style="font-family: monospace; font-size: 12px; line-height: 1.8; color: #24292e;">
+      ```rust<br>
+      struct Config {<br>
+      &nbsp;&nbsp;page_size: &'static str,<br>
+      &nbsp;&nbsp;margin_pt: f32,<br>
+      }<br>
+      <br>
+      fn generate(cfg: Config) {<br>
+      &nbsp;&nbsp;let _ = cfg;<br>
+      &nbsp;&nbsp;// render_file_to_pdf(...);<br>
+      }<br>
+      ```
+    </p>
+  </div>
+
+  <p>ภาษาที่รองรับ (ตัวอย่าง): Rust, JavaScript, Python, HTML, CSS, JSON, SQL,
+    Bash, Dockerfile, Go, Rust, Java, C/C++, PHP, Ruby, Swift, Kotlin, YAML, XML,
+    Markdown และอีกกว่า 190 ภาษา</p>
+
+  <h2>11.4 Page Break ด้วย <code>---</code></h2>
+
+  <p>ใน Markdown → PDF โมเดลของ LynPDF จะแปลง <code>---</code> (thematic break / <code>&lt;hr&gt;</code>)
+    เป็น <strong>page break</strong> อัตโนมัติ ทำให้จัดหน้าได้สะดวกโดยไม่ต้องเขียน HTML:</p>
+
+  <div class="sample-box">
+    <p style="font-size: 11px; color: #888; margin-bottom: 6px;">Markdown — จัดแต่ละ section คนละหน้า</p>
+    <p style="font-family: monospace; font-size: 12px; line-height: 1.8; color: #24292e;">
+      ## บทที่ 1: บทนำ<br>
+      ข้อความบทที่ 1...<br>
+      <br>
+      ---<br>
+      <br>
+      ## บทที่ 2: เนื้อหา<br>
+      ข้อความบทที่ 2...
+    </p>
+  </div>
+
+  <p>บรรทัด <code>---</code> สร้าง <code>&lt;hr style="page-break-after: always"&gt;</code>
+    โดยอัตโนมัติผ่าน default CSS ของ LynPDF</p>
+
+  <h2>11.5 Custom Containers</h2>
+
+  <p>ใช้ syntax <code>:::type</code> เพื่อสร้าง container พิเศษ (ต้องการ plugin
+    <code>markdown-it-container</code> ซึ่งรวมมาแล้ว):
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Syntax</th>
+        <th>ประเภท</th>
+        <th>สีพื้นหลัง</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>:::info</code></td>
+        <td>ข้อมูลทั่วไป</td>
+        <td>ฟ้าอ่อน</td>
+      </tr>
+      <tr class="alt">
+        <td><code>:::tip ชื่อ</code></td>
+        <td>เคล็ดลับ</td>
+        <td>เขียวอ่อน</td>
+      </tr>
+      <tr>
+        <td><code>:::warning ชื่อ</code></td>
+        <td>คำเตือน</td>
+        <td>เหลืองอ่อน</td>
+      </tr>
+      <tr class="alt">
+        <td><code>:::danger</code></td>
+        <td>อันตราย</td>
+        <td>แดงอ่อน</td>
+      </tr>
+      <tr>
+        <td><code>:::note</code></td>
+        <td>หมายเหตุ</td>
+        <td>เทาอ่อน</td>
+      </tr>
+      <tr class="alt">
+        <td><code>:::caution</code></td>
+        <td>ข้อควรระวัง</td>
+        <td>ส้มอ่อน</td>
+      </tr>
+      <tr>
+        <td><code>:::important</code></td>
+        <td>สำคัญ</td>
+        <td>ม่วงอ่อน</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="sample-box">
+    <p style="font-family: monospace; font-size: 12px; line-height: 1.8; color: #24292e;">
+      :::warning ระวัง!<br>
+      อย่าลืมตั้งค่า @page { margin } เมื่อใช้ custom CSS<br>
+      :::
+    </p>
+  </div>
+
+  <h2>11.6 GitHub-Style Alerts</h2>
+
+  <p>รองรับ <code>&gt; [!NOTE]</code> syntax เหมือน GitHub README:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Syntax</th>
+        <th>ประเภท</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>&gt; [!NOTE]</code></td>
+        <td>หมายเหตุ (ฟ้า)</td>
+      </tr>
+      <tr class="alt">
+        <td><code>&gt; [!TIP]</code></td>
+        <td>เคล็ดลับ (เขียว)</td>
+      </tr>
+      <tr>
+        <td><code>&gt; [!WARNING]</code></td>
+        <td>คำเตือน (เหลือง)</td>
+      </tr>
+      <tr class="alt">
+        <td><code>&gt; [!CAUTION]</code></td>
+        <td>ข้อควรระวัง (แดง)</td>
+      </tr>
+      <tr>
+        <td><code>&gt; [!IMPORTANT]</code></td>
+        <td>สำคัญ (ม่วง)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>11.7 Color Boxes และ Cards</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Syntax</th>
+        <th>สีกรอบ / พื้น</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>:::card ชื่อ</code></td>
+        <td>การ์ดขาว มีเงา</td>
+      </tr>
+      <tr class="alt">
+        <td><code>:::box-blue</code></td>
+        <td>ฟ้า</td>
+      </tr>
+      <tr>
+        <td><code>:::box-green</code></td>
+        <td>เขียว</td>
+      </tr>
+      <tr class="alt">
+        <td><code>:::box-red</code></td>
+        <td>แดง</td>
+      </tr>
+      <tr>
+        <td><code>:::box-yellow</code></td>
+        <td>เหลือง</td>
+      </tr>
+      <tr class="alt">
+        <td><code>:::box-purple</code></td>
+        <td>ม่วง</td>
+      </tr>
+      <tr>
+        <td><code>:::box-gray</code></td>
+        <td>เทา</td>
+      </tr>
+      <tr class="alt">
+        <td><code>:::box-orange</code></td>
+        <td>ส้ม</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>11.8 Markdown Features ที่รองรับ</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>หมายเหตุ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>GFM Tables</td>
+        <td>ตาราง | col | col | พร้อม border</td>
+      </tr>
+      <tr class="alt">
+        <td>Task Lists</td>
+        <td><code>- [x] done</code> / <code>- [ ] todo</code></td>
+      </tr>
+      <tr>
+        <td>Footnotes</td>
+        <td><code>[^1]</code> อ้างอิงท้ายหน้า</td>
+      </tr>
+      <tr class="alt">
+        <td>Strikethrough</td>
+        <td><code>~~ข้อความ~~</code></td>
+      </tr>
+      <tr>
+        <td>--- เป็น Page Break</td>
+        <td>แปลง &lt;hr&gt; เป็น page-break-after: always</td>
+      </tr>
+      <tr class="alt">
+        <td>Mermaid Diagrams</td>
+        <td>แนะนำ pre-render Mermaid เป็น SVG/PNG ก่อนนำเข้า Markdown</td>
+      </tr>
+      <tr>
+        <td>Inline HTML</td>
+        <td>HTML ใน Markdown จะถูกประมวลผลปกติ</td>
+      </tr>
+      <tr class="alt">
+        <td>Custom CSS</td>
+        <td>เพิ่มไฟล์ CSS ผ่าน <code>-c custom.css</code> (ถูก append ต่อจาก default markdown css)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>11.9 Default CSS ของ Markdown</h2>
+
+  <p>LynPDF ใส่ default stylesheet ให้อัตโนมัติเมื่อแปลง Markdown และสามารถเพิ่ม custom css ได้ผ่าน
+    <code>-c custom.css</code> เพื่อ override style เฉพาะเอกสาร
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Element</th>
+        <th>Default Style</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>@page</code></td>
+        <td>margin: 2cm</td>
+      </tr>
+      <tr class="alt">
+        <td><code>body</code></td>
+        <td>font: Sarabun 14px, line-height 1.6</td>
+      </tr>
+      <tr>
+        <td><code>pre</code> (code block)</td>
+        <td>พื้น #f6f8fa, border, monospace 12px, padding 16px 18px</td>
+      </tr>
+      <tr class="alt">
+        <td><code>.code-lang-badge</code></td>
+        <td>แถบชื่อภาษา (#eaeef2) แสดงชื่อภาษาเหนือ code block</td>
+      </tr>
+      <tr>
+        <td><code>hr</code></td>
+        <td>page-break-after: always (ไม่แสดงเส้น)</td>
+      </tr>
+      <tr class="alt">
+        <td><code>table</code></td>
+        <td>border-collapse, th พื้น #f6f8fa, แถบสลับสี</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+     APPENDIX
+     ═══════════════════════════════════════════════════════════════ -->
+
+  <div
+    id="appendix"
+    class="chapter-title"
+  >ภาคผนวก: ข้อมูลอ้างอิง</div>
+
+  <h2>ก. Dependencies</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Package</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>html5ever + markup5ever_rcdom</td>
+        <td>HTML parser และ DOM model</td>
+      </tr>
+      <tr class="alt">
+        <td>lightningcss</td>
+        <td>CSS parsing และ stylesheet diagnostics</td>
+      </tr>
+      <tr>
+        <td>rustybuzz + ttf-parser</td>
+        <td>OpenType shaping และ font parsing</td>
+      </tr>
+      <tr class="alt">
+        <td>Rust HTML parser</td>
+        <td>HTML parser (WHATWG standard)</td>
+      </tr>
+      <tr>
+        <td>Rust CSS parser</td>
+        <td>CSS parser &amp; AST toolkit</td>
+      </tr>
+      <tr class="alt">
+        <td>image</td>
+        <td>PNG raster decoding สำหรับภาพและ visual diff workflow</td>
+      </tr>
+      <tr>
+        <td>pulldown-cmark</td>
+        <td>Markdown parser (tables, task lists, footnotes)</td>
+      </tr>
+      <tr class="alt">
+        <td>unicode-segmentation + dictionary</td>
+        <td>word break สำหรับภาษาไทยและข้อความหลายภาษา</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>ข. Technical Specifications</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>รายการ</th>
+        <th>ค่า</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>ขนาดกระดาษ (ค่าเริ่มต้น)</td>
+        <td>A4 (595.28 × 841.89 pt) — กำหนดเองได้ผ่าน @page { size }</td>
+      </tr>
+      <tr class="alt">
+        <td>ระยะขอบ (ค่าเริ่มต้น)</td>
+        <td>36pt ทุกด้าน (กำหนดเองได้ผ่าน @page หรือ RenderOptions)</td>
+      </tr>
+      <tr>
+        <td>ฟอนต์เริ่มต้น</td>
+        <td>Sarabun 10.5pt</td>
+      </tr>
+      <tr class="alt">
+        <td>PDF Compression</td>
+        <td>กำหนดตาม renderer defaults</td>
+      </tr>
+      <tr>
+        <td>PDF Version</td>
+        <td>1.7 (กำหนดเองได้ 1.3–1.7ext3)</td>
+      </tr>
+      <tr class="alt">
+        <td>Color space</td>
+        <td>DeviceRGB</td>
+      </tr>
+      <tr>
+        <td>Text Shaping</td>
+        <td>HarfBuzz (GSUB + GPOS) — macOS, Linux, Windows (รองรับทุกแพลตฟอร์ม)</td>
+      </tr>
+      <tr class="alt">
+        <td>Thai Word Break</td>
+        <td>Thai dictionary segmenter (th-TH)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>ค. TLWG Fonts ทั้งหมด</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ชื่อฟอนต์</th>
+        <th>ประเภท</th>
+        <th>Variants</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Garuda</td>
+        <td>Sans-serif</td>
+        <td>Regular, Bold, Oblique, BoldOblique</td>
+      </tr>
+      <tr class="alt">
+        <td>Loma</td>
+        <td>Sans-serif</td>
+        <td>Regular, Bold, Oblique, BoldOblique</td>
+      </tr>
+      <tr>
+        <td>Norasi</td>
+        <td>Serif</td>
+        <td>Regular, Bold, Italic, BoldItalic</td>
+      </tr>
+      <tr class="alt">
+        <td>Kinnari</td>
+        <td>Serif</td>
+        <td>Regular, Bold, Italic, BoldItalic</td>
+      </tr>
+      <tr>
+        <td>Laksaman</td>
+        <td>Serif</td>
+        <td>Regular, Bold, Italic, BoldItalic</td>
+      </tr>
+      <tr class="alt">
+        <td>Sawasdee</td>
+        <td>Sans-serif</td>
+        <td>Regular, Bold, Oblique, BoldOblique</td>
+      </tr>
+      <tr>
+        <td>Purisa</td>
+        <td>Handwriting</td>
+        <td>Regular, Bold, Oblique, BoldOblique</td>
+      </tr>
+      <tr class="alt">
+        <td>Umpush</td>
+        <td>Sans-serif</td>
+        <td>Regular, Bold, Light, Oblique</td>
+      </tr>
+      <tr>
+        <td>Waree</td>
+        <td>Sans-serif</td>
+        <td>Regular, Bold, Oblique, BoldOblique</td>
+      </tr>
+      <tr class="alt">
+        <td>TlwgMono</td>
+        <td>Monospace</td>
+        <td>Regular, Bold</td>
+      </tr>
+      <tr>
+        <td>TlwgTypewriter</td>
+        <td>Monospace</td>
+        <td>Regular, Bold</td>
+      </tr>
+      <tr class="alt">
+        <td>TlwgTypist</td>
+        <td>Monospace</td>
+        <td>Regular, Bold</td>
+      </tr>
+      <tr>
+        <td>TlwgTypo</td>
+        <td>Monospace</td>
+        <td>Regular, Bold</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 style="page-break-before: always;">ง. ลิขสิทธิ์</h2>
+
+  <p>LynPDF เผยแพร่ภายใต้ MIT License — ใช้งานในโปรเจกต์ส่วนตัวและเชิงพาณิชย์ได้อิสระ</p>
+
+  <p>ฟอนต์ที่รวมมากับ LynPDF:</p>
+
+  <div class="sample-box">
+    <p style="font-size: 12px; margin-bottom: 3px;">Sarabun, Prompt, Kanit, Mitr, Chakra Petch — OFL (SIL Open Font
+      License)</p>
+    <p style="font-size: 12px; margin-bottom: 3px;">TLWG Fonts — GPL with Font Exception</p>
+    <p style="font-size: 12px; margin-bottom: 3px;">Inter Variable — OFL (SIL Open Font License)</p>
+    <p style="font-size: 12px; margin-bottom: 3px;">IBM Plex Sans — OFL (SIL Open Font License)</p>
+    <p style="font-size: 12px;">Noto Emoji — Apache License 2.0</p>
+  </div>
+
+  <div style="margin-top: 24px; padding: 14px; text-align: center; border-top: 2px solid #b87436;">
+    <p style="font-size: 12px; color: #888;">— จบเอกสาร —</p>
+    <p style="font-size: 11px; color: #aaa;">สร้างด้วย LynPDF v2.1 • HTML/CSS → PDF Creator</p>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<html>
+
+<head>
+  <title>Test 20 - Border Style Parity</title>
+</head>
+
+<body>
+
+  <h1>Test 20: Border Style Parity</h1>
+  <p class="text-muted">ทดสอบเส้นขอบแบบผสมทั้ง collapse และ separate โดยเน้น conflict precedence และลักษณะเส้นตาม style
+  </p>
+
+  <div class="test-section">
+    <h3>Test 20.1 - Collapse precedence matrix</h3>
+    <p class="test-label">คาดหวัง: hidden/none ไม่วาด, เส้นหนากว่าชนะ, style ที่ต่างกันให้ลักษณะเส้นแตกต่างกัน</p>
+
+    <table style="width: 100%; border-collapse: collapse; border: 4px solid #111827; margin-bottom: 12px;">
+      <tr>
+        <td style="border: 2px solid #1d4ed8; padding: 12px;">solid 2</td>
+        <td style="border: 3px dashed #dc2626; padding: 12px;">dashed 3</td>
+        <td style="border: 4px dotted #0f766e; padding: 12px;">dotted 4</td>
+      </tr>
+      <tr>
+        <td style="border: 6px double #7c3aed; padding: 12px;">double 6</td>
+        <td style="border: 5px solid #0f172a; padding: 12px;">solid 5</td>
+        <td style="border: 6px hidden #f59e0b; padding: 12px;">hidden 6</td>
+      </tr>
+      <tr>
+        <td style="border: 4px inset #334155; padding: 12px;">inset 4</td>
+        <td style="border: 4px outset #334155; padding: 12px;">outset 4</td>
+        <td style="border: 4px none #334155; padding: 12px;">none 4</td>
+      </tr>
+    </table>
+
+    <p class="test-expect">ขอบร่วมระหว่างเซลล์ควรเป็นเส้นเดียว ไม่หนาซ้อน และชนะแบบ deterministic</p>
+  </div>
+
+  <div class="test-section">
+    <h3>Test 20.2 - Rowspan and colspan with mixed styles</h3>
+    <p class="test-label">คาดหวัง: conflict ในช่วงที่มี rowspan/colspan ยังคงใช้ precedence เดียวกัน</p>
+
+    <table style="width: 100%; border-collapse: collapse; border: 3px solid #111827; margin-bottom: 12px;">
+      <tr>
+        <td
+          rowspan="2"
+          style="border: 6px double #2563eb; padding: 12px; background: #eff6ff;"
+        >rowspan 2 + double</td>
+        <td style="border: 3px dashed #dc2626; padding: 12px;">cell B1</td>
+        <td style="border: 2px solid #047857; padding: 12px;">cell C1</td>
+      </tr>
+      <tr>
+        <td
+          colspan="2"
+          style="border: 5px dotted #9333ea; padding: 12px;"
+        >colspan 2 + dotted</td>
+      </tr>
+      <tr>
+        <td style="border: 4px solid #0f172a; padding: 12px;">A3</td>
+        <td style="border: 4px hidden #f97316; padding: 12px;">B3 hidden</td>
+        <td style="border: 4px solid #0f172a; padding: 12px;">C3</td>
+      </tr>
+    </table>
+
+    <p class="test-expect">เส้นช่วงต่อเนื่องจากเซลล์ที่ span ควรไม่ขาด และ hidden ควรกดเส้นร่วมในช่วงที่ทับกัน</p>
+  </div>
+
+  <div class="test-section">
+    <h3>Test 20.3 - Separate model style appearance</h3>
+    <p class="test-label">คาดหวัง: ใน separate mode รูปแบบ dashed/dotted/double แยกกันชัดเจนต่อเซลล์</p>
+
+    <table style="width: 100%; border-collapse: separate; border-spacing: 6px; margin-bottom: 12px;">
+      <tr>
+        <td style="border: 3px dashed #1d4ed8; padding: 10px; background: #eff6ff;">separate dashed</td>
+        <td style="border: 3px dotted #dc2626; padding: 10px; background: #fef2f2;">separate dotted</td>
+        <td style="border: 5px double #0f766e; padding: 10px; background: #ecfdf5;">separate double</td>
+      </tr>
+      <tr>
+        <td style="border: 4px ridge #334155; padding: 10px;">separate ridge</td>
+        <td style="border: 4px groove #334155; padding: 10px;">separate groove</td>
+        <td style="border: 4px outset #334155; padding: 10px;">separate outset</td>
+      </tr>
+    </table>
+  </div>
+
+</body>
+
+</html>

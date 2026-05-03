@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>test-16-page-margin</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 20mm;
+    }
+
+    body {
+      font-family: sans-serif;
+      font-size: 11.5pt;
+      line-height: 1.45;
+      color: #1f2937;
+    }
+
+    h1 {
+      font-size: 18pt;
+      margin: 0 0 0.45em 0;
+    }
+
+    h2 {
+      font-size: 14pt;
+      margin: 0 0 0.35em 0;
+      color: #1e3a8a;
+    }
+
+    p {
+      margin: 0 0 0.7em 0;
+    }
+
+    .note {
+      font-size: 10pt;
+      color: #475569;
+      margin-bottom: 10px;
+    }
+
+    .frame {
+      border: 2px solid #94a3b8;
+      margin-bottom: 10px;
+      background: #f8fafc;
+    }
+
+    .frame.equal {
+      padding: 14mm;
+    }
+
+    .frame.unequal {
+      padding: 10mm 22mm 30mm 36mm;
+      border-style: dashed;
+      border-color: #64748b;
+    }
+
+    .box {
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      padding: 8px;
+      margin-bottom: 7px;
+    }
+
+    .code {
+      border: 1px solid #d1d5db;
+      background: #f3f4f6;
+      font-family: monospace;
+      font-size: 10pt;
+      padding: 8px;
+      white-space: pre-wrap;
+      margin-bottom: 8px;
+    }
+
+    .page-break {
+      page-break-before: always;
+      break-before: page;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Test 16: Page Margin Examples</h1>
+  <p class="note">ตัวอย่างนี้เพิ่มทั้ง margin แบบเท่ากันทุกด้าน และตัวอย่างแบบไม่เท่ากันทั้งสี่ด้าน (ผ่านเฟรมจำลอง)
+    เพื่อดูพื้นที่ใช้งานภายในหน้าที่ต่างกันอย่างชัดเจน</p>
+
+  <h2>A) Equal Margin Example</h2>
+  <div class="code">@page { size: A4; margin: 20mm; }</div>
+  <div class="frame equal">
+    <div class="box">Equal block 1: ทุกด้านมีระยะห่างเท่ากัน ช่วยให้ layout สมดุลและอ่านง่าย</div>
+    <div class="box">Equal block 2: เหมาะกับรายงานมาตรฐาน เอกสารองค์กร และคู่มือทั่วไป</div>
+    <div class="box">Equal block 3: เส้นเฟรมจำลองด้านในควรอยู่ห่างขอบหน้าเท่ากันทั้งบน/ขวา/ล่าง/ซ้าย</div>
+    <div class="box">Equal block 4: ข้อความยาวเพื่อทดสอบการไหลของย่อหน้าเมื่อพื้นที่ใช้งานลดลงเท่ากันทุกด้าน</div>
+    <div class="box">Equal block 5: การจัดตำแหน่งหัวข้อ ตาราง และภาพมักคาดการณ์ง่ายกว่าเมื่อ margin สมมาตร</div>
+    <div class="box">Equal block 6: ใช้เป็น baseline ก่อนเทียบกับเคส margin ไม่สมมาตรในหน้าถัดไป</div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <h2>B) Unequal 4-Side Margin Example</h2>
+  <div class="code">@page { size: A4; margin: 10mm 22mm 30mm 36mm; }</div>
+  <div class="frame unequal">
+    <div class="box">Unequal block 1: top 10mm, right 22mm, bottom 30mm, left 36mm</div>
+    <div class="box">Unequal block 2: ซ้ายกว้างขึ้นเพื่อเว้นสันเข้าเล่ม หรือเผื่อ binding offset</div>
+    <div class="box">Unequal block 3: ล่างกว้างขึ้นเพื่อพื้นที่ footer, หมายเหตุ, หรือพื้นที่เซ็นรับรอง</div>
+    <div class="box">Unequal block 4: ขวาแคบกว่าซ้ายเล็กน้อยเพื่อสมดุลทางสายตาเอกสารที่เข้าเล่ม</div>
+    <div class="box">Unequal block 5: เคสนี้ช่วยทดสอบว่าพื้นที่ flow ของ content เปลี่ยนตาม margin profile</div>
+    <div class="box">Unequal block 6: หากมีหลายหน้า ย่อหน้าและกล่องควรแตกหน้าได้ต่อเนื่องไม่ทับขอบ</div>
+    <div class="box">Unequal block 7: เติมเนื้อหาเพิ่มเพื่อ stress การไหลของ content ในพื้นที่ที่แคบลงบางด้าน</div>
+    <div class="box">Unequal block 8: ข้อความปิดท้ายสำหรับตรวจว่าท้ายหน้าไม่ชนขอบล่างหลังหัก margin</div>
+  </div>
+</body>
+
+</html>

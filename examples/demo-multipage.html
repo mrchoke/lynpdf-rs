@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>Multi-page Demo — PDF Creator</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .chapter-header {
+            background-color: #1d4a73;
+            color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .chapter-header h2 { color: #fff; margin: 0; }
+        .chapter-header p  { color: #adb5bd; margin: 4px 0 0; font-size: 12px; }
+        .content-block {
+            border: 1px solid #dee2e6;
+            padding: 16px;
+            margin-bottom: 12px;
+            background-color: #fff;
+        }
+        .tall-placeholder {
+            background-color: #e9ecef;
+            border: 2px dashed #adb5bd;
+            padding: 20px;
+            text-align: center;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════════════════════════════════════ PAGE 1 ═══ -->
+    <div class="page-header">
+        <h1>เอกสารหลายหน้า — Multi-page Demo</h1>
+        <p>ทดสอบการขึ้นหน้าใหม่ทั้งแบบธรรมชาติ (natural) และแบบบังคับ (forced page-break)</p>
+    </div>
+
+    <h2>บทที่ 1: บทนำ (Introduction)</h2>
+    <p>
+        เอกสารนี้ทดสอบความสามารถในการสร้าง PDF หลายหน้าของ TypeScript PDF Creator
+        โดยครอบคลุมสถานการณ์ต่าง ๆ ได้แก่ การขึ้นหน้าแบบธรรมชาติเมื่อเนื้อหาเกินขนาดหน้า
+        และการบังคับขึ้นหน้าใหม่ด้วย <code>page-break-before: always</code>
+    </p>
+
+    <div class="content-block">
+        <h3>1.1 การทำงานของ Page Break</h3>
+        <p>
+            ในการสร้าง PDF เนื้อหาที่ยาวเกินขนาดหน้าจะถูกจัดเรียงต่อยังหน้าถัดไปโดยอัตโนมัติ
+            ระบบจะคำนวณพิกัด Y ของแต่ละ element และตัดสินใจว่าควรอยู่ในหน้าใด
+        </p>
+        <p>
+            สำหรับการบังคับขึ้นหน้า สามารถใช้ CSS property <code>page-break-before: always</code>
+            หรือ <code>break-before: page</code> กับ element ที่ต้องการเริ่มต้นหน้าใหม่
+        </p>
+    </div>
+
+    <!-- ── Long content to trigger natural page break ── -->
+    <div class="tall-placeholder" style="height: 350px">
+        <h3>พื้นที่จำลองเนื้อหาขนาดใหญ่</h3>
+        <p>block นี้สูง 350px เพื่อกระตุ้นให้เกิดการขึ้นหน้าโดยธรรมชาติ</p>
+        <p>(Natural Page Break Trigger)</p>
+    </div>
+
+    <div class="content-block">
+        <h3>1.2 เนื้อหาต่อเนื่องหลังกล่องใหญ่</h3>
+        <p>
+            เนื้อหานี้ควรปรากฏบนหน้าถัดไปหลังจากกล่องขนาดใหญ่ด้านบนดันเนื้อหาเกินขอบหน้า
+            A4 ซึ่งมีความสูงประมาณ 841 จุด และมี margin ด้านบน-ล่าง 20mm (ประมาณ 113 จุด)
+        </p>
+    </div>
+
+    <!-- ═══════════════════════════════════════ PAGE 2 (forced) ═══ -->
+    <div class="chapter-header page-break">
+        <h2>บทที่ 2: หน้าที่ถูกบังคับขึ้นใหม่</h2>
+        <p>Forced page break via page-break-before: always</p>
+    </div>
+
+    <p>
+        หน้านี้เริ่มต้นด้วย <code>page-break-before: always</code> บน div.chapter-header
+        ดังนั้นไม่ว่าเนื้อหาก่อนหน้าจะอยู่ที่ตำแหน่งใด หน้านี้จะเริ่มต้นหน้าใหม่เสมอ
+    </p>
+
+    <div class="row">
+        <div class="col content-block">
+            <h3>ส่วน A</h3>
+            <p>เนื้อหาคอลัมน์ซ้าย Lorem ipsum dolor sit amet consectetur adipiscing elit</p>
+            <ul>
+                <li>รายการที่ 1 — สิ่งแรก</li>
+                <li>รายการที่ 2 — สิ่งที่สอง</li>
+                <li>รายการที่ 3 — สิ่งที่สาม</li>
+            </ul>
+        </div>
+        <div class="col content-block">
+            <h3>ส่วน B</h3>
+            <p>เนื้อหาคอลัมน์ขวา สามารถใช้ Flex layout เพื่อจัดวางเนื้อหาแบบ 2 คอลัมน์ได้</p>
+            <ol>
+                <li>ขั้นตอนที่ 1</li>
+                <li>ขั้นตอนที่ 2</li>
+                <li>ขั้นตอนที่ 3</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="tall-placeholder" style="height: 280px">
+        <p>พื้นที่จำลองอีกชิ้น — เพื่อทดสอบการล้นไปยังหน้าที่ 3</p>
+    </div>
+
+    <div class="highlight-box">
+        เนื้อหานี้ควรปรากฏบนหน้าที่ 3 เนื่องจากกล่องด้านบนดันให้ล้นหน้า
+    </div>
+
+    <!-- ═══════════════════════════════════════ PAGE 3 (forced) ═══ -->
+    <div class="chapter-header page-break">
+        <h2>บทที่ 3: หัวข้อย่อยและรายการซ้อน</h2>
+        <p>Page 3 — Nested lists and subheadings</p>
+    </div>
+
+    <h3>3.1 หัวข้อระดับ 3</h3>
+    <p>สามารถมีหัวข้อย่อยหลายระดับเพื่อจัดโครงสร้างเอกสารให้อ่านง่าย</p>
+
+    <h4>3.1.1 หัวข้อระดับ 4</h4>
+    <p>นี่คือหัวข้อระดับที่ 4 ซึ่งใช้สำหรับเนื้อหาที่ต้องการความละเอียดสูง</p>
+
+    <ul>
+        <li>
+            <strong>หัวข้อหลัก 1</strong>
+            <ul>
+                <li>หัวข้อย่อย 1.1</li>
+                <li>หัวข้อย่อย 1.2</li>
+                <li>หัวข้อย่อย 1.3</li>
+            </ul>
+        </li>
+        <li>
+            <strong>หัวข้อหลัก 2</strong>
+            <ul>
+                <li>หัวข้อย่อย 2.1</li>
+                <li>หัวข้อย่อย 2.2</li>
+            </ul>
+        </li>
+        <li><strong>หัวข้อหลัก 3</strong> — ไม่มีหัวข้อย่อย</li>
+    </ul>
+
+    <h3>3.2 Ordered List ลำดับเลข</h3>
+    <ol>
+        <li>ติดตั้ง Node.js และ Bun</li>
+        <li>ติดตั้ง dependencies ด้วย <code>bun install</code></li>
+        <li>รันคำสั่ง <code>bun run src/index.ts</code></li>
+        <li>ตรวจสอบไฟล์ PDF ที่สร้างในโฟลเดอร์ output</li>
+        <li>ปรับแต่ง HTML/CSS ตามต้องการ</li>
+    </ol>
+
+    <!-- ═══════════════════════════════════════ PAGE 4 (forced) ═══ -->
+    <div class="chapter-header page-break">
+        <h2>บทที่ 4: บทสรุป</h2>
+        <p>Page 4 — Summary and closing</p>
+    </div>
+
+    <p>
+        ทดสอบการสร้าง PDF หลายหน้าเสร็จสมบูรณ์แล้ว ไฟล์ PDF นี้มีทั้งหมด 4 หน้า
+        โดยแต่ละหน้ามี header และ footer ที่แสดงหมายเลขหน้าอัตโนมัติจาก @page rules
+    </p>
+
+    <div class="card bg-light">
+        <h3>สรุปคุณสมบัติที่ทดสอบ</h3>
+        <ul>
+            <li>✓ Natural page break — เนื้อหาล้นหน้าโดยธรรมชาติ</li>
+            <li>✓ Forced page break — บังคับขึ้นหน้าด้วย CSS</li>
+            <li>✓ Multiple pages — เอกสาร 4+ หน้า</li>
+            <li>✓ Header/Footer — จาก @page rules พร้อม counter(page) / counter(pages)</li>
+            <li>✓ Nested lists — รายการซ้อน</li>
+            <li>✓ Multi-column — Flex row layout</li>
+        </ul>
+    </div>
+
+</body>
+</html>

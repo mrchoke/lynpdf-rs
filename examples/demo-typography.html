@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Typography, Multilang &amp; Emoji Demo</title>
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
+  <style>
+    .font-showcase-row {
+      border-bottom: 1px solid #dee2e6;
+      padding: 8px 0;
+      margin-bottom: 4px;
+    }
+
+    .font-label {
+      font-size: 11px;
+      color: #999;
+      margin-bottom: 2px;
+    }
+
+    .sample-text-large {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    .lang-section {
+      border: 1px solid #dee2e6;
+      padding: 12px 16px;
+      margin-bottom: 12px;
+      background-color: #fff;
+    }
+
+    .lang-tag {
+      display: inline-block;
+      background-color: #1d4a73;
+      color: #fff;
+      padding: 2px 8px;
+      font-size: 11px;
+      margin-bottom: 6px;
+    }
+
+    .emoji-grid {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .emoji-cell {
+      padding: 8px;
+      text-align: center;
+      font-size: 20px;
+    }
+
+    .font-cjk {
+      font-family: 'Noto Sans CJK', 'Sarabun', sans-serif;
+    }
+
+    .font-emoji {
+      font-family: 'Noto Color Emoji', 'NotoEmoji', 'Sarabun', sans-serif;
+    }
+
+    .color-line {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page-header">
+    <h1>Typography, Multi-language &amp; Emoji</h1>
+    <p>ทดสอบรูปแบบตัวอักษร ภาษาต่าง ๆ และ Emoji</p>
+  </div>
+
+  <!-- ══ Section 1: Thai font variants ══ -->
+  <h2>1. ฟอนต์ Sarabun — รูปแบบต่าง ๆ (Sarabun Font Variants)</h2>
+
+  <div class="font-showcase-row">
+    <div class="font-label">Regular (400) — ปกติ</div>
+    <div
+      class="sample-text-large"
+      style="font-weight: 400; font-style: normal"
+    >
+      กขคงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮ — The quick brown fox
+    </div>
+  </div>
+
+  <div class="font-showcase-row">
+    <div class="font-label">Bold (700) — ตัวหนา</div>
+    <div class="sample-text-large font-bold">
+      กขคงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮ — The quick brown fox
+    </div>
+  </div>
+
+  <div class="font-showcase-row">
+    <div class="font-label">Italic (400) — ตัวเอียง</div>
+    <div class="sample-text-large font-italic">
+      กขคงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮ — The quick brown fox
+    </div>
+  </div>
+
+  <div class="font-showcase-row">
+    <div class="font-label">Bold Italic (700) — ตัวหนาเอียง</div>
+    <div class="sample-text-large font-bold-italic">
+      กขคงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮ — The quick brown fox
+    </div>
+  </div>
+
+  <!-- ══ Section 2: Font sizes ══ -->
+  <h2>2. ขนาดตัวอักษร (Font Sizes)</h2>
+  <div class="card">
+    <p style="font-size: 10px">ขนาด 10px — The quick brown fox jumps over the lazy dog</p>
+    <p style="font-size: 12px">ขนาด 12px — The quick brown fox jumps over the lazy dog</p>
+    <p style="font-size: 14px">ขนาด 14px — The quick brown fox jumps over the lazy dog</p>
+    <p style="font-size: 16px">ขนาด 16px — The quick brown fox jumps over the lazy dog</p>
+    <p style="font-size: 20px">ขนาด 20px — ภาษาไทยทดสอบ</p>
+    <p style="font-size: 24px">ขนาด 24px — ภาษาไทย</p>
+    <p style="font-size: 32px">ขนาด 32px — ใหญ่</p>
+  </div>
+
+  <!-- ══ Section 3: Thai complex vowels & tones ══ -->
+  <h2>3. ภาษาไทย — สระลอยและวรรณยุกต์ซ้อน</h2>
+  <div class="lang-section">
+    <div class="lang-tag">TH</div>
+    <p style="font-size: 18px; line-height: 2">
+      ผู้ใหญ่หาผ้าใหม่ให้สะใภ้ใช้คล้องคอ ใฝ่ใจเอาใส่ห่อ มิหลงใหลใครขอดู
+    </p>
+    <p style="font-size: 16px">
+      ทดสอบสระซ้อนวรรณยุกต์: <strong>ญัตติ</strong> <strong>ฐาน</strong>
+      <strong>ป่าไม้</strong> <strong>น้ำตก</strong> <strong>ปู่ย่า</strong>
+      <strong>ผู้ใหญ่</strong> <strong>น้ำพริก</strong> <strong>เลี้ยง</strong>
+    </p>
+    <p style="font-size: 14px">
+      ประโยคยาว: สวัสดีครับ/ค่ะ ผมชื่อสมชาย มาจากจังหวัดเชียงใหม่
+      ทำงานด้านเทคโนโลยีสารสนเทศมาแล้ว 5 ปี ชอบอ่านหนังสือและท่องเที่ยว
+    </p>
+  </div>
+
+  <!-- ══ Section 4: English ══ -->
+  <h2>4. English Text</h2>
+  <div class="lang-section">
+    <div class="lang-tag">EN</div>
+    <p style="font-size: 16px">
+      The quick brown fox jumps over the lazy dog.
+      Pack my box with five dozen liquor jugs.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, <strong>consectetur adipiscing</strong> elit.
+      Sed do eiusmod tempor <em>incididunt ut labore</em> et dolore magna aliqua.
+      Ut enim ad minim veniam, quis nostrud exercitation.
+    </p>
+  </div>
+
+  <h2>4.1 CJK (Noto Sans CJK)</h2>
+  <div class="lang-section font-cjk">
+    <div class="lang-tag">CJK</div>
+    <p style="font-size: 15px">日本語: 文書の段落組版、句読点、改行位置を確認します。</p>
+    <p style="font-size: 15px">中文: 这个段落用于检查 PDF 中的中文断行、字距和标点位置。</p>
+    <p style="font-size: 15px">한국어: 이 문단은 PDF 렌더링에서 줄바꿈과 자간 품질을 확인하기 위한 샘플입니다.</p>
+  </div>
+
+  <!-- ══ Section 5: Mixed Thai-English ══ -->
+  <h2>5. Mixed Thai-English (ผสมภาษา)</h2>
+  <div class="lang-section">
+    <div class="lang-tag">TH+EN</div>
+    <p style="font-size: 15px">
+      TypeScript เป็นภาษาโปรแกรมมิ่งที่พัฒนาต่อยอดจาก JavaScript
+      โดย Microsoft และเพิ่ม static typing เข้ามา ทำให้ developer
+      สามารถ detect bug ได้ตั้งแต่ compile time ก่อน runtime
+    </p>
+    <p>
+      PDF หรือ Portable Document Format คือ file format มาตรฐานสากลที่
+      ออกแบบมาเพื่อแสดงเอกสารได้อย่างสม่ำเสมอบนทุก platform และ device
+    </p>
+  </div>
+
+  <!-- ══ Section 6: Numbers / Special chars ══ -->
+  <h2>6. ตัวเลขและสัญลักษณ์พิเศษ</h2>
+  <div class="lang-section">
+    <div class="lang-tag">NUM</div>
+    <p style="font-size: 16px">
+      ตัวเลขอารบิก: 0 1 2 3 4 5 6 7 8 9
+    </p>
+    <p style="font-size: 16px">
+      ตัวเลขไทย: ๐ ๑ ๒ ๓ ๔ ๕ ๖ ๗ ๘ ๙
+    </p>
+    <p style="font-size: 16px">
+      สัญลักษณ์: ฿ $ € £ ¥ @ # % &amp; * + - = / \ | ~ ^ ° ± × ÷
+    </p>
+    <p style="font-size: 16px">
+      เครื่องหมายวรรคตอน: . , ; : ! ? " ' ( ) [ ] { } - — …
+    </p>
+  </div>
+
+  <!-- ══ Section 7: Emoji ══ -->
+  <h2 class="page-break">7. Emoji (ทดสอบการแสดง Emoji)</h2>
+  <div class="card font-emoji">
+    <p>
+      ทดสอบ Emoji ที่พบบ่อย:
+      😀 😃 😄 😁 😆 😅 😂 🤣 😊 😇 🥰 😍 🤩 😘 😗 😚 😙 🥲
+    </p>
+    <p>
+      อารมณ์: 😐 😑 😶 🫥 😏 😒 🙄 😬 🤥 😌 😔 😪 🤤 😴 😷 🤒 🤕 🤢
+    </p>
+    <p>
+      ธรรมชาติ: 🌍 🌎 🌏 🌑 🌒 🌓 🌔 🌕 🌖 🌗 🌘 🌙 🌚 🌛 🌜 ☀️ 🌝 🌞
+    </p>
+    <p>
+      เทคโนโลยี: 💻 🖥️ 🖨️ ⌨️ 🖱️ 💾 💿 📀 📱 ☎️ 📞 📟 📠 📺 📻 🎙️ 🎚️ 🎛️
+    </p>
+    <p>
+      การเดินทาง: ✈️ 🚀 🛸 🚁 🛶 ⛵ 🚢 🚂 🚆 🚇 🚈 🚉 🚊 🚝 🚞 🚋 🚌 🚍
+    </p>
+    <p>
+      ธง (Flags): 🇹🇭 🇯🇵 🇺🇸 🇬🇧 🇩🇪 🇫🇷 🇨🇳 🇰🇷 🇸🇬 🇦🇺
+    </p>
+    <p>
+      ตัวอักษรพิเศษ: ™️ ®️ ©️ ☎️ ✉️ 📧 🔑 🔒 🔓 ⚙️ 🔧 🔨 💡 🔦 🕯️
+    </p>
+  </div>
+
+  <!-- ══ Section 8: Lists & Bullets ══ -->
+  <h2>8. Lists &amp; Bullets</h2>
+  <div class="row">
+    <div class="col">
+      <h3>Unordered (Disc)</h3>
+      <ul>
+        <li>รายการแรก</li>
+        <li>รายการที่สอง</li>
+        <li>รายการที่สาม</li>
+        <li>รายการที่สี่</li>
+        <li>รายการสุดท้าย</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Ordered (Decimal)</h3>
+      <ol>
+        <li>ขั้นตอนแรก</li>
+        <li>ขั้นตอนที่สอง</li>
+        <li>ขั้นตอนที่สาม</li>
+        <li>ขั้นตอนที่สี่</li>
+        <li>ขั้นตอนสุดท้าย</li>
+      </ol>
+    </div>
+  </div>
+
+  <h3>Nested Lists (รายการซ้อน)</h3>
+  <ul>
+    <li>
+      <strong>กลุ่มประเทศอาเซียน</strong>
+      <ul>
+        <li>ไทย — Thailand 🇹🇭</li>
+        <li>สิงคโปร์ — Singapore 🇸🇬</li>
+        <li>มาเลเซีย — Malaysia</li>
+        <li>
+          เวียดนาม — Vietnam
+          <ul>
+            <li>ฮานอย (เหนือ)</li>
+            <li>โฮจิมินห์ (ใต้)</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <strong>ทวีปยุโรป</strong>
+      <ul>
+        <li>ฝรั่งเศส 🇫🇷</li>
+        <li>เยอรมนี 🇩🇪</li>
+        <li>อังกฤษ 🇬🇧</li>
+      </ul>
+    </li>
+  </ul>
+
+  <!-- ══ Section 9: Text decoration & colors ══ -->
+  <h2>9. Text Colors &amp; Highlighting</h2>
+  <div class="card">
+    <p
+      class="color-line"
+      style="color: #dc3545;"
+    >สีแดง: Critical alert และ error message</p>
+    <p
+      class="color-line"
+      style="color: #fd7e14;"
+    >สีส้ม: Warning และ pending task</p>
+    <p
+      class="color-line"
+      style="color: #28a745;"
+    >สีเขียว: Success state และ ready status</p>
+    <p
+      class="color-line"
+      style="color: #007bff;"
+    >สีน้ำเงิน: Information และ neutral event</p>
+    <p
+      class="color-line"
+      style="color: #6610f2;"
+    >สีม่วง: Feature highlight และ special note</p>
+    <p style="background-color: #fff3cd; padding: 6px">
+      พื้นหลังสีเหลืองสำหรับ highlight ข้อความสำคัญ
+    </p>
+    <p style="background-color: #d4edda; padding: 6px">
+      พื้นหลังสีเขียวแสดงสถานะสำเร็จ
+    </p>
+    <p style="background-color: #f8d7da; padding: 6px">
+      พื้นหลังสีแดงแสดงข้อผิดพลาด
+    </p>
+    <p style="background-color: #cce5ff; padding: 6px">
+      พื้นหลังสีน้ำเงินแสดงข้อมูล
+    </p>
+  </div>
+
+</body>
+
+</html>

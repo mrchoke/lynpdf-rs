@@ -1,0 +1,23 @@
+# Build artifacts
+/target/
+
+# Local working folders
+/tmp/
+/.vscode/
+
+# Generated render outputs
+/tests/output/*
+!/tests/output/.gitkeep
+/examples/output/*
+!/examples/output/.gitkeep
+
+# Downloaded runtime fonts (external policy)
+/fonts/*
+!/fonts/.gitkeep
+!/fonts/README.md
+
+# Misc
+*.log
+.DS_Store
+/tests/baseline/*
+!/tests/baseline/.gitkeep

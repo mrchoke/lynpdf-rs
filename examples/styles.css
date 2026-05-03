@@ -1,0 +1,472 @@
+/* ============================================================
+   LynPDF RS Example Brand System
+   ============================================================ */
+
+/* CSS Paged Media rules for all examples */
+@page {
+  size: A4;
+  margin: 18mm 14mm;
+
+  @top-left {
+    content: "LynPDF RS Examples";
+    font-family: 'Sarabun', sans-serif;
+    font-size: 8.5pt;
+    color: #6d7e8f;
+  }
+
+  @top-right {
+    content: "Brand Pack 2026";
+    font-family: 'Sarabun', sans-serif;
+    font-size: 8.5pt;
+    color: #6d7e8f;
+  }
+
+  @bottom-left {
+    content: "lynpdf-rs";
+    font-family: 'Sarabun', sans-serif;
+    font-size: 8.5pt;
+    color: #8a96a3;
+  }
+
+  @bottom-right {
+    content: "Page " counter(page) " / " counter(pages);
+    font-family: 'Sarabun', sans-serif;
+    font-size: 8.5pt;
+    color: #647487;
+  }
+}
+
+@page :first {
+  margin-top: 24mm;
+
+  @top-left {
+    content: "";
+  }
+
+  @top-right {
+    content: "";
+  }
+}
+
+@font-face {
+  font-family: 'Sarabun';
+  src: url('../fonts/Sarabun-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Sarabun';
+  src: url('../fonts/Sarabun-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Sarabun';
+  src: url('../fonts/Sarabun-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Sarabun';
+  src: url('../fonts/Sarabun-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Noto Color Emoji';
+  src: url('../fonts/NotoColorEmoji.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Sarabun', sans-serif;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #203041;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 29px;
+  font-weight: 700;
+  color: #0f2a45;
+  margin: 0 0 10px 0;
+}
+
+h2 {
+  font-size: 21px;
+  font-weight: 700;
+  color: #153757;
+  margin: 0 0 8px 0;
+  border-bottom: 2px solid #d8e2ec;
+  padding-bottom: 4px;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1d4a73;
+  margin: 0 0 6px 0;
+}
+
+h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #204664;
+  margin: 0 0 4px 0;
+}
+
+p {
+  margin: 0 0 10px 0;
+}
+
+a {
+  color: #17598c;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #b87436;
+}
+
+.page-break {
+  page-break-before: always;
+  break-before: page;
+}
+
+.avoid-break {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.font-regular {
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-bold {
+  font-weight: 700;
+  font-style: normal;
+}
+
+.font-italic {
+  font-weight: 400;
+  font-style: italic;
+}
+
+.font-bold-italic {
+  font-weight: 700;
+  font-style: italic;
+}
+
+.color-muted {
+  color: #647587;
+}
+
+.color-soft {
+  color: #7b8b9a;
+}
+
+.color-brand {
+  color: #0f2a45;
+}
+
+.color-accent {
+  color: #b87436;
+}
+
+.color-success {
+  color: #1f8f63;
+}
+
+.color-danger {
+  color: #c03a3a;
+}
+
+.color-warning {
+  color: #b87436;
+}
+
+.color-info {
+  color: #1d4a73;
+}
+
+.font-cjk {
+  font-family: 'Noto Sans CJK', 'Sarabun', sans-serif;
+}
+
+.font-emoji {
+  font-family: 'Noto Color Emoji', 'NotoEmoji', 'Sarabun', sans-serif;
+}
+
+.bg-primary {
+  background-color: #0f2a45;
+  color: #ffffff;
+}
+
+.bg-secondary {
+  background-color: #153757;
+  color: #ffffff;
+}
+
+.bg-accent {
+  background-color: #1d4a73;
+  color: #ffffff;
+}
+
+.bg-green {
+  background-color: #1f8f63;
+  color: #ffffff;
+}
+
+.bg-yellow {
+  background-color: #f6d365;
+  color: #24384d;
+}
+
+.bg-blue {
+  background-color: #5f9dbc;
+  color: #ffffff;
+}
+
+.bg-red {
+  background-color: #c03a3a;
+  color: #ffffff;
+}
+
+.bg-light {
+  background-color: #f3f7fb;
+}
+
+.page-header {
+  background-color: #0f2a45;
+  border-bottom: 3px solid #b87436;
+  color: #ffffff;
+  padding: 18px 20px;
+  margin-bottom: 18px;
+}
+
+.page-header h1 {
+  color: #ffffff;
+  font-size: 26px;
+  margin-bottom: 2px;
+}
+
+.page-header p {
+  color: #cad6e2;
+  margin: 0;
+  font-size: 12px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.col {
+  flex: 1;
+  padding: 7px;
+}
+
+.col-wide {
+  flex: 2;
+  padding: 7px;
+}
+
+.card {
+  border: 1px solid #dbe4ed;
+  background-color: #ffffff;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.card-header {
+  background-color: #f3f7fb;
+  border-bottom: 1px solid #d9e3ed;
+  color: #21435f;
+  font-size: 12px;
+  font-weight: 700;
+  margin: -12px -14px 10px -14px;
+  padding: 8px 12px;
+}
+
+.highlight-box {
+  border-left: 4px solid #5f9dbc;
+  background-color: #f4f9fd;
+  border: 1px solid #d6e5f0;
+  padding: 9px 11px;
+  margin: 10px 0;
+}
+
+.warning-box {
+  border-left: 4px solid #b87436;
+  background-color: #fff8ef;
+  border: 1px solid #edd7be;
+  padding: 9px 11px;
+  margin: 10px 0;
+}
+
+.success-box {
+  border-left: 4px solid #2a8d67;
+  background-color: #effaf5;
+  border: 1px solid #cfe8dd;
+  padding: 9px 11px;
+  margin: 10px 0;
+}
+
+.badge {
+  display: inline-block;
+  border: 1px solid #c98e56;
+  background-color: #fff8ef;
+  color: #0f2a45;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  padding: 2px 7px;
+  margin-right: 4px;
+  text-transform: uppercase;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 12px;
+}
+
+.table th,
+.table td {
+  border: 1px solid #d9e2eb;
+  padding: 7px 8px;
+  font-size: 12px;
+}
+
+.table th {
+  background-color: #123351;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.table .alt-row td,
+.table tr.alt td {
+  background-color: #f8fbfd;
+}
+
+.table .total-row td {
+  background-color: #eef3f8;
+  font-weight: 700;
+  border-top: 2px solid #0f2a45;
+}
+
+pre,
+.code-block {
+  background-color: #132c45;
+  color: #eaf1f8;
+  border-left: 4px solid #b87436;
+  padding: 10px 12px;
+  margin: 10px 0;
+  font-family: monospace;
+  font-size: 11px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+code {
+  background-color: #eef3f8;
+  border: 1px solid #d6e0ea;
+  color: #1d3a56;
+  padding: 1px 4px;
+  font-family: monospace;
+  font-size: 11px;
+}
+
+pre code,
+.code-block code {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  padding: 0;
+}
+
+.token-comment {
+  color: #7d98b3;
+}
+
+.token-keyword {
+  color: #f3bf72;
+  font-weight: 700;
+}
+
+.token-type {
+  color: #7bc4ff;
+}
+
+.token-function {
+  color: #b6d6ff;
+}
+
+.token-string {
+  color: #9fd18a;
+}
+
+.token-number {
+  color: #f4d58d;
+}
+
+.token-operator {
+  color: #dbe7f4;
+}
+
+.token-property {
+  color: #7bc4ff;
+}
+
+.token-punctuation {
+  color: #d6e2ef;
+}
+
+.cover {
+  text-align: center;
+  padding: 36px 20px;
+}
+
+.cover-title {
+  font-size: 38px;
+  font-weight: 700;
+  color: #0f2a45;
+  margin-bottom: 6px;
+}
+
+.cover-subtitle {
+  font-size: 18px;
+  color: #5f7081;
+  margin-bottom: 16px;
+}
+
+.cover-meta {
+  font-size: 12px;
+  color: #7c8a98;
+}

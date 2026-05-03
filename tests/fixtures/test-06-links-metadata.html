@@ -1,0 +1,95 @@
+<!-- ============================================================
+     Test 6: Interactive & Document Metadata (Links & Bookmarks)
+     ============================================================ -->
+<html>
+<head><title>Test 6 — Links &amp; Metadata</title></head>
+<body>
+
+<h1>Test 6: Interactive &amp; Document Metadata</h1>
+<p class="text-muted">ทดสอบ Internal Links, External Links, และ Bookmarks</p>
+
+<!-- ─── Test 6.1: Internal Links & Bookmarks ─── -->
+<div class="test-section">
+  <h3>Test 6.1 — Internal Links &amp; Bookmarks</h3>
+
+  <p class="test-label">สารบัญ (Table of Contents) — คลิกเพื่อกระโดดไปยังหัวข้อ:</p>
+  <div class="box">
+    <p>1. <a href="#chapter1">บทนำ — ทำไมต้องสร้าง PDF จาก HTML</a></p>
+    <p>2. <a href="#chapter2">สถาปัตยกรรมระบบ</a></p>
+    <p>3. <a href="#chapter3">วิธีใช้งาน CLI</a></p>
+    <p>4. <a href="#chapter4">สรุปและแนวทางพัฒนาต่อ</a></p>
+  </div>
+
+  <div class="test-expect">✓ Internal link (&lt;a href="#id"&gt;) ทำงานแล้ว — คลิกเพื่อข้ามไปยังจุดหมาย</div>
+</div>
+
+<div class="page-break"></div>
+
+<h2 id="chapter1">บทที่ 1: บทนำ — ทำไมต้องสร้าง PDF จาก HTML</h2>
+<div class="box">
+  <p>การสร้าง PDF จาก HTML/CSS เป็นความต้องการพื้นฐานในแอปพลิเคชันธุรกิจ ไม่ว่าจะเป็นใบแจ้งหนี้ รายงาน ใบเสร็จรับเงิน หรือเอกสารทางการ</p>
+  <p>LynPDF Creator ถูกออกแบบมาเพื่อรองรับภาษาไทยเป็นพิเศษ รวมถึง layout ที่ซับซ้อนผ่าน Yoga Flexbox Engine</p>
+</div>
+
+<h2 id="chapter2">บทที่ 2: สถาปัตยกรรมระบบ</h2>
+<div class="box">
+  <p>ระบบประกอบด้วย 4 ส่วนหลัก:</p>
+  <ul>
+    <li><strong>HTML Parser</strong> — แปลง HTML เป็น DOM tree (parse5)</li>
+    <li><strong>CSS Parser</strong> — แปลง CSS เป็น style rules (css-tree)</li>
+    <li><strong>Layout Engine</strong> — คำนวณตำแหน่งและขนาด (Yoga Layout)</li>
+    <li><strong>PDF Renderer</strong> — วาดลงไฟล์ PDF (PDFKit)</li>
+  </ul>
+</div>
+
+<h2 id="chapter3">บทที่ 3: วิธีใช้งาน CLI</h2>
+<div class="box">
+  <p>ใช้งานผ่าน command line:</p>
+  <p><strong>lynpdf -i input.html -c styles.css -o output.pdf</strong></p>
+  <p>Options:</p>
+  <ul>
+    <li>-i, --input — ไฟล์ HTML ต้นฉบับ</li>
+    <li>-o, --output — ไฟล์ PDF ที่จะสร้าง</li>
+    <li>-c, --css — ไฟล์ CSS เสริม</li>
+    <li>--page-size — ขนาดกระดาษ (A4, A3, letter)</li>
+    <li>--margin — ขอบกระดาษเป็น pt</li>
+  </ul>
+</div>
+
+<h2 id="chapter4">บทที่ 4: สรุปและแนวทางพัฒนาต่อ</h2>
+<div class="box">
+  <p>ฟีเจอร์ที่วางแผนจะพัฒนาเพิ่มเติม:</p>
+  <ul>
+    <li>Internal/External links ใน PDF</li>
+    <li>border-radius (มุมโค้ง)</li>
+    <li>overflow: hidden (clipping)</li>
+    <li>position: absolute/fixed</li>
+    <li>thead/tfoot repeat ข้ามหน้า</li>
+    <li>page-break-inside: avoid</li>
+    <li>orphans/widows</li>
+  </ul>
+</div>
+
+<!-- ─── Test 6.2: External Links ─── -->
+<div class="page-break"></div>
+
+<div class="test-section">
+  <h3>Test 6.2 — External Links</h3>
+
+  <p class="test-label">ลิงก์ที่คลิกได้:</p>
+  <div class="box">
+    <p>GitHub: <a href="https://github.com">https://github.com</a></p>
+    <p>Google: <a href="https://google.com">https://google.com</a></p>
+    <p>MDN Web Docs: <a href="https://developer.mozilla.org">https://developer.mozilla.org</a></p>
+  </div>
+
+  <p class="test-label">ลิงก์ในประโยค:</p>
+  <div class="box">
+    <p>อ่านเพิ่มเติมที่ <a href="https://github.com/nicolo-ribaudo/tc39-proposal-intl-segmenter-v2">Intl.Segmenter V2 proposal</a> สำหรับการตัดคำภาษาไทย</p>
+  </div>
+
+  <div class="test-expect">✓ External link (&lt;a href="https://..."&gt;) ทำงานแล้ว — คลิกเพื่อเปิดในเบราว์เซอร์</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Thai Mark Positioning - LynPDF RS</title>
+  <meta
+    name="description"
+    content="Dedicated Thai font mark-positioning and inter-character justification test page."
+  >
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
+  <style>
+    @page {
+      size: A4;
+      margin: 12mm;
+    }
+
+    body {
+      font-family: 'Sarabun', sans-serif;
+      color: #1f3144;
+      background-color: #ffffff;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 4px;
+      color: #10263d;
+    }
+
+    .lead {
+      font-size: 10.5px;
+      line-height: 1.55;
+      margin-bottom: 10px;
+      color: #617084;
+    }
+
+    .font-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: auto;
+      margin-bottom: 10px;
+    }
+
+    col.col-font {
+      width: 1%;
+    }
+
+    col.col-sara {
+      width: 23%;
+    }
+
+    col.col-base {
+      width: 23%;
+    }
+
+    .font-table th,
+    .font-table td {
+      border: 1px solid #d5dde7;
+      padding: 4px 5px;
+      vertical-align: top;
+    }
+
+    .font-table th {
+      background-color: #eef4fa;
+      color: #244762;
+      font-size: 8.5px;
+      text-transform: uppercase;
+    }
+
+    .font-name {
+      font-size: 9px;
+      font-weight: bold;
+      color: #12304d;
+    }
+
+    .sample {
+      font-size: 12.6px;
+      line-height: 1.58;
+      color: #101d2b;
+      white-space: normal;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    .sample.small {
+      font-size: 11.2px;
+      line-height: 1.52;
+    }
+
+    .justify-sample {
+      font-size: 11.1px;
+      line-height: 1.58;
+      text-align: justify;
+      text-justify: inter-character;
+      color: #243548;
+      white-space: normal;
+      word-break: normal;
+      overflow-wrap: anywhere;
+    }
+
+    .legend {
+      font-size: 9px;
+      color: #6b7887;
+      margin-bottom: 8px;
+    }
+
+    .font-table th:nth-child(1),
+    .font-table td:nth-child(1) {
+      white-space: nowrap;
+      word-break: normal;
+      overflow-wrap: normal;
+    }
+
+    .font-table th:nth-child(2),
+    .font-table th:nth-child(3),
+    .font-table th:nth-child(4),
+    .font-table td:nth-child(2),
+    .font-table td:nth-child(3),
+    .font-table td:nth-child(4) {
+      white-space: normal;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Thai Mark Positioning Matrix</h1>
+  <p class="lead">ชุดทดสอบนี้บังคับใช้ฟอนต์ไทยแต่ละตัวแยกกัน เพื่อดูตำแหน่งนิคหิต สระอำ และวรรณยุกต์ เอก โท ตรี จัตวา
+    บนฐานพยัญชนะหลายทรง ทั้งฐานปกติ ฐานมีหาง และฐานที่มีส่วนสูง/ต่ำชัดเจน</p>
+  <p class="legend">Columns: Sara Am stack, tone coverage, tail/no-tail coverage, and cluster-safe inter-character
+    justification.</p>
+
+  <table class="font-table">
+    <colgroup>
+      <col class="col-font">
+      <col class="col-sara">
+      <col class="col-base">
+      <col>
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="font-name">Font</th>
+        <th>Sara Am + Tone</th>
+        <th>Base Coverage</th>
+        <th>Inter-character Justify</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="font-family: 'Sarabun', sans-serif;">
+        <td class="font-name">Sarabun</td>
+        <td class="sample">กำ ก่ำ ก้ำ ก๊ำ ก๋ำ<br>น้ำ น่ำ น้ํา น๊ำ น๋ำ</td>
+        <td class="sample small">ก่ำ ป้ำ ฝ๊ำ ญ๋ำ ฎ้ำ ฏ๋ำ</td>
+        <td class="justify-sample">น้ำก่ำป้ำฝ่ำญ๋ำต้องจัดช่องไฟระดับคลัสเตอร์โดยไม่ทำให้สระและวรรณยุกต์เบี้ยว
+          พร้อมรักษาความต่อเนื่องของการอ่าน</td>
+      </tr>
+      <tr style="font-family: 'Kanit', sans-serif;">
+        <td class="font-name">Kanit</td>
+        <td class="sample">กำ ก่ำ ก้ำ ก๊ำ ก๋ำ<br>น้ำ น่ำ น้ํา น๊ำ น๋ำ</td>
+        <td class="sample small">ก่ำ ป้ำ ฝ๊ำ ญ๋ำ ฎ้ำ ฏ๋ำ</td>
+        <td class="justify-sample">น้ำก่ำป้ำฝ่ำญ๋ำต้องจัดช่องไฟระดับคลัสเตอร์โดยไม่ทำให้สระและวรรณยุกต์เบี้ยว
+          พร้อมรักษาความต่อเนื่องของการอ่าน</td>
+      </tr>
+      <tr style="font-family: 'Prompt', sans-serif;">
+        <td class="font-name">Prompt</td>
+        <td class="sample">กำ ก่ำ ก้ำ ก๊ำ ก๋ำ<br>น้ำ น่ำ น้ํา น๊ำ น๋ำ</td>
+        <td class="sample small">ก่ำ ป้ำ ฝ๊ำ ญ๋ำ ฎ้ำ ฏ๋ำ</td>
+        <td class="justify-sample">น้ำก่ำป้ำฝ่ำญ๋ำต้องจัดช่องไฟระดับคลัสเตอร์โดยไม่ทำให้สระและวรรณยุกต์เบี้ยว
+          พร้อมรักษาความต่อเนื่องของการอ่าน</td>
+      </tr>
+      <tr style="font-family: 'Mitr', sans-serif;">
+        <td class="font-name">Mitr</td>
+        <td class="sample">กำ ก่ำ ก้ำ ก๊ำ ก๋ำ<br>น้ำ น่ำ น้ํา น๊ำ น๋ำ</td>
+        <td class="sample small">ก่ำ ป้ำ ฝ๊ำ ญ๋ำ ฎ้ำ ฏ๋ำ</td>
+        <td class="justify-sample">น้ำก่ำป้ำฝ่ำญ๋ำต้องจัดช่องไฟระดับคลัสเตอร์โดยไม่ทำให้สระและวรรณยุกต์เบี้ยว
+          พร้อมรักษาความต่อเนื่องของการอ่าน</td>
+      </tr>
+      <tr style="font-family: 'Chakra Petch', sans-serif;">
+        <td class="font-name">Chakra Petch</td>
+        <td class="sample">กำ ก่ำ ก้ำ ก๊ำ ก๋ำ<br>น้ำ น่ำ น้ํา น๊ำ น๋ำ</td>
+        <td class="sample small">ก่ำ ป้ำ ฝ๊ำ ญ๋ำ ฎ้ำ ฏ๋ำ</td>
+        <td class="justify-sample">น้ำก่ำป้ำฝ่ำญ๋ำต้องจัดช่องไฟระดับคลัสเตอร์โดยไม่ทำให้สระและวรรณยุกต์เบี้ยว
+          พร้อมรักษาความต่อเนื่องของการอ่าน</td>
+      </tr>
+      <tr style="font-family: 'Garuda', sans-serif;">
+        <td class="font-name">Garuda</td>
+        <td class="sample">กำ ก่ำ ก้ำ ก๊ำ ก๋ำ<br>น้ำ น่ำ น้ํา น๊ำ น๋ำ</td>
+        <td class="sample small">ก่ำ ป้ำ ฝ๊ำ ญ๋ำ ฎ้ำ ฏ๋ำ</td>
+        <td class="justify-sample">น้ำก่ำป้ำฝ่ำญ๋ำต้องจัดช่องไฟระดับคลัสเตอร์โดยไม่ทำให้สระและวรรณยุกต์เบี้ยว
+          พร้อมรักษาความต่อเนื่องของการอ่าน</td>
+      </tr>
+      <tr style="font-family: 'Kinnari', sans-serif;">
+        <td class="font-name">Kinnari</td>
+        <td class="sample">กำ ก่ำ ก้ำ ก๊ำ ก๋ำ<br>น้ำ น่ำ น้ํา น๊ำ น๋ำ</td>
+        <td class="sample small">ก่ำ ป้ำ ฝ๊ำ ญ๋ำ ฎ้ำ ฏ๋ำ</td>
+        <td class="justify-sample">น้ำก่ำป้ำฝ่ำญ๋ำต้องจัดช่องไฟระดับคลัสเตอร์โดยไม่ทำให้สระและวรรณยุกต์เบี้ยว
+          พร้อมรักษาความต่อเนื่องของการอ่าน</td>
+      </tr>
+      <tr style="font-family: 'Laksaman', sans-serif;">
+        <td class="font-name">Laksaman</td>
+        <td class="sample">กำ ก่ำ ก้ำ ก๊ำ ก๋ำ<br>น้ำ น่ำ น้ํา น๊ำ น๋ำ</td>
+        <td class="sample small">ก่ำ ป้ำ ฝ๊ำ ญ๋ำ ฎ้ำ ฏ๋ำ</td>
+        <td class="justify-sample">น้ำก่ำป้ำฝ่ำญ๋ำต้องจัดช่องไฟระดับคลัสเตอร์โดยไม่ทำให้สระและวรรณยุกต์เบี้ยว
+          พร้อมรักษาความต่อเนื่องของการอ่าน</td>
+      </tr>
+      <tr style="font-family: 'Loma', sans-serif;">
+        <td class="font-name">Loma</td>
+        <td class="sample">กำ ก่ำ ก้ำ ก๊ำ ก๋ำ<br>น้ำ น่ำ น้ํา น๊ำ น๋ำ</td>
+        <td class="sample small">ก่ำ ป้ำ ฝ๊ำ ญ๋ำ ฎ้ำ ฏ๋ำ</td>
+        <td class="justify-sample">น้ำก่ำป้ำฝ่ำญ๋ำต้องจัดช่องไฟระดับคลัสเตอร์โดยไม่ทำให้สระและวรรณยุกต์เบี้ยว
+          พร้อมรักษาความต่อเนื่องของการอ่าน</td>
+      </tr>
+      <tr style="font-family: 'Norasi', sans-serif;">
+        <td class="font-name">Norasi</td>
+        <td class="sample">กำ ก่ำ ก้ำ ก๊ำ ก๋ำ<br>น้ำ น่ำ น้ํา น๊ำ น๋ำ</td>
+        <td class="sample small">ก่ำ ป้ำ ฝ๊ำ ญ๋ำ ฎ้ำ ฏ๋ำ</td>
+        <td class="justify-sample">น้ำก่ำป้ำฝ่ำญ๋ำต้องจัดช่องไฟระดับคลัสเตอร์โดยไม่ทำให้สระและวรรณยุกต์เบี้ยว
+          พร้อมรักษาความต่อเนื่องของการอ่าน</td>
+      </tr>
+      <tr style="font-family: 'Purisa', sans-serif;">
+        <td class="font-name">Purisa</td>
+        <td class="sample">กำ ก่ำ ก้ำ ก๊ำ ก๋ำ<br>น้ำ น่ำ น้ํา น๊ำ น๋ำ</td>
+        <td class="sample small">ก่ำ ป้ำ ฝ๊ำ ญ๋ำ ฎ้ำ ฏ๋ำ</td>
+        <td class="justify-sample">น้ำก่ำป้ำฝ่ำญ๋ำต้องจัดช่องไฟระดับคลัสเตอร์โดยไม่ทำให้สระและวรรณยุกต์เบี้ยว
+          พร้อมรักษาความต่อเนื่องของการอ่าน</td>
+      </tr>
+      <tr style="font-family: 'Sawasdee', sans-serif;">
+        <td class="font-name">Sawasdee</td>
+        <td class="sample">กำ ก่ำ ก้ำ ก๊ำ ก๋ำ<br>น้ำ น่ำ น้ํา น๊ำ น๋ำ</td>
+        <td class="sample small">ก่ำ ป้ำ ฝ๊ำ ญ๋ำ ฎ้ำ ฏ๋ำ</td>
+        <td class="justify-sample">น้ำก่ำป้ำฝ่ำญ๋ำต้องจัดช่องไฟระดับคลัสเตอร์โดยไม่ทำให้สระและวรรณยุกต์เบี้ยว
+          พร้อมรักษาความต่อเนื่องของการอ่าน</td>
+      </tr>
+      <tr style="font-family: 'TlwgMono', monospace;">
+        <td class="font-name">TlwgMono</td>
+        <td class="sample">กำ ก่ำ ก้ำ ก๊ำ ก๋ำ<br>น้ำ น่ำ น้ํา น๊ำ น๋ำ</td>
+        <td class="sample small">ก่ำ ป้ำ ฝ๊ำ ญ๋ำ ฎ้ำ ฏ๋ำ</td>
+        <td class="justify-sample">น้ำก่ำป้ำฝ่ำญ๋ำต้องจัดช่องไฟระดับคลัสเตอร์โดยไม่ทำให้สระและวรรณยุกต์เบี้ยว
+          พร้อมรักษาความต่อเนื่องของการอ่าน</td>
+      </tr>
+      <tr style="font-family: 'TlwgTypewriter', monospace;">
+        <td class="font-name">TlwgTypewriter</td>
+        <td class="sample">กำ ก่ำ ก้ำ ก๊ำ ก๋ำ<br>น้ำ น่ำ น้ํา น๊ำ น๋ำ</td>
+        <td class="sample small">ก่ำ ป้ำ ฝ๊ำ ญ๋ำ ฎ้ำ ฏ๋ำ</td>
+        <td class="justify-sample">น้ำก่ำป้ำฝ่ำญ๋ำต้องจัดช่องไฟระดับคลัสเตอร์โดยไม่ทำให้สระและวรรณยุกต์เบี้ยว
+          พร้อมรักษาความต่อเนื่องของการอ่าน</td>
+      </tr>
+      <tr style="font-family: 'TlwgTypist', sans-serif;">
+        <td class="font-name">TlwgTypist</td>
+        <td class="sample">กำ ก่ำ ก้ำ ก๊ำ ก๋ำ<br>น้ำ น่ำ น้ํา น๊ำ น๋ำ</td>
+        <td class="sample small">ก่ำ ป้ำ ฝ๊ำ ญ๋ำ ฎ้ำ ฏ๋ำ</td>
+        <td class="justify-sample">น้ำก่ำป้ำฝ่ำญ๋ำต้องจัดช่องไฟระดับคลัสเตอร์โดยไม่ทำให้สระและวรรณยุกต์เบี้ยว
+          พร้อมรักษาความต่อเนื่องของการอ่าน</td>
+      </tr>
+      <tr style="font-family: 'TlwgTypo', sans-serif;">
+        <td class="font-name">TlwgTypo</td>
+        <td class="sample">กำ ก่ำ ก้ำ ก๊ำ ก๋ำ<br>น้ำ น่ำ น้ํา น๊ำ น๋ำ</td>
+        <td class="sample small">ก่ำ ป้ำ ฝ๊ำ ญ๋ำ ฎ้ำ ฏ๋ำ</td>
+        <td class="justify-sample">น้ำก่ำป้ำฝ่ำญ๋ำต้องจัดช่องไฟระดับคลัสเตอร์โดยไม่ทำให้สระและวรรณยุกต์เบี้ยว
+          พร้อมรักษาความต่อเนื่องของการอ่าน</td>
+      </tr>
+      <tr style="font-family: 'Umpush', sans-serif;">
+        <td class="font-name">Umpush</td>
+        <td class="sample">กำ ก่ำ ก้ำ ก๊ำ ก๋ำ<br>น้ำ น่ำ น้ํา น๊ำ น๋ำ</td>
+        <td class="sample small">ก่ำ ป้ำ ฝ๊ำ ญ๋ำ ฎ้ำ ฏ๋ำ</td>
+        <td class="justify-sample">น้ำก่ำป้ำฝ่ำญ๋ำต้องจัดช่องไฟระดับคลัสเตอร์โดยไม่ทำให้สระและวรรณยุกต์เบี้ยว
+          พร้อมรักษาความต่อเนื่องของการอ่าน</td>
+      </tr>
+      <tr style="font-family: 'Waree', sans-serif;">
+        <td class="font-name">Waree</td>
+        <td class="sample">กำ ก่ำ ก้ำ ก๊ำ ก๋ำ<br>น้ำ น่ำ น้ํา น๊ำ น๋ำ</td>
+        <td class="sample small">ก่ำ ป้ำ ฝ๊ำ ญ๋ำ ฎ้ำ ฏ๋ำ</td>
+        <td class="justify-sample">น้ำก่ำป้ำฝ่ำญ๋ำต้องจัดช่องไฟระดับคลัสเตอร์โดยไม่ทำให้สระและวรรณยุกต์เบี้ยว
+          พร้อมรักษาความต่อเนื่องของการอ่าน</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>

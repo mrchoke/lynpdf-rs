@@ -1,0 +1,546 @@
+<!-- ============================================================
+     Test 3: Tables (ตาราง)
+     ============================================================ -->
+<html>
+
+<head>
+  <title>Test 3 — Tables</title>
+</head>
+
+<body>
+
+  <h1>Test 3: Tables (ตาราง)</h1>
+  <p class="text-muted">ทดสอบตารางยาวข้ามหน้า, thead/tfoot repeat, colspan/rowspan, และ border-collapse</p>
+
+  <!-- ─── Test 3.1: ตารางยาวข้ามหน้า ─── -->
+  <div class="test-section">
+    <h3>Test 3.1 — ตารางยาวข้ามหน้า (Long Table)</h3>
+
+    <p class="test-label">ตาราง 50 แถว — ควรไหลข้ามหน้าได้ถูกต้อง:</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th style="width: 50px;">#</th>
+          <th>ชื่อ-นามสกุล</th>
+          <th>ตำแหน่ง</th>
+          <th style="width: 80px;">เงินเดือน</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>สมชาย ใจดี</td>
+          <td>ผู้จัดการ</td>
+          <td>55,000</td>
+        </tr>
+        <tr class="alt-row">
+          <td>2</td>
+          <td>สมหญิง รักไทย</td>
+          <td>หัวหน้าฝ่าย</td>
+          <td>45,000</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>ประเสริฐ มั่นคง</td>
+          <td>วิศวกร</td>
+          <td>42,000</td>
+        </tr>
+        <tr class="alt-row">
+          <td>4</td>
+          <td>อรุณี สว่างใจ</td>
+          <td>นักบัญชี</td>
+          <td>38,000</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>วิชัย ก้าวหน้า</td>
+          <td>โปรแกรมเมอร์</td>
+          <td>50,000</td>
+        </tr>
+        <tr class="alt-row">
+          <td>6</td>
+          <td>พรพิมล ศรีสุข</td>
+          <td>นักออกแบบ</td>
+          <td>40,000</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>ธนพล เจริญกิจ</td>
+          <td>นักวิเคราะห์</td>
+          <td>43,000</td>
+        </tr>
+        <tr class="alt-row">
+          <td>8</td>
+          <td>จิราภรณ์ สุขใจ</td>
+          <td>เลขานุการ</td>
+          <td>32,000</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>กิตติพงษ์ ยิ่งใหญ่</td>
+          <td>หัวหน้าทีม</td>
+          <td>48,000</td>
+        </tr>
+        <tr class="alt-row">
+          <td>10</td>
+          <td>นันทนา อุดมผล</td>
+          <td>ผู้ชำนาญการ</td>
+          <td>46,000</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>ศักดิ์ชัย พลศักดิ์</td>
+          <td>วิศวกรอาวุโส</td>
+          <td>58,000</td>
+        </tr>
+        <tr class="alt-row">
+          <td>12</td>
+          <td>อัญชลี งามวงศ์</td>
+          <td>ผู้ช่วยผจก.</td>
+          <td>35,000</td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td>พิชิต ชัยฤทธิ์</td>
+          <td>โปรแกรมเมอร์</td>
+          <td>52,000</td>
+        </tr>
+        <tr class="alt-row">
+          <td>14</td>
+          <td>รัชนี โชตินันท์</td>
+          <td>นักทดสอบ</td>
+          <td>37,000</td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td>ภูวดล ภูผา</td>
+          <td>DevOps</td>
+          <td>55,000</td>
+        </tr>
+        <tr class="alt-row">
+          <td>16</td>
+          <td>มณีรัตน์ แก้วใส</td>
+          <td>UX Designer</td>
+          <td>44,000</td>
+        </tr>
+        <tr>
+          <td>17</td>
+          <td>ชัยวัฒน์ ธรรมดา</td>
+          <td>ที่ปรึกษา</td>
+          <td>60,000</td>
+        </tr>
+        <tr class="alt-row">
+          <td>18</td>
+          <td>สุดา วิไลวรรณ</td>
+          <td>การเงิน</td>
+          <td>36,000</td>
+        </tr>
+        <tr>
+          <td>19</td>
+          <td>เกียรติศักดิ์ ศิลป์ดี</td>
+          <td>Fullstack Dev</td>
+          <td>54,000</td>
+        </tr>
+        <tr class="alt-row">
+          <td>20</td>
+          <td>ปัทมา ดอกไม้</td>
+          <td>ธุรการ</td>
+          <td>30,000</td>
+        </tr>
+        <tr>
+          <td>21</td>
+          <td>อนุชา รุ่งเรือง</td>
+          <td>วิศวกร</td>
+          <td>42,000</td>
+        </tr>
+        <tr class="alt-row">
+          <td>22</td>
+          <td>กนกพร เพชรดี</td>
+          <td>โปรแกรมเมอร์</td>
+          <td>48,000</td>
+        </tr>
+        <tr>
+          <td>23</td>
+          <td>สุรศักดิ์ มุ่งมั่น</td>
+          <td>Sr. Developer</td>
+          <td>62,000</td>
+        </tr>
+        <tr class="alt-row">
+          <td>24</td>
+          <td>วราภรณ์ ชื่นใจ</td>
+          <td>PM</td>
+          <td>56,000</td>
+        </tr>
+        <tr>
+          <td>25</td>
+          <td>กฤษณะ นาคสุด</td>
+          <td>Data Engineer</td>
+          <td>58,000</td>
+        </tr>
+        <tr class="alt-row">
+          <td>26</td>
+          <td>พิมพ์ใจ ใสสะอาด</td>
+          <td>QA Lead</td>
+          <td>47,000</td>
+        </tr>
+        <tr>
+          <td>27</td>
+          <td>สาธิต บุญมาก</td>
+          <td>SRE</td>
+          <td>53,000</td>
+        </tr>
+        <tr class="alt-row">
+          <td>28</td>
+          <td>ลักขณา ใจเย็น</td>
+          <td>Scrum Master</td>
+          <td>50,000</td>
+        </tr>
+        <tr>
+          <td>29</td>
+          <td>วรวุฒิ ปราชญ์</td>
+          <td>Tech Lead</td>
+          <td>65,000</td>
+        </tr>
+        <tr class="alt-row">
+          <td>30</td>
+          <td>จันทร์จิรา งามตา</td>
+          <td>Frontend Dev</td>
+          <td>45,000</td>
+        </tr>
+        <tr>
+          <td>31</td>
+          <td>ทวีศักดิ์ ฤกษ์ดี</td>
+          <td>Backend Dev</td>
+          <td>51,000</td>
+        </tr>
+        <tr class="alt-row">
+          <td>32</td>
+          <td>ปภาดา สุวรรณ</td>
+          <td>Designer</td>
+          <td>40,000</td>
+        </tr>
+        <tr>
+          <td>33</td>
+          <td>ณรงค์ ตรงใจ</td>
+          <td>เจ้าหน้าที่IT</td>
+          <td>35,000</td>
+        </tr>
+        <tr class="alt-row">
+          <td>34</td>
+          <td>อรพรรณ ศิริ</td>
+          <td>HR</td>
+          <td>38,000</td>
+        </tr>
+        <tr>
+          <td>35</td>
+          <td>ชนินทร์ วงศ์ดี</td>
+          <td>CTO</td>
+          <td>80,000</td>
+        </tr>
+        <tr class="alt-row">
+          <td>36</td>
+          <td>จุฑามาศ แจ่มใส</td>
+          <td>COO</td>
+          <td>75,000</td>
+        </tr>
+        <tr>
+          <td>37</td>
+          <td>ไกรศร เข้มแข็ง</td>
+          <td>Architect</td>
+          <td>70,000</td>
+        </tr>
+        <tr class="alt-row">
+          <td>38</td>
+          <td>ดวงใจ สดใส</td>
+          <td>Marketing</td>
+          <td>42,000</td>
+        </tr>
+        <tr>
+          <td>39</td>
+          <td>ปรีชา ลึกซึ้ง</td>
+          <td>Research</td>
+          <td>45,000</td>
+        </tr>
+        <tr class="alt-row">
+          <td>40</td>
+          <td>สุภาวดี อ่อนหวาน</td>
+          <td>Support</td>
+          <td>32,000</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="test-expect">✓ ตารางต้องไหลข้ามหน้าได้โดยโครงสร้างไม่พัง, เส้นขอบต่อเนื่อง</div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ─── Test 3.2: Repeating Headers / Footers ─── -->
+  <div class="test-section">
+    <h3>Test 3.2 — Repeating thead/tfoot</h3>
+
+    <p class="test-label">ตารางที่มี thead และ tfoot — ควรพิมพ์ซ้ำทุกหน้า:</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>รหัส</th>
+          <th>สินค้า</th>
+          <th>จำนวน</th>
+          <th>ราคา/หน่วย</th>
+          <th>รวม</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td style="font-weight: bold;">รวมทั้งหมด</td>
+          <td style="font-weight: bold;">฿ 999,999</td>
+        </tr>
+      </tfoot>
+      <tbody>
+        <tr>
+          <td>P001</td>
+          <td>คอมพิวเตอร์โน้ตบุ๊ก</td>
+          <td>5</td>
+          <td>35,000</td>
+          <td>175,000</td>
+        </tr>
+        <tr class="alt-row">
+          <td>P002</td>
+          <td>หน้าจอมอนิเตอร์ 27"</td>
+          <td>10</td>
+          <td>12,000</td>
+          <td>120,000</td>
+        </tr>
+        <tr>
+          <td>P003</td>
+          <td>คีย์บอร์ด Mechanical</td>
+          <td>15</td>
+          <td>3,500</td>
+          <td>52,500</td>
+        </tr>
+        <tr class="alt-row">
+          <td>P004</td>
+          <td>เมาส์ไร้สาย</td>
+          <td>20</td>
+          <td>1,200</td>
+          <td>24,000</td>
+        </tr>
+        <tr>
+          <td>P005</td>
+          <td>เครื่องพิมพ์เลเซอร์</td>
+          <td>3</td>
+          <td>15,000</td>
+          <td>45,000</td>
+        </tr>
+        <tr class="alt-row">
+          <td>P006</td>
+          <td>แท็บเล็ต</td>
+          <td>8</td>
+          <td>18,000</td>
+          <td>144,000</td>
+        </tr>
+        <tr>
+          <td>P007</td>
+          <td>หูฟังบลูทูธ</td>
+          <td>25</td>
+          <td>2,500</td>
+          <td>62,500</td>
+        </tr>
+        <tr class="alt-row">
+          <td>P008</td>
+          <td>Webcam HD</td>
+          <td>12</td>
+          <td>1,800</td>
+          <td>21,600</td>
+        </tr>
+        <tr>
+          <td>P009</td>
+          <td>UPS สำรองไฟ</td>
+          <td>6</td>
+          <td>8,000</td>
+          <td>48,000</td>
+        </tr>
+        <tr class="alt-row">
+          <td>P010</td>
+          <td>เราเตอร์ Wi-Fi 6</td>
+          <td>4</td>
+          <td>5,500</td>
+          <td>22,000</td>
+        </tr>
+        <tr>
+          <td>P011</td>
+          <td>SSD 1TB NVMe</td>
+          <td>15</td>
+          <td>3,200</td>
+          <td>48,000</td>
+        </tr>
+        <tr class="alt-row">
+          <td>P012</td>
+          <td>RAM DDR5 32GB</td>
+          <td>10</td>
+          <td>4,500</td>
+          <td>45,000</td>
+        </tr>
+        <tr>
+          <td>P013</td>
+          <td>ชุดอุปกรณ์สำนักงาน</td>
+          <td>30</td>
+          <td>800</td>
+          <td>24,000</td>
+        </tr>
+        <tr class="alt-row">
+          <td>P014</td>
+          <td>โปรเจ็กเตอร์</td>
+          <td>2</td>
+          <td>25,000</td>
+          <td>50,000</td>
+        </tr>
+        <tr>
+          <td>P015</td>
+          <td>กระดานไวท์บอร์ด</td>
+          <td>5</td>
+          <td>3,000</td>
+          <td>15,000</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="test-expect">✓ thead repeat ทำงานแล้ว — หัวตารางซ้ำทุกหน้า, tfoot repeat ทำงานแล้ว — ท้ายตารางซ้ำทุกหน้า
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ─── Test 3.3: Colspan & Rowspan ─── -->
+  <div class="test-section">
+    <h3>Test 3.3 — Colspan &amp; Rowspan</h3>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>หมวด</th>
+          <th>รายการ</th>
+          <th>Q1</th>
+          <th>Q2</th>
+          <th>Q3</th>
+          <th>Q4</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight: bold;">รายรับ</td>
+          <td>ยอดขาย</td>
+          <td>1.2M</td>
+          <td>1.5M</td>
+          <td>1.8M</td>
+          <td>2.1M</td>
+        </tr>
+        <tr class="alt-row">
+          <td></td>
+          <td>บริการ</td>
+          <td>0.3M</td>
+          <td>0.4M</td>
+          <td>0.5M</td>
+          <td>0.6M</td>
+        </tr>
+        <tr>
+          <td
+            style="font-weight: bold;"
+            colspan="2"
+          >รวมรายรับ</td>
+          <td style="font-weight: bold;">1.5M</td>
+          <td style="font-weight: bold;">1.9M</td>
+          <td style="font-weight: bold;">2.3M</td>
+          <td style="font-weight: bold;">2.7M</td>
+        </tr>
+        <tr class="alt-row">
+          <td style="font-weight: bold;">รายจ่าย</td>
+          <td>เงินเดือน</td>
+          <td>0.8M</td>
+          <td>0.8M</td>
+          <td>0.9M</td>
+          <td>0.9M</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>วัตถุดิบ</td>
+          <td>0.3M</td>
+          <td>0.4M</td>
+          <td>0.4M</td>
+          <td>0.5M</td>
+        </tr>
+        <tr class="alt-row">
+          <td
+            style="font-weight: bold;"
+            colspan="2"
+          >รวมรายจ่าย</td>
+          <td style="font-weight: bold;">1.1M</td>
+          <td style="font-weight: bold;">1.2M</td>
+          <td style="font-weight: bold;">1.3M</td>
+          <td style="font-weight: bold;">1.4M</td>
+        </tr>
+        <tr style="background-color: #d4edda;">
+          <td
+            style="font-weight: bold;"
+            colspan="2"
+          >กำไรสุทธิ</td>
+          <td style="font-weight: bold; color: #28a745;">0.4M</td>
+          <td style="font-weight: bold; color: #28a745;">0.7M</td>
+          <td style="font-weight: bold; color: #28a745;">1.0M</td>
+          <td style="font-weight: bold; color: #28a745;">1.3M</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="test-expect">✓ colspan ต้องรวมเซลล์ถูกต้อง, ความกว้างพอดี</div>
+  </div>
+
+  <!-- ─── Test 3.4: Border Collapse ─── -->
+  <div class="test-section">
+    <h3>Test 3.4 — Border Collapse</h3>
+
+    <p class="test-label">border-collapse: collapse (เส้นขอบซ้อนทับ ไม่หนา 2 เท่า):</p>
+    <table style="border-collapse: collapse; width: 100%;">
+      <tr>
+        <td style="border: 2px solid #333; padding: 10px;">A1</td>
+        <td style="border: 2px solid #333; padding: 10px;">B1</td>
+        <td style="border: 2px solid #333; padding: 10px;">C1</td>
+      </tr>
+      <tr>
+        <td style="border: 2px solid #333; padding: 10px;">A2</td>
+        <td style="border: 2px solid #333; padding: 10px;">B2</td>
+        <td style="border: 2px solid #333; padding: 10px;">C2</td>
+      </tr>
+      <tr>
+        <td style="border: 2px solid #333; padding: 10px;">A3</td>
+        <td style="border: 2px solid #333; padding: 10px;">B3</td>
+        <td style="border: 2px solid #333; padding: 10px;">C3</td>
+      </tr>
+    </table>
+
+    <p
+      class="test-label"
+      style="margin-top: 16px;"
+    >border-collapse: separate (เส้นขอบแยก เห็นช่องว่าง):</p>
+    <table style="border-collapse: separate; border-spacing: 4px; width: 100%;">
+      <tr>
+        <td style="border: 2px solid #0f3460; padding: 10px; background-color: #e8f0fe;">A1</td>
+        <td style="border: 2px solid #0f3460; padding: 10px; background-color: #e8f0fe;">B1</td>
+        <td style="border: 2px solid #0f3460; padding: 10px; background-color: #e8f0fe;">C1</td>
+      </tr>
+      <tr>
+        <td style="border: 2px solid #0f3460; padding: 10px; background-color: #e8f0fe;">A2</td>
+        <td style="border: 2px solid #0f3460; padding: 10px; background-color: #e8f0fe;">B2</td>
+        <td style="border: 2px solid #0f3460; padding: 10px; background-color: #e8f0fe;">C2</td>
+      </tr>
+    </table>
+
+    <div class="test-expect">✓ collapse: เส้นขอบหนา 2px ไม่ใช่ 4px — separate: มีช่องว่างระหว่างเซลล์</div>
+  </div>
+
+</body>
+
+</html>

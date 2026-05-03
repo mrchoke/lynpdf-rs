@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="th">
+
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  />
+  <title>LynPDF RS | Production Guide</title>
+  <meta
+    name="description"
+    content="คู่มือ production สำหรับ LynPDF RS: external fonts, Docker, service deployment, และ release hygiene"
+  />
+  <link
+    rel="stylesheet"
+    href="./styles.css"
+  />
+</head>
+
+<body>
+  <div class="bg-orb bg-orb-a"></div>
+  <div class="bg-orb bg-orb-b"></div>
+  <header class="hero">
+    <p class="eyebrow">LynPDF RS Deployment Guide</p>
+    <h1>Production-Ready, No Bundled Fonts</h1>
+    <p class="lead">รีโปนี้เตรียมให้พร้อม deploy โดยไม่ต้องพกไฟล์ฟอนต์ในซอร์สโค้ด พร้อมสคริปต์ดาวน์โหลด, แนวทาง
+      Docker/Service และขั้นตอน release hygiene.</p>
+    <div class="hero-links">
+      <a
+        class="btn btn-primary"
+        href="https://github.com/mrchoke/lynpdf-rs"
+      >Open Repository</a>
+      <a
+        class="btn btn-ghost"
+        href="https://github.com/mrchoke/lynpdf-rs/blob/main/docs/font-setup.md"
+      >Full Font Setup</a>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="card">
+      <h2>1. Bootstrap Fonts</h2>
+      <p>ดาวน์โหลดฟอนต์ที่ใช้ใน examples/tests ลงโฟลเดอร์ runtime โดยไม่ต้อง commit ไฟล์ฟอนต์ขึ้นรีโป:</p>
+      <pre><code>./scripts/download-fonts.sh --dest ./fonts
+./scripts/download-fonts.ps1 -Dest ./fonts</code></pre>
+      <p>สคริปต์ทั้งสองตัวจะดึง TLWG OTF (จาก release ของ tlwg/fonts-tlwg) มาไว้ที่ <code>fonts/tlwg/otf</code>
+        ให้อัตโนมัติ</p>
+      <p>จากนั้น run renderer ด้วย path ชัดเจน:</p>
+      <pre><code>cargo run -- examples/demo-single-page.html \
+  -c examples/styles.css \
+  -o examples/output/demo-single-page.pdf \
+  --font-dir ./fonts</code></pre>
+    </section>
+
+    <section class="card">
+      <h2>2. Service Deployment</h2>
+      <p>เมื่อ deploy เป็น service แนะนำให้กำหนด path ผ่าน environment variable:</p>
+      <pre><code>export LYNPDF_FONT_DIRS="/opt/lynpdf/fonts:/usr/local/share/fonts/lynpdf"</code></pre>
+      <p>CLI/API สามารถ override ได้ตามงาน:</p>
+      <pre><code>lynpdf-rs input.html -o output.pdf --font-dir /opt/lynpdf/fonts</code></pre>
+    </section>
+
+    <section class="card">
+      <h2>3. Docker Pattern</h2>
+      <pre><code>FROM rust:1.86-bookworm
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends curl ca-certificates fontconfig \
+  && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+COPY . .
+RUN ./scripts/download-fonts.sh --dest /usr/local/share/fonts/lynpdf \
+  && fc-cache -f -v
+
+ENV LYNPDF_FONT_DIRS=/usr/local/share/fonts/lynpdf</code></pre>
+    </section>
+
+    <section class="card">
+      <h2>4. Release Hygiene Checklist</h2>
+      <ul>
+        <li>ไม่ publish ไฟล์ฟอนต์ไปกับ crate package</li>
+        <li>ไม่เก็บไฟล์ generated ใน tests/output และ examples/output</li>
+        <li>บังคับ external-font workflow ผ่าน scripts + docs</li>
+        <li>ใช้ GitHub Pages เป็นเอกสาร public ที่อัปเดตตาม push</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>5. Useful Links</h2>
+      <ul>
+        <li><a href="https://github.com/mrchoke/lynpdf-rs/blob/main/README.md">README</a></li>
+        <li><a href="https://github.com/mrchoke/lynpdf-rs/blob/main/docs/api-guide-v0.1.0.md">API Guide</a></li>
+        <li><a href="https://github.com/mrchoke/lynpdf-rs/blob/main/docs/font-setup.md">Font Setup</a></li>
+      </ul>
+    </section>
+  </main>
+</body>
+
+</html>

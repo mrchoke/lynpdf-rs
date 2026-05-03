@@ -1,0 +1,110 @@
+<!-- ============================================================
+     Test 12: PDF Metadata from HTML (เมตาดาต้า PDF จาก HTML)
+     ============================================================
+     ทดสอบ: <title>, <meta name="author">, <meta name="description">,
+     <meta name="keywords"> → PDF info dictionary
+     ============================================================ -->
+<html>
+<head>
+  <title>LynPDF Metadata Test Document</title>
+  <meta name="author" content="LynPDF Test Suite">
+  <meta name="description" content="ทดสอบการส่ง metadata จาก HTML ไปยัง PDF">
+  <meta name="keywords" content="lynpdf, metadata, test, pdf, thai">
+</head>
+<body>
+
+<h1>Test 12: PDF Metadata</h1>
+<p class="text-muted">ทดสอบการดึง metadata จาก HTML &lt;meta&gt; tags ไปใส่ใน PDF info dictionary</p>
+
+<!-- ─── Test 12.1: Metadata Source Display ─── -->
+<div class="test-section">
+  <h3>Test 12.1 — HTML Metadata Source</h3>
+  <p class="test-label">แท็ก HTML ที่ใช้กำหนด metadata:</p>
+
+  <div style="padding: 16px; background-color: #f0f4f8; margin-bottom: 12px; font-family: monospace;">
+    <div style="font-size: 13px; color: #1a1a2e; line-height: 2;">
+      <div>&lt;title&gt;LynPDF Metadata Test Document&lt;/title&gt;</div>
+      <div>&lt;meta name="author" content="LynPDF Test Suite"&gt;</div>
+      <div>&lt;meta name="description" content="ทดสอบการส่ง metadata จาก HTML ไปยัง PDF"&gt;</div>
+      <div>&lt;meta name="keywords" content="lynpdf, metadata, test, pdf, thai"&gt;</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── Test 12.2: Expected PDF Metadata ─── -->
+<div class="test-section">
+  <h3>Test 12.2 — Expected PDF Info Dictionary</h3>
+
+  <div style="padding: 16px; background-color: #f0fdf4; margin-bottom: 12px;">
+    <table style="width: 100%; border-collapse: collapse; border: 1px solid #c3e6cb;">
+      <thead>
+        <tr>
+          <th style="padding: 8px 12px; border: 1px solid #c3e6cb; background-color: #d4edda; text-align: left; font-size: 13px;">PDF Key</th>
+          <th style="padding: 8px 12px; border: 1px solid #c3e6cb; background-color: #d4edda; text-align: left; font-size: 13px;">Expected Value</th>
+          <th style="padding: 8px 12px; border: 1px solid #c3e6cb; background-color: #d4edda; text-align: left; font-size: 13px;">HTML Source</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding: 8px 12px; border: 1px solid #c3e6cb; font-size: 13px;">/Title</td>
+          <td style="padding: 8px 12px; border: 1px solid #c3e6cb; font-size: 13px;">LynPDF Metadata Test Document</td>
+          <td style="padding: 8px 12px; border: 1px solid #c3e6cb; font-size: 13px; color: #666;">&lt;title&gt;</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px 12px; border: 1px solid #c3e6cb; font-size: 13px;">/Author</td>
+          <td style="padding: 8px 12px; border: 1px solid #c3e6cb; font-size: 13px;">LynPDF Test Suite</td>
+          <td style="padding: 8px 12px; border: 1px solid #c3e6cb; font-size: 13px; color: #666;">&lt;meta name="author"&gt;</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px 12px; border: 1px solid #c3e6cb; font-size: 13px;">/Subject</td>
+          <td style="padding: 8px 12px; border: 1px solid #c3e6cb; font-size: 13px;">ทดสอบการส่ง metadata จาก HTML ไปยัง PDF</td>
+          <td style="padding: 8px 12px; border: 1px solid #c3e6cb; font-size: 13px; color: #666;">&lt;meta name="description"&gt;</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px 12px; border: 1px solid #c3e6cb; font-size: 13px;">/Keywords</td>
+          <td style="padding: 8px 12px; border: 1px solid #c3e6cb; font-size: 13px;">lynpdf, metadata, test, pdf, thai</td>
+          <td style="padding: 8px 12px; border: 1px solid #c3e6cb; font-size: 13px; color: #666;">&lt;meta name="keywords"&gt;</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px 12px; border: 1px solid #c3e6cb; font-size: 13px;">/Creator</td>
+          <td style="padding: 8px 12px; border: 1px solid #c3e6cb; font-size: 13px;">LynPDF</td>
+          <td style="padding: 8px 12px; border: 1px solid #c3e6cb; font-size: 13px; color: #666;">Default (LynPDF)</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px 12px; border: 1px solid #c3e6cb; font-size: 13px;">/Producer</td>
+          <td style="padding: 8px 12px; border: 1px solid #c3e6cb; font-size: 13px;">LynPDF (PDFKit)</td>
+          <td style="padding: 8px 12px; border: 1px solid #c3e6cb; font-size: 13px; color: #666;">Default</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ─── Test 12.3: Thai Content ─── -->
+<div class="test-section">
+  <h3>Test 12.3 — Thai Content with Metadata</h3>
+
+  <div style="padding: 16px; background-color: #f8f9fa; margin-bottom: 12px;">
+    <div style="font-size: 16px; color: #333; line-height: 1.8;">
+      เอกสารนี้ถูกสร้างโดย LynPDF — เครื่องมือแปลง HTML/CSS เป็น PDF ที่รองรับภาษาไทย
+      ข้อมูล metadata ถูกดึงจาก HTML head section และนำไปใส่ใน PDF info dictionary
+      ทำให้สามารถค้นหาและจัดระเบียบเอกสาร PDF ได้ง่าย
+    </div>
+  </div>
+</div>
+
+<!-- ─── Test 12.4: Compression Info ─── -->
+<div class="test-section">
+  <h3>Test 12.4 — Compression Status</h3>
+
+  <div style="padding: 16px; background-color: #fff3cd; margin-bottom: 12px;">
+    <div style="font-size: 14px; color: #856404; line-height: 1.6;">
+      This PDF is generated with compression enabled (default: true).
+      PDF streams are compressed using FlateDecode (zlib deflate), which typically
+      reduces file size by 30-60%. The Creator metadata is set to "LynPDF" by default.
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

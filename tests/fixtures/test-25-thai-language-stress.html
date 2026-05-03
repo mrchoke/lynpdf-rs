@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Test 25 - Thai Language Stress Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 28px;
+      font-family: "Sarabun", sans-serif;
+      color: #1f2937;
+      font-size: 13.5px;
+      line-height: 1.48;
+      background: #f8fafc;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      color: #0f172a;
+    }
+
+    h2 {
+      margin: 20px 0 8px;
+      font-size: 16px;
+      color: #1e3a8a;
+      border-bottom: 1px solid #bfdbfe;
+      padding-bottom: 4px;
+    }
+
+    p.meta {
+      margin: 0 0 10px;
+      font-size: 12px;
+      color: #334155;
+    }
+
+    .panel {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    table.grid {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: auto;
+      margin-bottom: 12px;
+      background: #ffffff;
+    }
+
+    .grid th,
+    .grid td {
+      border: 1px solid #cbd5e1;
+      padding: 7px;
+      vertical-align: top;
+    }
+
+    .grid th {
+      background: #e2e8f0;
+      font-size: 12px;
+      color: #0f172a;
+    }
+
+    .mono {
+      width: 1%;
+      font-family: "Courier New", monospace;
+      font-size: 10.6px;
+      color: #334155;
+      white-space: nowrap;
+      word-break: normal;
+      overflow-wrap: normal;
+    }
+
+    .probe {
+      width: 220px;
+      border: 1px dashed #cbd5e1;
+      padding: 8px;
+      min-height: 76px;
+      margin: 0 auto;
+      background: #f8fafc;
+      font-size: 14px;
+    }
+
+    .grid-justify col.mode-col {
+      width: 1%;
+    }
+
+    .grid-justify col.probe-col {
+      width: auto;
+    }
+
+    .grid-justify .mode-label {
+      font-size: 10px;
+      line-height: 1.4;
+      white-space: nowrap;
+      word-break: normal;
+      overflow-wrap: normal;
+      color: #0f172a;
+    }
+
+    .probe-justify {
+      width: 100%;
+      max-width: 340px;
+      min-height: 120px;
+      font-size: 13.5px;
+      line-height: 1.64;
+      border-color: #a8bfd6;
+      background: #f4f8ff;
+    }
+
+    .align-left {
+      text-align: left;
+    }
+
+    .align-center {
+      text-align: center;
+    }
+
+    .align-right {
+      text-align: right;
+    }
+
+    .align-justify {
+      text-align: justify;
+      text-justify: inter-character;
+    }
+
+    .tj-auto {
+      text-align: justify;
+      text-justify: auto;
+    }
+
+    .tj-inter-word {
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    .tj-inter-character {
+      text-align: justify;
+      text-justify: inter-character;
+    }
+
+    .tj-none {
+      text-align: justify;
+      text-justify: none;
+    }
+
+    .tj-initial {
+      text-align: justify;
+      text-justify: initial;
+    }
+
+    .tj-inherit-parent {
+      text-align: justify;
+      text-justify: inter-character;
+    }
+
+    .tj-inherit {
+      text-align: justify;
+      text-justify: inherit;
+    }
+
+    .ws-normal {
+      white-space: normal;
+    }
+
+    .ws-pre-wrap {
+      white-space: pre-wrap;
+    }
+
+    .ws-pre-line {
+      white-space: pre-line;
+    }
+
+    .wb-normal {
+      word-break: normal;
+      overflow-wrap: normal;
+    }
+
+    .wb-break-all {
+      word-break: break-all;
+    }
+
+    .wb-keep-all {
+      word-break: keep-all;
+    }
+
+    .ow-anywhere {
+      overflow-wrap: anywhere;
+    }
+
+    .lb-auto {
+      line-break: auto;
+    }
+
+    .lb-strict {
+      line-break: strict;
+    }
+
+    .lb-anywhere {
+      line-break: anywhere;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Test 25: Thai Language Stress (Single File)</h1>
+  <p class="meta">รวมเคสหนักในไฟล์เดียว: สระ/วรรณยุกต์, เว้นวรรค, ตัดคำ, ตัดบรรทัด, จัดแนวข้อความ, ประโยคยาว, ตัวเลข,
+    ภาษาไทยผสมอังกฤษและบาลี-สันสกฤต</p>
+
+  <h2>A) Thai marks and cluster pressure</h2>
+  <table class="grid">
+    <thead>
+      <tr>
+        <th class="mono">Case</th>
+        <th>Sample</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="mono">vowel + tone marks</td>
+        <td>
+          เกี๊ยะ เกี๋ยว เกี้ยว เกี๊ยว เกี๋ยว เกี๊ยะ<br>
+          เสี้ยว เงี้ยว เหยี่ยว เที่ยว เลี้ยว เรียง<br>
+          ก๋วยเตี๋ยว ปี่พาทย์ เศรษฐกิจ พิธีกรรม
+        </td>
+      </tr>
+      <tr>
+        <td class="mono">Sara Am + stacks</td>
+        <td>
+          น้ำ น้ํา ค้ำ คํ้า ล้ำ ลํ้า ย้ำ ซ้ำ คำ คํา ถ้ำ ดำ รำ<br>
+          สำเนียง คำอธิบาย นำเสนอ สัมผัส สัญลักษณ์
+        </td>
+      </tr>
+      <tr>
+        <td class="mono">dense cluster stream</td>
+        <td>
+          การทดสอบการวางสระและวรรณยุกต์ที่ต่อเนื่องกันอย่างหนาแน่นเพื่อดูว่าเครื่องหมายบนล่างซ้อนกันโดยไม่กระโดดตำแหน่งและไม่ชนกันจนอ่านไม่ได้
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>B) Alignment stress</h2>
+  <div class="panel">
+    <div class="probe align-left">left:
+      เอกสารราชการและรายงานยาวมักใช้การจัดชิดซ้ายเพื่อความเร็วในการสแกนสายตาและการอ่านทวนหลายรอบ</div>
+    <div class="probe align-center">center:
+      การจัดกลางใช้กับหัวข้อประกาศหรือใบประกาศนียบัตรที่ต้องเน้นสมดุลสายตาและจังหวะบรรทัด</div>
+    <div class="probe align-right">right: การจัดชิดขวาใช้กับยอดรวม หมายเลขอ้างอิง และข้อความสั้นที่ต้องยึดขอบท้ายให้ตรง
+    </div>
+    <div class="probe align-justify">justify inter-character:
+      ข้อความยาวภาษาไทยควรกระจายระยะอย่างละเอียดโดยไม่ฉีกคลัสเตอร์และไม่ทำให้ช่วงวรรคดูเป็นหลุมใหญ่ในคอลัมน์แคบ</div>
+  </div>
+
+  <h2>B2) text-justify comparison</h2>
+  <table class="grid grid-justify">
+    <colgroup>
+      <col class="mode-col">
+      <col class="probe-col">
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="mono">Mode</th>
+        <th>Probe</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="mono mode-label">text-align: justify; text-justify: auto;</td>
+        <td>
+          <div class="probe probe-justify tj-auto">
+            เอกสารภาษาไทยในหมวดนโยบายข้อมูลต้องจัดย่อหน้าให้ขอบซ้ายและขอบขวาดูสมดุล
+            พร้อมรองรับคำอังกฤษยาวอย่าง DataPipelineWorkflowOrchestrator โดยยังอ่านต่อเนื่องได้
+            และไม่ทำให้จังหวะบรรทัดช่วงท้ายดูแน่นหรือโปร่งเกินไปเมื่ออยู่ในคอลัมน์ความกว้างจำกัด</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mono mode-label">text-align: justify; text-justify: inter-word;</td>
+        <td>
+          <div class="probe probe-justify tj-inter-word">
+            เอกสารภาษาไทยในหมวดนโยบายข้อมูลต้องจัดย่อหน้าให้ขอบซ้ายและขอบขวาดูสมดุล
+            พร้อมรองรับคำอังกฤษยาวอย่าง DataPipelineWorkflowOrchestrator โดยยังอ่านต่อเนื่องได้
+            และไม่ทำให้จังหวะบรรทัดช่วงท้ายดูแน่นหรือโปร่งเกินไปเมื่ออยู่ในคอลัมน์ความกว้างจำกัด</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mono mode-label">text-align: justify; text-justify: inter-character;</td>
+        <td>
+          <div class="probe probe-justify tj-inter-character">
+            เอกสารภาษาไทยในหมวดนโยบายข้อมูลต้องจัดย่อหน้าให้ขอบซ้ายและขอบขวาดูสมดุล
+            พร้อมรองรับคำอังกฤษยาวอย่าง DataPipelineWorkflowOrchestrator โดยยังอ่านต่อเนื่องได้
+            และไม่ทำให้จังหวะบรรทัดช่วงท้ายดูแน่นหรือโปร่งเกินไปเมื่ออยู่ในคอลัมน์ความกว้างจำกัด</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mono mode-label">text-align: justify; text-justify: none;</td>
+        <td>
+          <div class="probe probe-justify tj-none">
+            เอกสารภาษาไทยในหมวดนโยบายข้อมูลต้องจัดย่อหน้าให้ขอบซ้ายและขอบขวาดูสมดุล
+            พร้อมรองรับคำอังกฤษยาวอย่าง DataPipelineWorkflowOrchestrator โดยยังอ่านต่อเนื่องได้
+            และไม่ทำให้จังหวะบรรทัดช่วงท้ายดูแน่นหรือโปร่งเกินไปเมื่ออยู่ในคอลัมน์ความกว้างจำกัด</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mono mode-label">text-align: justify; text-justify: initial;</td>
+        <td>
+          <div class="probe probe-justify tj-initial">
+            เอกสารภาษาไทยในหมวดนโยบายข้อมูลต้องจัดย่อหน้าให้ขอบซ้ายและขอบขวาดูสมดุล
+            พร้อมรองรับคำอังกฤษยาวอย่าง DataPipelineWorkflowOrchestrator โดยยังอ่านต่อเนื่องได้
+            และไม่ทำให้จังหวะบรรทัดช่วงท้ายดูแน่นหรือโปร่งเกินไปเมื่ออยู่ในคอลัมน์ความกว้างจำกัด</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mono mode-label">text-align: justify; text-justify: inherit;</td>
+        <td>
+          <div class="probe probe-justify tj-inherit-parent">
+            <div class="tj-inherit">เอกสารภาษาไทยในหมวดนโยบายข้อมูลต้องจัดย่อหน้าให้ขอบซ้ายและขอบขวาดูสมดุล
+              พร้อมรองรับคำอังกฤษยาวอย่าง DataPipelineWorkflowOrchestrator โดยยังอ่านต่อเนื่องได้
+              และไม่ทำให้จังหวะบรรทัดช่วงท้ายดูแน่นหรือโปร่งเกินไปเมื่ออยู่ในคอลัมน์ความกว้างจำกัด</div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>C) Word and line breaks (Thai + mixed)</h2>
+  <table class="grid">
+    <thead>
+      <tr>
+        <th class="mono">Mode</th>
+        <th>Probe</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="mono">word-break: normal; line-break: auto;</td>
+        <td>
+          <div class="probe wb-normal lb-auto">
+            ระบบการทดสอบนี้ต้องรองรับประโยคภาษาไทยยาวมากโดยไม่มีช่องว่างคั่นคำรวมทั้งคำศัพท์ทางเทคนิคอย่างDataPipelineAndWorkflowOrchestratorที่ผสมอังกฤษกลางประโยค
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mono">word-break: break-all;</td>
+        <td>
+          <div class="probe wb-break-all">
+            ระบบการทดสอบนี้ต้องรองรับประโยคภาษาไทยยาวมากโดยไม่มีช่องว่างคั่นคำรวมทั้งคำศัพท์ทางเทคนิคอย่างDataPipelineAndWorkflowOrchestratorที่ผสมอังกฤษกลางประโยค
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mono">word-break: keep-all;</td>
+        <td>
+          <div class="probe wb-keep-all">
+            ระบบการทดสอบนี้ต้องรองรับประโยคภาษาไทยยาวมากโดยไม่มีช่องว่างคั่นคำรวมทั้งคำศัพท์ทางเทคนิคอย่างDataPipelineAndWorkflowOrchestratorที่ผสมอังกฤษกลางประโยค
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mono">overflow-wrap: anywhere;</td>
+        <td>
+          <div class="probe wb-normal ow-anywhere">
+            ระบบการทดสอบนี้ต้องรองรับประโยคภาษาไทยยาวมากโดยไม่มีช่องว่างคั่นคำรวมทั้งคำศัพท์ทางเทคนิคอย่างDataPipelineAndWorkflowOrchestratorที่ผสมอังกฤษกลางประโยค
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mono">line-break: strict;</td>
+        <td>
+          <div class="probe wb-normal lb-strict">ภาษาไทย-อังกฤษ(ผสม): วิเคราะห์โครงสร้างข้อมูล,
+            ตรวจสอบค่าความถูกต้อง/ความครบถ้วน และสรุปผลแบบเรียลไทม์เพื่อการตัดสินใจที่แม่นยำ</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mono">line-break: anywhere;</td>
+        <td>
+          <div class="probe wb-normal lb-anywhere">ภาษาไทย-อังกฤษ(ผสม): วิเคราะห์โครงสร้างข้อมูล,
+            ตรวจสอบค่าความถูกต้อง/ความครบถ้วน และสรุปผลแบบเรียลไทม์เพื่อการตัดสินใจที่แม่นยำ</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <h2>D) White-space, sentence breaks, and punctuation</h2>
+  <table class="grid">
+    <thead>
+      <tr>
+        <th class="mono">Mode</th>
+        <th>Thai</th>
+        <th>English / Mixed</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="mono">white-space: normal</td>
+        <td>
+          <div class="probe ws-normal">บรรทัดหนึ่ง มีช่องว่างเยอะ และ
+            บรรทัดสองควรถูกยุบช่องว่างให้เป็นธรรมชาติ</div>
+        </td>
+        <td>
+          <div class="probe ws-normal">Line one has too many spaces and
+            line two should collapse naturally in normal mode.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mono">white-space: pre-wrap</td>
+        <td>
+          <div class="probe ws-pre-wrap">บรรทัดหนึ่ง ช่องว่างต้องคง
+            บรรทัดสองต้องคงขึ้นบรรทัดและยังตัดได้เมื่อยาวมากจนล้นคอลัมน์</div>
+        </td>
+        <td>
+          <div class="probe ws-pre-wrap">Line one keeps spaces
+            Line two keeps newlines and still wraps when content is too long.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mono">white-space: pre-line</td>
+        <td>
+          <div class="probe ws-pre-line">บรรทัดหนึ่ง ช่องว่างหลายตัว
+            บรรทัดสองคงการขึ้นบรรทัดแต่ยุบช่องว่างซ้ำ</div>
+        </td>
+        <td>
+          <div class="probe ws-pre-line">Line one has repeated spaces
+            Line two keeps line breaks but collapses repeated spaces.</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>E) Linguistic mix: Thai + Pali/Sanskrit + numerals</h2>
+  <div class="panel align-justify">
+    พระพุทธศาสนามีคำบาลี-สันสกฤตจำนวนมาก เช่น สัมมาสัมพุทธะ ปฏิจจสมุปบาท อนิจจัง ทุกขัง อนัตตา
+    และคำไทยร่วมสมัยด้านเทคโนโลยีอย่างการประมวลผลข้อมูลเชิงสถิติแบบเรียลไทม์ โดยในย่อหน้าเดียวกันอาจมีตัวเลขไทย ๑๒๓๔๕
+    และเลขอารบิก 12345 ปรากฏร่วมกันพร้อมเครื่องหมายวรรคตอน: , ; : ? ! ( ) [ ] / -
+    ซึ่งต้องจัดบรรทัดได้อย่างสม่ำเสมอและคงความอ่านง่าย
+  </div>
+
+  <div class="panel align-justify">
+    ประโยคยาวทดสอบการตัดประโยค: เมื่อระบบแสดงผลเอกสารที่มีทั้งหัวข้อย่อยคำย่อภาษาอังกฤษ API, CLI, PDF, HTML/CSS
+    และเนื้อหาภาษาไทยต่อเนื่องหลายบรรทัดโดยไม่มีการเว้นวรรคที่ชัดเจน ระบบควรรักษาระยะบรรทัด ตำแหน่งวรรณยุกต์
+    และขอบย่อหน้าให้เรียบร้อยโดยไม่ทำให้สระหรือเครื่องหมายซ้อนทับผิดตำแหน่ง
+  </div>
+</body>
+
+</html>

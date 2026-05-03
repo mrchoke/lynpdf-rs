@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Test 28 - Syntax Highlight HTML</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm;
+    }
+
+    body {
+      font-family: Sarabun, sans-serif;
+      color: #1f2937;
+      line-height: 1.5;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      color: #0b2f4a;
+    }
+
+    .grid {
+      display: block;
+    }
+
+    .card {
+      margin-bottom: 12px;
+      padding: 8px;
+      border: 1px solid #d0d7de;
+      background: #f8fbff;
+    }
+
+    .card h2 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: #32556f;
+    }
+
+    pre {
+      margin: 0;
+      padding: 8px;
+      border: 1px solid #d0d7de;
+      background: #ffffff;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    pre code {
+      display: block;
+      white-space: inherit;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Test 28 - HTML syntax highlight support</h1>
+  <p>Each code block should be colorized by language class when syntax highlighting is enabled.</p>
+
+  <div class="grid">
+    <section class="card">
+      <h2>Rust</h2>
+      <pre><code class="language-rust">fn sum(a: i32, b: i32) -> i32 {
+    let total = a + b;
+    println!("{}", total);
+    total
+}
+</code></pre>
+    </section>
+
+    <section class="card">
+      <h2>TypeScript</h2>
+      <pre><code class="language-typescript">interface InvoiceLine {
+  sku: string;
+  qty: number;
+}
+
+const line: InvoiceLine = { sku: "A-100", qty: 2 };
+console.log(line);
+</code></pre>
+    </section>
+
+    <section class="card">
+      <h2>SQL</h2>
+      <pre><code class="language-sql">select customer_id, sum(total)
+from invoices
+where status = 'PAID'
+group by customer_id
+order by customer_id;
+</code></pre>
+    </section>
+  </div>
+</body>
+
+</html>

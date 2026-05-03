@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Certificate Landscape - LynPDF RS</title>
+  <meta
+    name="author"
+    content="LynPDF RS Team"
+  >
+  <meta
+    name="description"
+    content="Landscape certificate layout example for lynpdf-rs with enterprise visual identity."
+  >
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
+  <style>
+    @page {
+      size: A4 landscape;
+      margin: 11mm;
+
+      @top-left {
+        content: "";
+      }
+
+      @top-right {
+        content: "";
+      }
+
+      @bottom-left {
+        content: "";
+      }
+
+      @bottom-right {
+        content: "";
+      }
+    }
+
+    @page :first {
+      margin: 11mm;
+
+      @top-left {
+        content: "";
+      }
+
+      @top-right {
+        content: "";
+      }
+
+      @bottom-left {
+        content: "";
+      }
+
+      @bottom-right {
+        content: "";
+      }
+    }
+
+    body {
+      font-family: 'Sarabun', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #21374e;
+      background-color: #ffffff;
+    }
+
+    .cert {
+      border: 3px solid #0f2a45;
+      background-color: #fffcf7;
+      min-height: 450px;
+      overflow: hidden;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .left-band {
+      display: none;
+    }
+
+    .left-band .title {
+      font-size: 17px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .left-band .sub {
+      font-size: 10px;
+      color: #d5e2ee;
+      margin-bottom: 12px;
+      line-height: 1.45;
+    }
+
+    .left-band .chip {
+      display: block;
+      border: 1px solid #b98a59;
+      background-color: rgba(184, 116, 54, 0.18);
+      color: #ffe4c7;
+      font-size: 9px;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      padding: 3px 6px;
+      text-align: center;
+    }
+
+    .left-band .serial {
+      margin-top: 12px;
+      font-size: 10px;
+      line-height: 1.45;
+      color: #d7e4f0;
+    }
+
+    .main {
+      float: none;
+      width: auto;
+      padding: 10px 16px 10px 16px;
+      min-height: 0;
+      box-sizing: border-box;
+      border-left: 0;
+      font-size: 13px;
+    }
+
+    .header-line {
+      height: 5px;
+      background-color: #0f2a45;
+      margin-bottom: 1px;
+    }
+
+    .header-line-2 {
+      height: 2px;
+      background-color: #b87436;
+      margin-bottom: 8px;
+    }
+
+    .org {
+      text-align: center;
+      margin-bottom: 3px;
+    }
+
+    .org .th {
+      font-size: 14px;
+      font-weight: bold;
+      color: #0f2a45;
+      margin-bottom: 1px;
+    }
+
+    .org .en {
+      font-size: 10px;
+      color: #61778c;
+    }
+
+    .title {
+      text-align: center;
+      margin-bottom: 4px;
+    }
+
+    .title .th {
+      font-size: 21px;
+      font-weight: bold;
+      color: #b87436;
+      margin-bottom: 1px;
+    }
+
+    .title .en {
+      font-size: 11px;
+      color: #5e748a;
+      letter-spacing: 1px;
+    }
+
+    .recipient-lead {
+      text-align: center;
+      font-size: 12px;
+      color: #40566a;
+      margin-bottom: 3px;
+    }
+
+    .recipient {
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      color: #0f2a45;
+      margin-bottom: 2px;
+    }
+
+    .recipient-rule {
+      width: 330px;
+      margin: 0 auto 5px auto;
+      border-bottom: 2px solid #b87436;
+    }
+
+    .course {
+      text-align: center;
+      margin-bottom: 4px;
+    }
+
+    .course .th {
+      font-size: 14px;
+      font-weight: bold;
+      color: #133755;
+      margin-bottom: 1px;
+    }
+
+    .course .en {
+      font-size: 10px;
+      color: #5f7489;
+    }
+
+    .award-grid {
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .award-card {
+      display: inline-block;
+      width: 23.1%;
+      vertical-align: top;
+      border: 1px solid #dae4ee;
+      background-color: #f7fbff;
+      margin: 0 0.3%;
+      text-align: center;
+      padding: 4px 5px;
+    }
+
+    .award-card .k {
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #7c8fa3;
+      margin-bottom: 1px;
+    }
+
+    .award-card .v {
+      font-size: 10px;
+      font-weight: bold;
+      color: #173b5a;
+    }
+
+    .footer {
+      display: block;
+      border-top: 1px solid #d7e2ec;
+      padding-top: 5px;
+      margin-top: 4px;
+    }
+
+    .signatures {
+      display: inline-block;
+      width: 70%;
+      vertical-align: top;
+      padding-right: 8px;
+      box-sizing: border-box;
+    }
+
+    .sign {
+      display: inline-block;
+      width: 49%;
+      vertical-align: top;
+      text-align: center;
+      padding: 0 2px;
+      box-sizing: border-box;
+    }
+
+    .sign .line {
+      border-top: 1px solid #8599ad;
+      margin: 10px 8px 3px 8px;
+    }
+
+    .sign .name {
+      font-size: 11px;
+      font-weight: bold;
+      color: #183957;
+    }
+
+    .sign .role {
+      font-size: 9px;
+      color: #6e8398;
+    }
+
+    .verify {
+      display: inline-block;
+      width: 29%;
+      vertical-align: top;
+      text-align: center;
+      border-left: 1px solid #d9e3ed;
+      padding-left: 8px;
+      box-sizing: border-box;
+    }
+
+    .verify .id {
+      font-size: 10px;
+      color: #2d455d;
+      font-weight: bold;
+      margin-top: 4px;
+    }
+
+    .verify .url {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="cert">
+    <div class="left-band">
+      <div class="title">LynPDF RS</div>
+      <div class="sub">Professional Credential Program<br />Digital Document Engineering Track</div>
+
+      <span class="chip">Landscape Edition</span>
+      <span class="chip">Enterprise Approved</span>
+      <span class="chip">Visual QA Passed</span>
+
+      <svg
+        width="132"
+        height="132"
+        viewBox="0 0 132 132"
+        style="margin-top: 6px; margin-bottom: 10px;"
+      >
+        <circle
+          cx="66"
+          cy="66"
+          r="58"
+          fill="none"
+          stroke="#f2c389"
+          stroke-width="3"
+        ></circle>
+        <circle
+          cx="66"
+          cy="66"
+          r="44"
+          fill="none"
+          stroke="#ffffff"
+          stroke-width="2"
+          opacity="0.75"
+        ></circle>
+        <path
+          d="M66 26 L77 54 L106 54 L82 72 L90 102 L66 84 L42 102 L50 72 L26 54 L55 54 Z"
+          fill="#f2c389"
+        ></path>
+      </svg>
+
+      <div class="serial">
+        Cert ID: LPR-LS-2605-0048<br />
+        Issued: 03 May 2026<br />
+        Program Hours: 96h
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="header-line"></div>
+      <div class="header-line-2"></div>
+
+      <div class="org">
+        <div class="th">สถาบันเอกสารดิจิทัลลินพีดีเอฟ</div>
+        <div class="en">LynPDF Institute of Digital Document Engineering</div>
+      </div>
+
+      <div class="title">
+        <div class="th">หนังสือรับรองความเชี่ยวชาญวิชาชีพ</div>
+        <div class="en">CERTIFICATE OF PROFESSIONAL COMPETENCY</div>
+      </div>
+
+      <div class="recipient-lead">มอบให้แก่</div>
+      <div class="recipient">นางสาวอรุณี มีทรัพย์</div>
+      <div class="recipient-rule"></div>
+
+      <div class="course">
+        <div class="th">Enterprise Invoice & Certificate System with LynPDF RS</div>
+        <div class="en">Advanced Layout, Landscape Support, and Visual Baseline Governance</div>
+      </div>
+
+      <div class="award-grid">
+        <div class="award-card">
+          <div class="k">Overall Score</div>
+          <div class="v">96 / 100</div>
+        </div>
+        <div class="award-card">
+          <div class="k">Rendering Accuracy</div>
+          <div class="v">98.4%</div>
+        </div>
+        <div class="award-card">
+          <div class="k">Batch Validation</div>
+          <div class="v">Pass 37/37</div>
+        </div>
+        <div class="award-card">
+          <div class="k">Status</div>
+          <div class="v">Certified</div>
+        </div>
+      </div>
+
+      <div style="font-size: 11px; line-height: 1.5; color: #3f566b; margin-bottom: 8px; text-align: center;">
+        ผู้ได้รับการรับรองได้แสดงความสามารถในการออกแบบระบบเอกสาร PDF ระดับองค์กรด้วย lynpdf-rs
+        พร้อมผ่านเกณฑ์ regression, visual baseline, และ deployment readiness ตามมาตรฐานสถาบัน
+      </div>
+
+      <div class="footer">
+        <div class="signatures">
+          <div class="sign">
+            <svg
+              width="124"
+              height="32"
+              viewBox="0 0 124 32"
+            >
+              <path
+                d="M8 24 Q20 3 40 21 T70 18 Q90 9 114 17"
+                fill="none"
+                stroke="#2f455b"
+                stroke-width="1.4"
+                stroke-linecap="round"
+              ></path>
+            </svg>
+            <div class="line"></div>
+            <div class="name">ดร.วสิษฐ์ พูนสวัสดิ์</div>
+            <div class="role">Academic Board Chair</div>
+          </div>
+          <div class="sign">
+            <svg
+              width="124"
+              height="32"
+              viewBox="0 0 124 32"
+            >
+              <path
+                d="M9 26 Q22 5 44 23 T78 19 Q97 11 114 17"
+                fill="none"
+                stroke="#2f455b"
+                stroke-width="1.4"
+                stroke-linecap="round"
+              ></path>
+            </svg>
+            <div class="line"></div>
+            <div class="name">คุณศศิธร ชูศรี</div>
+            <div class="role">Certification Registrar</div>
+          </div>
+        </div>
+
+        <div class="verify">
+          <svg
+            width="82"
+            height="82"
+            viewBox="0 0 82 82"
+          >
+            <rect
+              x="1"
+              y="1"
+              width="80"
+              height="80"
+              fill="#fff"
+              stroke="#2a4157"
+              stroke-width="1.2"
+            ></rect>
+            <rect
+              x="7"
+              y="7"
+              width="18"
+              height="18"
+              fill="#0f2a45"
+            ></rect>
+            <rect
+              x="11"
+              y="11"
+              width="10"
+              height="10"
+              fill="#fff"
+            ></rect>
+            <rect
+              x="57"
+              y="7"
+              width="18"
+              height="18"
+              fill="#0f2a45"
+            ></rect>
+            <rect
+              x="61"
+              y="11"
+              width="10"
+              height="10"
+              fill="#fff"
+            ></rect>
+            <rect
+              x="7"
+              y="57"
+              width="18"
+              height="18"
+              fill="#0f2a45"
+            ></rect>
+            <rect
+              x="11"
+              y="61"
+              width="10"
+              height="10"
+              fill="#fff"
+            ></rect>
+            <rect
+              x="31"
+              y="9"
+              width="5"
+              height="5"
+              fill="#0f2a45"
+            ></rect>
+            <rect
+              x="39"
+              y="9"
+              width="5"
+              height="5"
+              fill="#0f2a45"
+            ></rect>
+            <rect
+              x="31"
+              y="17"
+              width="5"
+              height="5"
+              fill="#0f2a45"
+            ></rect>
+            <rect
+              x="29"
+              y="33"
+              width="5"
+              height="5"
+              fill="#0f2a45"
+            ></rect>
+            <rect
+              x="37"
+              y="33"
+              width="5"
+              height="5"
+              fill="#0f2a45"
+            ></rect>
+            <rect
+              x="45"
+              y="33"
+              width="5"
+              height="5"
+              fill="#0f2a45"
+            ></rect>
+            <rect
+              x="53"
+              y="33"
+              width="5"
+              height="5"
+              fill="#0f2a45"
+            ></rect>
+            <rect
+              x="61"
+              y="33"
+              width="5"
+              height="5"
+              fill="#0f2a45"
+            ></rect>
+            <rect
+              x="37"
+              y="41"
+              width="5"
+              height="5"
+              fill="#0f2a45"
+            ></rect>
+            <rect
+              x="53"
+              y="41"
+              width="5"
+              height="5"
+              fill="#0f2a45"
+            ></rect>
+            <rect
+              x="29"
+              y="49"
+              width="5"
+              height="5"
+              fill="#0f2a45"
+            ></rect>
+            <rect
+              x="45"
+              y="49"
+              width="5"
+              height="5"
+              fill="#0f2a45"
+            ></rect>
+            <rect
+              x="61"
+              y="49"
+              width="5"
+              height="5"
+              fill="#0f2a45"
+            ></rect>
+            <rect
+              x="37"
+              y="57"
+              width="5"
+              height="5"
+              fill="#0f2a45"
+            ></rect>
+            <rect
+              x="45"
+              y="57"
+              width="5"
+              height="5"
+              fill="#0f2a45"
+            ></rect>
+            <rect
+              x="53"
+              y="65"
+              width="5"
+              height="5"
+              fill="#0f2a45"
+            ></rect>
+            <rect
+              x="61"
+              y="65"
+              width="5"
+              height="5"
+              fill="#0f2a45"
+            ></rect>
+          </svg>
+          <div class="id">HASH: 92E4-C71A</div>
+          <div class="url">verify.lynpdf.dev/cert</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

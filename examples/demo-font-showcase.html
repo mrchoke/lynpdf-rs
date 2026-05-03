@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Font Showcase - LynPDF RS</title>
+  <meta name="author" content="LynPDF RS Team">
+  <meta name="description" content="Brand-consistent font showcase for TTF, OTF and variable fonts in lynpdf-rs.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .hero {
+      border: 1px solid #d9e3ed;
+      background-color: #f8fbff;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+    }
+
+    .hero h2 {
+      margin: 0 0 4px 0;
+      border-bottom: none;
+      color: #123856;
+      font-size: 20px;
+    }
+
+    .hero p {
+      margin: 0;
+      color: #62788d;
+      font-size: 11px;
+    }
+
+    .section {
+      border: 1px solid #dbe5ee;
+      background-color: #ffffff;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .section h3 {
+      color: #b87436;
+      margin-bottom: 4px;
+    }
+
+    .label {
+      font-size: 9px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #768ca0;
+      margin-bottom: 2px;
+      font-weight: bold;
+    }
+
+    .sample {
+      margin-bottom: 7px;
+      color: #20364b;
+    }
+
+    .grid {
+      display: flex;
+      flex-direction: row;
+      margin-top: 6px;
+    }
+
+    .cell {
+      flex: 1;
+      border: 1px solid #dde6ef;
+      background-color: #f9fcff;
+      margin-right: 6px;
+      padding: 8px;
+    }
+
+    .cell:last-child {
+      margin-right: 0;
+    }
+
+    .cell .t {
+      font-size: 9px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: #6f8599;
+      margin-bottom: 2px;
+      font-weight: bold;
+    }
+
+    .footer {
+      border-top: 2px solid #b87436;
+      margin-top: 10px;
+      padding-top: 5px;
+      text-align: center;
+      font-size: 9px;
+      color: #6d8297;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Font Showcase</h1>
+  <p>TTF, OTF และ Variable Font พร้อม kerning/ligature ในธีมเดียวกับชุดเอกสาร Enterprise</p>
+</div>
+
+<div class="hero">
+  <h2>LynPDF RS Typography Lab</h2>
+  <p>ใช้ไฟล์นี้เป็น baseline สำหรับตรวจความสม่ำเสมอของ family, weight, style และการจัดวรรณยุกต์ภาษาไทย</p>
+</div>
+
+<div class="section">
+  <h3>Thai TTF Families</h3>
+
+  <div class="label">Sarabun Regular 18px</div>
+  <div class="sample" style="font-family: 'Sarabun'; font-size: 18px;">สวัสดีครับ นี่คือข้อความทดสอบ Sarabun สำหรับเอกสารธุรกิจระดับองค์กร</div>
+
+  <div class="label">Kanit Bold 18px</div>
+  <div class="sample" style="font-family: 'Kanit'; font-size: 18px; font-weight: bold;">สวัสดีครับ ข้อความนี้ทดสอบ Kanit Bold พร้อมวรรณยุกต์และสระไทย</div>
+
+  <div class="label">Prompt Italic 18px</div>
+  <div class="sample" style="font-family: 'Prompt'; font-size: 18px; font-style: italic;">สวัสดีครับ ข้อความนี้ใช้ Prompt Italic เพื่อทดสอบสไตล์เอกสารนำเสนอ</div>
+</div>
+
+<div class="section">
+  <h3>Latin Kerning and Ligatures</h3>
+
+  <div class="label">Inter Regular 18px</div>
+  <div class="sample" style="font-family: 'Inter'; font-size: 18px;">The quick brown fox jumps over the lazy dog. office efficient traffic</div>
+
+  <div class="label">Inter Bold 18px</div>
+  <div class="sample" style="font-family: 'Inter'; font-size: 18px; font-weight: bold;">Bold kerning sample: AV AW AY AT To Te Ty We</div>
+
+  <div class="label">Inter Italic 18px</div>
+  <div class="sample" style="font-family: 'Inter'; font-size: 18px; font-style: italic;">Ligature sample: fi fl ff ffi ffl — fifty final flame float</div>
+
+  <div class="label">Kerning at Display Size 34px</div>
+  <div class="sample" style="font-family: 'Inter'; font-size: 34px; color: #123856;">AV AW AY AT To Te Ty We</div>
+</div>
+
+<div class="section">
+  <h3>OTF and Variable</h3>
+
+  <div class="label">IBM Plex Sans (OTF)</div>
+  <div class="sample" style="font-family: 'IBM Plex Sans'; font-size: 17px;">OTF sample: consistent spacing, clean punctuation, enterprise readability</div>
+
+  <div class="label">Inter Variable</div>
+  <div class="sample" style="font-family: 'Inter Variable'; font-size: 17px;">Variable sample: one-file family with flexible weight behavior</div>
+
+  <div class="grid">
+    <div class="cell">
+      <div class="t">Sarabun</div>
+      <div style="font-family: 'Sarabun'; font-size: 15px;">office fi fl ff AV To</div>
+      <div style="font-family: 'Sarabun'; font-size: 15px;">ภาษาไทยครบทุกวรรณยุกต์</div>
+    </div>
+    <div class="cell">
+      <div class="t">Inter</div>
+      <div style="font-family: 'Inter'; font-size: 15px;">office fi fl ff AV To</div>
+      <div style="font-family: 'Inter'; font-size: 15px;">Precision for UI and docs</div>
+    </div>
+    <div class="cell">
+      <div class="t">IBM Plex Sans</div>
+      <div style="font-family: 'IBM Plex Sans'; font-size: 15px;">office fi fl ff AV To</div>
+      <div style="font-family: 'IBM Plex Sans'; font-size: 15px;">Readable technical text</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Code Block + Syntax Highlight Tokens</h3>
+  <pre><code><span class="token-comment">// Rust rendering entrypoint</span>
+<span class="token-keyword">use</span> <span class="token-type">lynpdf_rs</span>::{<span class="token-function">render_file_to_pdf</span>, <span class="token-type">RenderOptions</span>};
+
+<span class="token-keyword">fn</span> <span class="token-function">main</span>() {
+    <span class="token-keyword">let</span> options <span class="token-operator">=</span> <span class="token-type">RenderOptions</span>::default();
+    <span class="token-keyword">let</span> _result <span class="token-operator">=</span> <span class="token-function">render_file_to_pdf</span>(
+        <span class="token-string">"examples/demo-font-showcase.html"</span>,
+        <span class="token-keyword">Some</span>(<span class="token-string">"examples/styles.css"</span>),
+        <span class="token-string">"examples/output/font-showcase.pdf"</span>,
+        options,
+    );
+}</code></pre>
+</div>
+
+<div class="footer">Generated by LynPDF RS | Typography Baseline v2026.05</div>
+
+</body>
+</html>

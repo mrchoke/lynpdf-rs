@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Test 26 - Color Emoji and Fallback</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 26px;
+      font-family: "Sarabun", sans-serif;
+      color: #172033;
+      background: #f8fafc;
+      line-height: 1.45;
+      font-size: 13.5px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      color: #0f172a;
+    }
+
+    h2 {
+      margin: 20px 0 8px;
+      font-size: 16px;
+      color: #1e3a8a;
+      border-bottom: 1px solid #bfdbfe;
+      padding-bottom: 4px;
+    }
+
+    p.meta {
+      margin: 0 0 10px;
+      font-size: 12px;
+      color: #334155;
+    }
+
+    .panel {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .emoji-color {
+      font-family: "Noto Color Emoji", "Sarabun", sans-serif;
+    }
+
+    .emoji-fallback {
+      font-family: "Noto Emoji", "NotoEmoji", "Sarabun", sans-serif;
+    }
+
+    .line {
+      margin: 0 0 8px;
+      font-size: 25px;
+      line-height: 1.25;
+    }
+
+    .line:last-child {
+      margin-bottom: 0;
+    }
+
+    .small {
+      font-size: 18px;
+    }
+
+    table.grid {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      background: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .grid th,
+    .grid td {
+      border: 1px solid #cbd5e1;
+      padding: 8px;
+      vertical-align: top;
+    }
+
+    .grid th {
+      background: #e2e8f0;
+      font-size: 12px;
+      color: #0f172a;
+    }
+
+    .label {
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      color: #334155;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Test 26: Color Emoji + Fallback Emoji</h1>
+  <p class="meta">เป้าหมาย: ทดสอบ emoji สีจาก NotoColorEmoji.ttf และ fallback แบบปกติ โดยครอบคลุมทั้ง emoji เดี่ยว, ZWJ
+    sequence, skin tone, keycap และธงชาติที่ใช้หลายโค้ดพอยต์ประกอบกัน</p>
+
+  <h2>A) Color emoji rendering (Noto Color Emoji)</h2>
+  <div class="panel emoji-color">
+    <p class="line">😀 😂 🤣 😍 😎 🤖 👋 🙏 👍 👎 ✅ ❌</p>
+    <p class="line">🍜 🍣 🍕 ☕ 🎂 🎉 🎁 🏖️ 🚗 ✈️ 🚀</p>
+    <p class="line">👩‍⚕️ 👨‍🍳 🧑‍🔬 🧑🏽‍💻 👨🏻‍🏫 👩🏾‍⚖️ 👮‍♂️ 🧘‍♀️</p>
+    <p class="line">👨‍👩‍👧‍👦 👩‍❤️‍👨 👩‍❤️‍👩 🧑‍🤝‍🧑 🏳️‍🌈 🏳️‍⚧️ 🏴‍☠️</p>
+    <p class="line">1️⃣ 2️⃣ 3️⃣ #️⃣ *️⃣ ™️ ©️ ®️</p>
+    <p class="line">🇹🇭 🇺🇸 🇯🇵 🇰🇷 🇨🇳 🇬🇧 🇫🇷 🇩🇪 🇪🇸 🇮🇳 🇦🇺 🇧🇷</p>
+  </div>
+
+  <h2>B) Compare color vs fallback in same rows</h2>
+  <table class="grid">
+    <thead>
+      <tr>
+        <th class="label">Case</th>
+        <th>Color (Noto Color Emoji)</th>
+        <th>Fallback/Normal (Noto Emoji)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="label">common faces</td>
+        <td class="emoji-color small">😀 😁 😂 🤣 🥰 😎 🤔 😴 🤯 🥳</td>
+        <td class="emoji-fallback small">😀 😁 😂 🤣 🥰 😎 🤔 😴 🤯 🥳</td>
+      </tr>
+      <tr>
+        <td class="label">gesture + skin tone</td>
+        <td class="emoji-color small">👍 👍🏻 👍🏽 👍🏿 👋 👋🏼 🙌🏾 🙏🏽</td>
+        <td class="emoji-fallback small">👍 👍🏻 👍🏽 👍🏿 👋 👋🏼 🙌🏾 🙏🏽</td>
+      </tr>
+      <tr>
+        <td class="label">zwj complex</td>
+        <td class="emoji-color small">👨‍👩‍👧‍👦 👩‍❤️‍👩 👩‍⚕️ 🧑🏽‍💻 🏳️‍🌈 🏳️‍⚧️ 🏴‍☠️</td>
+        <td class="emoji-fallback small">👨‍👩‍👧‍👦 👩‍❤️‍👩 👩‍⚕️ 🧑🏽‍💻 🏳️‍🌈 🏳️‍⚧️ 🏴‍☠️</td>
+      </tr>
+      <tr>
+        <td class="label">flags (regional indicators)</td>
+        <td class="emoji-color small">🇹🇭 🇺🇸 🇯🇵 🇬🇧 🇫🇷 🇩🇪 🇪🇺 🇺🇳</td>
+        <td class="emoji-fallback small">🇹🇭 🇺🇸 🇯🇵 🇬🇧 🇫🇷 🇩🇪 🇪🇺 🇺🇳</td>
+      </tr>
+      <tr>
+        <td class="label">mixed text</td>
+        <td class="emoji-color">สวัสดีครับ 👋 วันนี้อากาศดีมาก ☀️ นัดกินข้าว 🍜 แล้วบินไปโตเกียว ✈️🇯🇵</td>
+        <td class="emoji-fallback">สวัสดีครับ 👋 วันนี้อากาศดีมาก ☀️ นัดกินข้าว 🍜 แล้วบินไปโตเกียว ✈️🇯🇵</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <h2>C) Stress line wrap with emoji clusters</h2>
+  <div class="panel emoji-color small">
+    <p>ประโยคยาวเพื่อทดสอบตัดบรรทัด: ระบบควรไม่แยกคลัสเตอร์ emoji ที่ประกอบหลายโค้ดพอยต์ เช่น 👨‍👩‍👧‍👦, 🏳️‍🌈,
+      🏳️‍⚧️, 🏴‍☠️, และธงชาติ 🇹🇭🇺🇸🇬🇧 ระหว่างขึ้นบรรทัด</p>
+    <p>English stress: complex emoji sequences like 👩‍❤️‍👨 and profession emoji 🧑🏽‍💻 should keep cluster integrity
+      while line wrapping in narrow columns.</p>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,192 @@
+<!-- ============================================================
+     Test 8: Thead Repeat (หัวตารางซ้ำทุกหน้า)
+     ============================================================
+     ทดสอบ: thead repeat เมื่อตารางยาวข้ามหน้า
+     - ตาราง 80 แถว ข้ามหลายหน้า
+     - thead ต้องปรากฏซ้ำที่ด้านบนของทุกหน้า
+     - tfoot ด้านล่างสุด
+     - หลายรูปแบบตาราง
+     ============================================================ -->
+<html>
+<head><title>Test 8 — Thead Repeat</title></head>
+<body>
+
+<h1>Test 8: Thead Repeat (หัวตารางซ้ำทุกหน้า)</h1>
+<p class="text-muted">ทดสอบว่า thead ปรากฏซ้ำอัตโนมัติเมื่อตารางยาวข้ามหน้า — ตาราง 80+ แถว</p>
+
+<!-- ─── Test 8.1: ตารางยาว 80 แถว ─── -->
+<div class="test-section">
+  <h3>Test 8.1 — ตารางรายชื่อบุคลากร (80 แถว)</h3>
+  <p class="test-label">ตาราง 80 แถว — thead ต้องพิมพ์ซ้ำทุกหน้า:</p>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th style="width: 40px;">ลำดับ</th>
+        <th style="width: 130px;">ชื่อ-นามสกุล</th>
+        <th style="width: 100px;">แผนก</th>
+        <th style="width: 100px;">ตำแหน่ง</th>
+        <th style="width: 70px;">เงินเดือน</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>สมชาย ใจดี</td><td>วิศวกรรม</td><td>ผู้จัดการ</td><td>65,000</td></tr>
+      <tr class="alt-row"><td>2</td><td>สมหญิง รักไทย</td><td>วิศวกรรม</td><td>หัวหน้าฝ่าย</td><td>55,000</td></tr>
+      <tr><td>3</td><td>ประเสริฐ มั่นคง</td><td>วิศวกรรม</td><td>วิศวกรอาวุโส</td><td>52,000</td></tr>
+      <tr class="alt-row"><td>4</td><td>อรุณี สว่างใจ</td><td>การเงิน</td><td>นักบัญชี</td><td>42,000</td></tr>
+      <tr><td>5</td><td>วิชัย ก้าวหน้า</td><td>วิศวกรรม</td><td>โปรแกรมเมอร์</td><td>50,000</td></tr>
+      <tr class="alt-row"><td>6</td><td>พรพิมล ศรีสุข</td><td>ออกแบบ</td><td>นักออกแบบ</td><td>45,000</td></tr>
+      <tr><td>7</td><td>ธนพล เจริญกิจ</td><td>วิศวกรรม</td><td>นักวิเคราะห์</td><td>48,000</td></tr>
+      <tr class="alt-row"><td>8</td><td>จิราภรณ์ สุขใจ</td><td>บริหาร</td><td>เลขานุการ</td><td>35,000</td></tr>
+      <tr><td>9</td><td>กิตติพงษ์ ยิ่งใหญ่</td><td>วิศวกรรม</td><td>หัวหน้าทีม</td><td>55,000</td></tr>
+      <tr class="alt-row"><td>10</td><td>นันทนา อุดมผล</td><td>วิจัย</td><td>ผู้ชำนาญการ</td><td>50,000</td></tr>
+      <tr><td>11</td><td>ศักดิ์ชัย พลศักดิ์</td><td>วิศวกรรม</td><td>วิศวกรอาวุโส</td><td>58,000</td></tr>
+      <tr class="alt-row"><td>12</td><td>อัญชลี งามวงศ์</td><td>บริหาร</td><td>ผู้ช่วยผจก.</td><td>38,000</td></tr>
+      <tr><td>13</td><td>พิชิต ชัยฤทธิ์</td><td>วิศวกรรม</td><td>โปรแกรมเมอร์</td><td>52,000</td></tr>
+      <tr class="alt-row"><td>14</td><td>รัชนี โชตินันท์</td><td>คุณภาพ</td><td>นักทดสอบ</td><td>40,000</td></tr>
+      <tr><td>15</td><td>ภูวดล ภูผา</td><td>โครงสร้าง</td><td>DevOps</td><td>55,000</td></tr>
+      <tr class="alt-row"><td>16</td><td>มณีรัตน์ แก้วใส</td><td>ออกแบบ</td><td>UX Designer</td><td>48,000</td></tr>
+      <tr><td>17</td><td>ชัยวัฒน์ ธรรมดา</td><td>ที่ปรึกษา</td><td>ที่ปรึกษา</td><td>65,000</td></tr>
+      <tr class="alt-row"><td>18</td><td>สุดา วิไลวรรณ</td><td>การเงิน</td><td>การเงิน</td><td>38,000</td></tr>
+      <tr><td>19</td><td>เกียรติศักดิ์ ศิลป์ดี</td><td>วิศวกรรม</td><td>Fullstack Dev</td><td>58,000</td></tr>
+      <tr class="alt-row"><td>20</td><td>ปัทมา ดอกไม้</td><td>บริหาร</td><td>ธุรการ</td><td>32,000</td></tr>
+      <tr><td>21</td><td>อนุชา รุ่งเรือง</td><td>วิศวกรรม</td><td>วิศวกร</td><td>46,000</td></tr>
+      <tr class="alt-row"><td>22</td><td>กนกพร เพชรดี</td><td>วิศวกรรม</td><td>โปรแกรมเมอร์</td><td>50,000</td></tr>
+      <tr><td>23</td><td>สุรศักดิ์ มุ่งมั่น</td><td>วิศวกรรม</td><td>Sr. Developer</td><td>62,000</td></tr>
+      <tr class="alt-row"><td>24</td><td>วราภรณ์ ชื่นใจ</td><td>บริหาร</td><td>PM</td><td>58,000</td></tr>
+      <tr><td>25</td><td>กฤษณะ นาคสุด</td><td>ข้อมูล</td><td>Data Engineer</td><td>60,000</td></tr>
+      <tr class="alt-row"><td>26</td><td>พิมพ์ใจ ใสสะอาด</td><td>คุณภาพ</td><td>QA Lead</td><td>52,000</td></tr>
+      <tr><td>27</td><td>สาธิต บุญมาก</td><td>โครงสร้าง</td><td>SRE</td><td>56,000</td></tr>
+      <tr class="alt-row"><td>28</td><td>ลักขณา ใจเย็น</td><td>บริหาร</td><td>Scrum Master</td><td>54,000</td></tr>
+      <tr><td>29</td><td>วรวุฒิ ปราชญ์</td><td>วิศวกรรม</td><td>Tech Lead</td><td>68,000</td></tr>
+      <tr class="alt-row"><td>30</td><td>จันทร์จิรา งามตา</td><td>วิศวกรรม</td><td>Frontend Dev</td><td>48,000</td></tr>
+      <tr><td>31</td><td>ทวีศักดิ์ ฤกษ์ดี</td><td>วิศวกรรม</td><td>Backend Dev</td><td>52,000</td></tr>
+      <tr class="alt-row"><td>32</td><td>ปภาดา สุวรรณ</td><td>ออกแบบ</td><td>Graphic Designer</td><td>42,000</td></tr>
+      <tr><td>33</td><td>ณรงค์ ตรงใจ</td><td>โครงสร้าง</td><td>IT Support</td><td>36,000</td></tr>
+      <tr class="alt-row"><td>34</td><td>อรพรรณ ศิริ</td><td>บุคคล</td><td>HR Manager</td><td>50,000</td></tr>
+      <tr><td>35</td><td>ชนินทร์ วงศ์ดี</td><td>บริหาร</td><td>CTO</td><td>85,000</td></tr>
+      <tr class="alt-row"><td>36</td><td>จุฑามาศ แจ่มใส</td><td>บริหาร</td><td>COO</td><td>80,000</td></tr>
+      <tr><td>37</td><td>ไกรศร เข้มแข็ง</td><td>วิศวกรรม</td><td>Architect</td><td>75,000</td></tr>
+      <tr class="alt-row"><td>38</td><td>ดวงใจ สดใส</td><td>การตลาด</td><td>Marketing Mgr</td><td>48,000</td></tr>
+      <tr><td>39</td><td>ปรีชา ลึกซึ้ง</td><td>วิจัย</td><td>Researcher</td><td>50,000</td></tr>
+      <tr class="alt-row"><td>40</td><td>สุภาวดี อ่อนหวาน</td><td>บริการ</td><td>Support Lead</td><td>38,000</td></tr>
+      <tr><td>41</td><td>พงศกร พึ่งพา</td><td>วิศวกรรม</td><td>ML Engineer</td><td>62,000</td></tr>
+      <tr class="alt-row"><td>42</td><td>นภัสสร ลมเย็น</td><td>ออกแบบ</td><td>UI Designer</td><td>46,000</td></tr>
+      <tr><td>43</td><td>ธีรพงษ์ ไม้แก้ว</td><td>วิศวกรรม</td><td>Mobile Dev</td><td>54,000</td></tr>
+      <tr class="alt-row"><td>44</td><td>วิลาสินี น้ำใส</td><td>การเงิน</td><td>Accountant</td><td>40,000</td></tr>
+      <tr><td>45</td><td>บุญเลิศ ปลื้มใจ</td><td>โครงสร้าง</td><td>Network Eng.</td><td>48,000</td></tr>
+      <tr class="alt-row"><td>46</td><td>ศิริพร ทองคำ</td><td>บุคคล</td><td>Recruiter</td><td>38,000</td></tr>
+      <tr><td>47</td><td>ณัฐพล รักษ์ดี</td><td>คุณภาพ</td><td>QA Engineer</td><td>44,000</td></tr>
+      <tr class="alt-row"><td>48</td><td>อมรรัตน์ ดีเลิศ</td><td>วิจัย</td><td>Data Scientist</td><td>58,000</td></tr>
+      <tr><td>49</td><td>สิทธิชัย แข็งแกร่ง</td><td>วิศวกรรม</td><td>DevSecOps</td><td>56,000</td></tr>
+      <tr class="alt-row"><td>50</td><td>รุ่งนภา เช้าตรู่</td><td>บริหาร</td><td>Office Manager</td><td>42,000</td></tr>
+      <tr><td>51</td><td>กรกช สันติ</td><td>วิศวกรรม</td><td>Embedded Eng.</td><td>52,000</td></tr>
+      <tr class="alt-row"><td>52</td><td>ปิยะ ภูมิใจ</td><td>การตลาด</td><td>Content Writer</td><td>35,000</td></tr>
+      <tr><td>53</td><td>อุทัย แสงทอง</td><td>วิศวกรรม</td><td>Cloud Eng.</td><td>58,000</td></tr>
+      <tr class="alt-row"><td>54</td><td>จารุวรรณ ดอกมะลิ</td><td>บริการ</td><td>Helpdesk</td><td>32,000</td></tr>
+      <tr><td>55</td><td>ภาณุพงษ์ ยุทธนา</td><td>วิศวกรรม</td><td>Platform Eng.</td><td>60,000</td></tr>
+      <tr class="alt-row"><td>56</td><td>สุพัตรา ร่มเย็น</td><td>บุคคล</td><td>Training Mgr</td><td>46,000</td></tr>
+      <tr><td>57</td><td>วัชระ ดาวเด่น</td><td>คุณภาพ</td><td>Automation QA</td><td>50,000</td></tr>
+      <tr class="alt-row"><td>58</td><td>พัชรินทร์ มั่งมี</td><td>การเงิน</td><td>Financial Analyst</td><td>48,000</td></tr>
+      <tr><td>59</td><td>สุริยา เรืองฤทธิ์</td><td>โครงสร้าง</td><td>Security Eng.</td><td>56,000</td></tr>
+      <tr class="alt-row"><td>60</td><td>กมลวรรณ สายใจ</td><td>ออกแบบ</td><td>Product Designer</td><td>52,000</td></tr>
+      <tr><td>61</td><td>ประสิทธิ์ ทำดี</td><td>วิศวกรรม</td><td>IoT Engineer</td><td>54,000</td></tr>
+      <tr class="alt-row"><td>62</td><td>มาลี ชื่นชม</td><td>บริหาร</td><td>Admin</td><td>30,000</td></tr>
+      <tr><td>63</td><td>ชาญชัย ฉลาด</td><td>วิจัย</td><td>AI Researcher</td><td>65,000</td></tr>
+      <tr class="alt-row"><td>64</td><td>วันเพ็ญ งดงาม</td><td>การตลาด</td><td>SEO Specialist</td><td>40,000</td></tr>
+      <tr><td>65</td><td>ปวีณา เก่งกาจ</td><td>วิศวกรรม</td><td>Blockchain Dev</td><td>62,000</td></tr>
+      <tr class="alt-row"><td>66</td><td>สถาพร มั่นใจ</td><td>โครงสร้าง</td><td>DBA</td><td>52,000</td></tr>
+      <tr><td>67</td><td>รัตนา เปล่งปลั่ง</td><td>บุคคล</td><td>Payroll</td><td>38,000</td></tr>
+      <tr class="alt-row"><td>68</td><td>พิทักษ์ คุ้มครอง</td><td>คุณภาพ</td><td>Test Manager</td><td>55,000</td></tr>
+      <tr><td>69</td><td>อภิชาติ ยอดเยี่ยม</td><td>วิศวกรรม</td><td>VP Engineering</td><td>90,000</td></tr>
+      <tr class="alt-row"><td>70</td><td>สุวิทย์ รอบรู้</td><td>วิจัย</td><td>Principal Eng.</td><td>82,000</td></tr>
+      <tr><td>71</td><td>กัลยา ขวัญใจ</td><td>บริการ</td><td>CS Manager</td><td>48,000</td></tr>
+      <tr class="alt-row"><td>72</td><td>ทินกร แสงเงิน</td><td>วิศวกรรม</td><td>Compiler Eng.</td><td>68,000</td></tr>
+      <tr><td>73</td><td>พิศมัย ช่อดอก</td><td>ออกแบบ</td><td>Design Lead</td><td>56,000</td></tr>
+      <tr class="alt-row"><td>74</td><td>เดชา ทรงพลัง</td><td>โครงสร้าง</td><td>Infra Lead</td><td>62,000</td></tr>
+      <tr><td>75</td><td>นิภาพร ยิ้มสวย</td><td>การเงิน</td><td>Controller</td><td>58,000</td></tr>
+      <tr class="alt-row"><td>76</td><td>สมพร สุขสันต์</td><td>บริหาร</td><td>CEO</td><td>120,000</td></tr>
+      <tr><td>77</td><td>อาทิตย์ ส่องแสง</td><td>วิศวกรรม</td><td>Graphics Eng.</td><td>60,000</td></tr>
+      <tr class="alt-row"><td>78</td><td>ดาริน สวยงาม</td><td>การตลาด</td><td>Brand Manager</td><td>52,000</td></tr>
+      <tr><td>79</td><td>วรพจน์ คารม</td><td>วิจัย</td><td>NLP Researcher</td><td>60,000</td></tr>
+      <tr class="alt-row"><td>80</td><td>ปิยนุช สุขล้น</td><td>บุคคล</td><td>CHRO</td><td>85,000</td></tr>
+    </tbody>
+  </table>
+
+  <div class="test-expect">✓ thead (ลำดับ, ชื่อ-นามสกุล, แผนก, ตำแหน่ง, เงินเดือน) ต้องปรากฏซ้ำที่ด้านบนทุกหน้า</div>
+</div>
+
+<!-- ─── Test 8.2: ตารางที่ 2 — styled thead ─── -->
+<div class="page-break"></div>
+
+<div class="test-section">
+  <h3>Test 8.2 — ตารางสรุปงบประมาณ (thead สีต่างกัน)</h3>
+  <p class="test-label">ตารางสรุปงบประมาณรายเดือน — thead สีน้ำเงิน ต้องซ้ำทุกหน้า:</p>
+
+  <table class="table" style="font-size: 12px;">
+    <thead>
+      <tr>
+        <th style="width: 30px; background-color: #0f3460;">เดือน</th>
+        <th style="background-color: #0f3460;">รายการ</th>
+        <th style="width: 80px; background-color: #0f3460;">งบประมาณ</th>
+        <th style="width: 80px; background-color: #0f3460;">ใช้จ่ายจริง</th>
+        <th style="width: 60px; background-color: #0f3460;">คงเหลือ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>ม.ค.</td><td>ค่าจ้างบุคลากร</td><td>2,500,000</td><td>2,450,000</td><td>50,000</td></tr>
+      <tr class="alt-row"><td>ม.ค.</td><td>ค่าวัสดุอุปกรณ์</td><td>300,000</td><td>285,000</td><td>15,000</td></tr>
+      <tr><td>ม.ค.</td><td>ค่าสาธารณูปโภค</td><td>150,000</td><td>142,000</td><td>8,000</td></tr>
+      <tr class="alt-row"><td>ม.ค.</td><td>ค่าเดินทาง</td><td>100,000</td><td>87,000</td><td>13,000</td></tr>
+      <tr><td>ก.พ.</td><td>ค่าจ้างบุคลากร</td><td>2,500,000</td><td>2,480,000</td><td>20,000</td></tr>
+      <tr class="alt-row"><td>ก.พ.</td><td>ค่าวัสดุอุปกรณ์</td><td>300,000</td><td>310,000</td><td>-10,000</td></tr>
+      <tr><td>ก.พ.</td><td>ค่าสาธารณูปโภค</td><td>150,000</td><td>148,000</td><td>2,000</td></tr>
+      <tr class="alt-row"><td>ก.พ.</td><td>ค่าฝึกอบรม</td><td>200,000</td><td>195,000</td><td>5,000</td></tr>
+      <tr><td>มี.ค.</td><td>ค่าจ้างบุคลากร</td><td>2,500,000</td><td>2,500,000</td><td>0</td></tr>
+      <tr class="alt-row"><td>มี.ค.</td><td>ค่าซอฟต์แวร์</td><td>500,000</td><td>480,000</td><td>20,000</td></tr>
+      <tr><td>มี.ค.</td><td>ค่าอุปกรณ์คอมพิวเตอร์</td><td>800,000</td><td>750,000</td><td>50,000</td></tr>
+      <tr class="alt-row"><td>มี.ค.</td><td>ค่าที่ปรึกษา</td><td>250,000</td><td>250,000</td><td>0</td></tr>
+      <tr><td>เม.ย.</td><td>ค่าจ้างบุคลากร</td><td>2,500,000</td><td>2,510,000</td><td>-10,000</td></tr>
+      <tr class="alt-row"><td>เม.ย.</td><td>ค่าจัดงาน</td><td>400,000</td><td>380,000</td><td>20,000</td></tr>
+      <tr><td>เม.ย.</td><td>ค่าโฆษณาประชาสัมพันธ์</td><td>200,000</td><td>195,000</td><td>5,000</td></tr>
+      <tr class="alt-row"><td>เม.ย.</td><td>ค่าเดินทาง</td><td>150,000</td><td>130,000</td><td>20,000</td></tr>
+      <tr><td>พ.ค.</td><td>ค่าจ้างบุคลากร</td><td>2,500,000</td><td>2,500,000</td><td>0</td></tr>
+      <tr class="alt-row"><td>พ.ค.</td><td>ค่าบำรุงรักษา</td><td>300,000</td><td>275,000</td><td>25,000</td></tr>
+      <tr><td>พ.ค.</td><td>ค่าประกัน</td><td>180,000</td><td>180,000</td><td>0</td></tr>
+      <tr class="alt-row"><td>พ.ค.</td><td>ค่าวัสดุอุปกรณ์</td><td>300,000</td><td>290,000</td><td>10,000</td></tr>
+      <tr><td>มิ.ย.</td><td>ค่าจ้างบุคลากร</td><td>2,600,000</td><td>2,580,000</td><td>20,000</td></tr>
+      <tr class="alt-row"><td>มิ.ย.</td><td>ค่าฝึกอบรมพิเศษ</td><td>350,000</td><td>340,000</td><td>10,000</td></tr>
+      <tr><td>มิ.ย.</td><td>ค่าสาธารณูปโภค</td><td>160,000</td><td>155,000</td><td>5,000</td></tr>
+      <tr class="alt-row"><td>มิ.ย.</td><td>ค่าเช่าพื้นที่เพิ่ม</td><td>100,000</td><td>100,000</td><td>0</td></tr>
+      <tr><td>ก.ค.</td><td>ค่าจ้างบุคลากร</td><td>2,600,000</td><td>2,600,000</td><td>0</td></tr>
+      <tr class="alt-row"><td>ก.ค.</td><td>ค่าปรับปรุงอาคาร</td><td>500,000</td><td>480,000</td><td>20,000</td></tr>
+      <tr><td>ก.ค.</td><td>ค่าวัสดุสำนักงาน</td><td>120,000</td><td>115,000</td><td>5,000</td></tr>
+      <tr class="alt-row"><td>ก.ค.</td><td>ค่าจ้างเหมาบริการ</td><td>200,000</td><td>200,000</td><td>0</td></tr>
+      <tr><td>ส.ค.</td><td>ค่าจ้างบุคลากร</td><td>2,600,000</td><td>2,590,000</td><td>10,000</td></tr>
+      <tr class="alt-row"><td>ส.ค.</td><td>ค่าจัดซื้อเซิร์ฟเวอร์</td><td>1,200,000</td><td>1,150,000</td><td>50,000</td></tr>
+      <tr><td>ส.ค.</td><td>ค่าลิขสิทธิ์ซอฟต์แวร์</td><td>400,000</td><td>395,000</td><td>5,000</td></tr>
+      <tr class="alt-row"><td>ส.ค.</td><td>ค่าเดินทางต่างประเทศ</td><td>300,000</td><td>280,000</td><td>20,000</td></tr>
+      <tr><td>ก.ย.</td><td>ค่าจ้างบุคลากร</td><td>2,600,000</td><td>2,600,000</td><td>0</td></tr>
+      <tr class="alt-row"><td>ก.ย.</td><td>ค่าจัดสัมมนา</td><td>250,000</td><td>240,000</td><td>10,000</td></tr>
+      <tr><td>ก.ย.</td><td>ค่าสวัสดิการ</td><td>350,000</td><td>345,000</td><td>5,000</td></tr>
+      <tr class="alt-row"><td>ก.ย.</td><td>ค่าตรวจสอบบัญชี</td><td>100,000</td><td>100,000</td><td>0</td></tr>
+      <tr><td>ต.ค.</td><td>ค่าจ้างบุคลากร (ปรับ)</td><td>2,700,000</td><td>2,680,000</td><td>20,000</td></tr>
+      <tr class="alt-row"><td>ต.ค.</td><td>ค่าอุปกรณ์ใหม่</td><td>600,000</td><td>585,000</td><td>15,000</td></tr>
+      <tr><td>ต.ค.</td><td>ค่าระบบรักษาความปลอดภัย</td><td>200,000</td><td>198,000</td><td>2,000</td></tr>
+      <tr class="alt-row"><td>ต.ค.</td><td>ค่าเบ็ดเตล็ด</td><td>80,000</td><td>72,000</td><td>8,000</td></tr>
+      <tr><td>พ.ย.</td><td>ค่าจ้างบุคลากร</td><td>2,700,000</td><td>2,700,000</td><td>0</td></tr>
+      <tr class="alt-row"><td>พ.ย.</td><td>ค่าโบนัสพิเศษ</td><td>1,500,000</td><td>1,480,000</td><td>20,000</td></tr>
+      <tr><td>พ.ย.</td><td>ค่าจัดกิจกรรมทีม</td><td>200,000</td><td>195,000</td><td>5,000</td></tr>
+      <tr class="alt-row"><td>พ.ย.</td><td>ค่าของขวัญลูกค้า</td><td>150,000</td><td>148,000</td><td>2,000</td></tr>
+      <tr><td>ธ.ค.</td><td>ค่าจ้างบุคลากร</td><td>2,700,000</td><td>2,700,000</td><td>0</td></tr>
+      <tr class="alt-row"><td>ธ.ค.</td><td>ค่าจัดงานปีใหม่</td><td>300,000</td><td>295,000</td><td>5,000</td></tr>
+      <tr><td>ธ.ค.</td><td>ค่าโบนัสประจำปี</td><td>5,000,000</td><td>4,950,000</td><td>50,000</td></tr>
+      <tr class="alt-row"><td>ธ.ค.</td><td>สำรองฉุกเฉิน</td><td>500,000</td><td>120,000</td><td>380,000</td></tr>
+    </tbody>
+  </table>
+
+  <div class="test-expect">✓ thead สีน้ำเงินต้องซ้ำทุกหน้า, ข้อมูลงบประมาณตรงตามที่กำหนด</div>
+</div>
+
+</body>
+</html>

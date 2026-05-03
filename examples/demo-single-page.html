@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Single Page Demo — PDF Creator</title>
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
+  <style>
+    body {
+      line-height: 1.4;
+    }
+
+    .page-header {
+      padding: 14px 20px;
+      margin-bottom: 14px;
+    }
+
+    .page-header h1 {
+      font-size: 22px;
+      margin-bottom: 2px;
+    }
+
+    .page-header p {
+      font-size: 11px;
+    }
+
+    .section-label {
+      font-size: 10px;
+      color: #999;
+      margin-bottom: 2px;
+    }
+
+    .section-label.color-success {
+      color: #1f8f63;
+    }
+
+    .section-label.color-danger {
+      color: #c03a3a;
+    }
+
+    .section-label.color-muted {
+      color: #647587;
+    }
+
+    .big-number {
+      font-size: 24px;
+      font-weight: bold;
+      color: #1d4a73;
+    }
+
+    .stat-card {
+      flex: 1;
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #dee2e6;
+      background-color: #f8f9fa;
+      margin: 3px;
+    }
+
+    .compact-row {
+      margin-bottom: 8px;
+    }
+
+    .compact-card {
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .small-text {
+      font-size: 12px;
+    }
+
+    h2 {
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    h3 {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    p {
+      margin-bottom: 6px;
+    }
+
+    .swatch {
+      height: 28px;
+      padding: 6px;
+      font-size: 10px;
+    }
+
+    .swatch-row {
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── Cover Banner ── -->
+  <div class="page-header">
+    <h1>รายงานประจำปี 2568</h1>
+    <p>Annual Report — Single Page Layout Demo</p>
+  </div>
+
+  <!-- ── Intro ── -->
+  <p class="small-text">
+    เอกสารนี้แสดงตัวอย่าง PDF หน้าเดียว — ครอบคลุมข้อความ สี พื้นหลัง การ์ด และ SVG Inline
+  </p>
+
+  <!-- ── Statistics row ── -->
+  <div class="row compact-row">
+    <div class="stat-card">
+      <div class="section-label">ยอดขายรวม</div>
+      <div class="big-number">฿2.4M</div>
+      <div class="section-label color-success">+12%</div>
+    </div>
+    <div class="stat-card">
+      <div class="section-label">ลูกค้าใหม่</div>
+      <div class="big-number">348</div>
+      <div class="section-label color-success">+7%</div>
+    </div>
+    <div class="stat-card">
+      <div class="section-label">สินค้าที่ขาย</div>
+      <div class="big-number">1,290</div>
+      <div class="section-label color-muted">รายการ</div>
+    </div>
+    <div class="stat-card">
+      <div class="section-label">อัตราคืนสินค้า</div>
+      <div class="big-number">2.1%</div>
+      <div class="section-label color-danger">-0.3%</div>
+    </div>
+  </div>
+
+  <!-- ── Two-column: Summary + Plan ── -->
+  <div class="row compact-row">
+    <div
+      class="col compact-card"
+      style="border: 1px solid #dee2e6; background-color: #fff; margin-right: 4px"
+    >
+      <h3>สรุปผลการดำเนินงาน</h3>
+      <p
+        class="small-text"
+        style="margin-bottom: 0"
+      >รายได้เพิ่มขึ้นจาก 2.1 เป็น 2.4 ล้านบาท (+12%) สูงกว่าเป้าหมาย</p>
+    </div>
+    <div
+      class="col compact-card"
+      style="border: 1px solid #dee2e6; background-color: #fff; margin-left: 4px"
+    >
+      <h3>แผนงานปีหน้า</h3>
+      <p
+        class="small-text"
+        style="margin-bottom: 0"
+      >ขยายตลาด SME · ผลิตภัณฑ์ใหม่ 3 รายการ · ลดต้นทุน 5% · เพิ่มช่องทางออนไลน์</p>
+    </div>
+  </div>
+
+  <!-- ── Highlight ── -->
+  <div
+    class="highlight-box"
+    style="margin: 6px 0; padding: 6px 12px"
+  >
+    <span class="small-text"><strong>หมายเหตุ:</strong> ตัวเลขตรวจสอบโดยผู้ตรวจสอบบัญชีอิสระ ตามมาตรฐาน TFRS</span>
+  </div>
+
+  <!-- ── Inline SVG — Bar Chart ── -->
+  <h2>ยอดขายรายไตรมาส</h2>
+  <svg
+    width="495"
+    height="90"
+    viewBox="0 0 495 90"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <rect
+      width="495"
+      height="90"
+      fill="#f8f9fa"
+      rx="4"
+    />
+    <rect
+      x="30"
+      y="38"
+      width="55"
+      height="35"
+      fill="#0f2a45"
+      rx="2"
+    />
+    <rect
+      x="105"
+      y="22"
+      width="55"
+      height="51"
+      fill="#1d4a73"
+      rx="2"
+    />
+    <rect
+      x="180"
+      y="10"
+      width="55"
+      height="63"
+      fill="#153757"
+      rx="2"
+    />
+    <rect
+      x="255"
+      y="28"
+      width="55"
+      height="45"
+      fill="#1d4a73"
+      rx="2"
+    />
+    <rect
+      x="330"
+      y="14"
+      width="55"
+      height="59"
+      fill="#0f2a45"
+      rx="2"
+    />
+    <rect
+      x="405"
+      y="32"
+      width="55"
+      height="41"
+      fill="#1d4a73"
+      rx="2"
+    />
+    <line
+      x1="20"
+      y1="78"
+      x2="470"
+      y2="78"
+      stroke="#bbb"
+      stroke-width="1"
+    />
+    <text
+      x="57"
+      y="88"
+      text-anchor="middle"
+      font-size="9"
+      fill="#666"
+    >Q1</text>
+    <text
+      x="132"
+      y="88"
+      text-anchor="middle"
+      font-size="9"
+      fill="#666"
+    >Q2</text>
+    <text
+      x="207"
+      y="88"
+      text-anchor="middle"
+      font-size="9"
+      fill="#666"
+    >Q3</text>
+    <text
+      x="282"
+      y="88"
+      text-anchor="middle"
+      font-size="9"
+      fill="#666"
+    >Q4</text>
+    <text
+      x="357"
+      y="88"
+      text-anchor="middle"
+      font-size="9"
+      fill="#666"
+    >Q5</text>
+    <text
+      x="432"
+      y="88"
+      text-anchor="middle"
+      font-size="9"
+      fill="#666"
+    >Q6</text>
+  </svg>
+
+  <!-- ── Color swatches ── -->
+  <h2>Color Palette</h2>
+  <div class="swatch-row">
+    <div class="swatch bg-primary">#0f2a45</div>
+    <div class="swatch bg-secondary">#153757</div>
+    <div class="swatch bg-accent">#1d4a73</div>
+    <div
+      class="swatch"
+      style="background-color: #b87436; color: #fff"
+    >#b87436</div>
+    <div class="swatch bg-green">Green</div>
+    <div class="swatch bg-yellow">Yellow</div>
+    <div class="swatch bg-blue">Blue</div>
+    <div class="swatch bg-red">Red</div>
+  </div>
+
+  <!-- ── Text formatting demo ── -->
+  <h2>Text Formatting</h2>
+  <div
+    class="compact-card"
+    style="border: 1px solid #dee2e6; background-color: #fff"
+  >
+    <p class="small-text">
+      <span class="font-regular">ปกติ</span> &nbsp;
+      <span class="font-bold">หนา</span> &nbsp;
+      <span class="font-italic">เอียง</span> &nbsp;
+      <span class="font-bold-italic">หนา+เอียง</span> &nbsp;
+      <span style="color: #dc3545">สีแดง</span> &nbsp;
+      <span style="color: #28a745">สีเขียว</span> &nbsp;
+      <span style="color: #007bff">สีน้ำเงิน</span> &nbsp;
+      <span style="color: #fd7e14">สีส้ม</span> &nbsp;
+      <span style="color: #6f42c1">สีม่วง</span>
+    </p>
+    <p style="background-color: #0f2a45; color: #fff; padding: 6px; font-size: 12px">
+      ข้อความบนพื้นหลังสีเข้ม (Light text on dark background)
+    </p>
+  </div>
+
+  <!-- ── Footer ── -->
+  <div
+    class="bg-light compact-card"
+    style="padding: 6px; margin-bottom: 0"
+  >
+    <p
+      class="text-center color-muted"
+      style="font-size: 10px; margin-bottom: 0"
+    >
+      สร้างโดย LynPDF &nbsp;|&nbsp; วันที่ 22 ก.พ. 2568 &nbsp;|&nbsp; ฉบับที่ 1
+    </p>
+  </div>
+
+</body>
+
+</html>

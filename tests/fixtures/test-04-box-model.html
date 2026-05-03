@@ -1,0 +1,133 @@
+<!-- ============================================================
+     Test 4: Box Model & Layout (Flexbox, Positioning, Overflow)
+     ============================================================ -->
+<html>
+<head><title>Test 4 — Box Model &amp; Layout</title></head>
+<body>
+
+<h1>Test 4: Box Model &amp; Layout</h1>
+<p class="text-muted">ทดสอบ Flexbox, Absolute/Fixed Positioning, และ Overflow Clipping</p>
+
+<!-- ─── Test 4.1: Flexbox เบื้องต้น ─── -->
+<div class="test-section">
+  <h3>Test 4.1 — Flexbox เบื้องต้น</h3>
+
+  <p class="test-label">flex-direction: row + justify-content: space-between:</p>
+  <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 12px;">
+    <div class="box-sm bg-blue" style="width: 120px; text-align: center;">กล่อง 1</div>
+    <div class="box-sm bg-green" style="width: 120px; text-align: center;">กล่อง 2</div>
+    <div class="box-sm bg-yellow" style="width: 120px; text-align: center;">กล่อง 3</div>
+  </div>
+
+  <p class="test-label">flex-direction: row + justify-content: center:</p>
+  <div style="display: flex; flex-direction: row; justify-content: center; margin-bottom: 12px;">
+    <div class="box-sm bg-red" style="width: 100px; text-align: center; margin: 0 8px;">Left</div>
+    <div class="box-sm bg-red" style="width: 100px; text-align: center; margin: 0 8px;">Center</div>
+    <div class="box-sm bg-red" style="width: 100px; text-align: center; margin: 0 8px;">Right</div>
+  </div>
+
+  <p class="test-label">flex-direction: column:</p>
+  <div style="display: flex; flex-direction: column; margin-bottom: 12px;">
+    <div class="box-sm bg-light" style="padding: 8px;">แถวที่ 1 (column direction)</div>
+    <div class="box-sm bg-light" style="padding: 8px;">แถวที่ 2</div>
+    <div class="box-sm bg-light" style="padding: 8px;">แถวที่ 3</div>
+  </div>
+
+  <p class="test-label">flex: 1 (กระจายเท่ากัน):</p>
+  <div style="display: flex; flex-direction: row; margin-bottom: 12px;">
+    <div class="box-sm bg-blue" style="flex: 1; text-align: center;">flex:1</div>
+    <div class="box-sm bg-green" style="flex: 1; text-align: center;">flex:1</div>
+    <div class="box-sm bg-yellow" style="flex: 1; text-align: center;">flex:1</div>
+  </div>
+
+  <p class="test-label">flex: 1 + flex: 2 (สัดส่วน):</p>
+  <div style="display: flex; flex-direction: row; margin-bottom: 12px;">
+    <div class="box-sm bg-blue" style="flex: 1; text-align: center;">flex:1</div>
+    <div class="box-sm bg-green" style="flex: 2; text-align: center;">flex:2 (กว้างกว่า 2 เท่า)</div>
+    <div class="box-sm bg-yellow" style="flex: 1; text-align: center;">flex:1</div>
+  </div>
+
+  <p class="test-label">align-items: center (จัดกลางแนวตั้ง):</p>
+  <div style="display: flex; flex-direction: row; align-items: center; margin-bottom: 12px; min-height: 80px; border: 1px dashed #999;">
+    <div class="box-sm bg-blue" style="padding: 4px 12px;">เตี้ย</div>
+    <div class="box-sm bg-green" style="padding: 20px 12px;">สูง</div>
+    <div class="box-sm bg-yellow" style="padding: 8px 12px;">กลาง</div>
+  </div>
+
+  <p class="test-label">flex-wrap: wrap:</p>
+  <div style="display: flex; flex-direction: row; flex-wrap: wrap; margin-bottom: 12px;">
+    <div class="box-sm bg-light" style="width: 200px; text-align: center;">item 1</div>
+    <div class="box-sm bg-light" style="width: 200px; text-align: center;">item 2</div>
+    <div class="box-sm bg-light" style="width: 200px; text-align: center;">item 3</div>
+    <div class="box-sm bg-light" style="width: 200px; text-align: center;">item 4</div>
+    <div class="box-sm bg-light" style="width: 200px; text-align: center;">item 5</div>
+  </div>
+
+  <div class="test-expect">✓ Flexbox layout ต้องจัดเรียงถูกต้องตาม property ที่ระบุ</div>
+</div>
+
+<!-- ─── Test 4.2: Absolute / Fixed Positioning ─── -->
+<div class="test-section">
+  <h3>Test 4.2 — Position: Absolute / Fixed</h3>
+
+  <p class="test-label">position: relative + absolute child:</p>
+  <div style="position: relative; height: 150px; border: 2px solid #0f3460; background-color: #f0f0f0; margin-bottom: 12px;">
+    <div style="position: absolute; top: 10px; left: 10px; padding: 8px; background-color: #cce5ff; border: 1px solid #007bff;">
+      top:10 left:10
+    </div>
+    <div style="position: absolute; top: 10px; right: 10px; padding: 8px; background-color: #d4edda; border: 1px solid #28a745;">
+      top:10 right:10
+    </div>
+    <div style="position: absolute; bottom: 10px; left: 10px; padding: 8px; background-color: #f8d7da; border: 1px solid #dc3545;">
+      bottom:10 left:10
+    </div>
+    <div style="position: absolute; bottom: 10px; right: 10px; padding: 8px; background-color: #fff3cd; border: 1px solid #ffc107;">
+      bottom:10 right:10
+    </div>
+  </div>
+
+  <div class="test-expect">✓ position absolute/fixed ทำงานแล้ว — absolute ใช้ Yoga, fixed ซ้ำทุกหน้า</div>
+</div>
+
+<!-- ─── Test 4.3: Overflow & Clipping ─── -->
+<div class="test-section">
+  <h3>Test 4.3 — Overflow: Hidden (Clipping)</h3>
+
+  <p class="test-label">overflow: hidden — ข้อความที่ล้นต้องถูกตัดทิ้ง:</p>
+  <div style="overflow: hidden; width: 300px; height: 60px; border: 2px solid #dc3545; padding: 8px; margin-bottom: 12px;">
+    <p>ข้อความยาวมากๆ ที่ล้นออกจากกล่องขนาด 300×60px กล่องนี้มี overflow: hidden ดังนั้นข้อความที่ล้นต้องถูกตัดทิ้ง ไม่แสดงผลออกมานอกกรอบสี่เหลี่ยมสีแดง ถ้าคุณเห็นข้อความนี้ทั้งหมดก็แสดงว่า overflow: hidden ยังไม่ทำงาน</p>
+  </div>
+
+  <p class="test-label">overflow: visible (ค่าเริ่มต้น):</p>
+  <div style="overflow: visible; width: 300px; height: 60px; border: 2px dashed #28a745; padding: 8px; margin-bottom: 80px;">
+    <p>ข้อความยาวมากๆ ที่ล้นออกจากกล่อง — กรณี overflow:visible ข้อความจะล้นออกมาข้างนอก ซึ่งเป็นพฤติกรรมปกติ</p>
+  </div>
+
+  <div class="test-expect">✓ overflow: hidden ทำงานแล้ว — ข้อความที่ล้นจะถูก clip</div>
+</div>
+
+<!-- ─── Test 4.4: Margin, Padding, Border ─── -->
+<div class="test-section">
+  <h3>Test 4.4 — Margin, Padding, Border (Box Model)</h3>
+
+  <p class="test-label">Box 1: margin:20px padding:16px border:3px solid:</p>
+  <div style="margin: 20px; padding: 16px; border: 3px solid #0f3460; background-color: #e8f0fe;">
+    <p>กล่องที่มี margin, padding, border ครบ — ข้อความต้องอยู่ห่างขอบตามที่กำหนด</p>
+  </div>
+
+  <p class="test-label">Box 2: Nested boxes (Box Model ซ้อนกัน):</p>
+  <div style="padding: 16px; border: 2px solid #333; background-color: #f8f9fa;">
+    <p>กล่องนอก (padding:16px)</p>
+    <div style="padding: 12px; border: 2px solid #0f3460; background-color: #cce5ff; margin: 8px;">
+      <p>กล่องใน (padding:12px, margin:8px)</p>
+      <div style="padding: 8px; border: 2px solid #dc3545; background-color: #f8d7da; margin: 4px;">
+        <p>กล่องในสุด (padding:8px, margin:4px)</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="test-expect">✓ Box model ต้องคำนวณ margin + padding + border ถูกต้อง ไม่ล้นกล่อง</div>
+</div>
+
+</body>
+</html>

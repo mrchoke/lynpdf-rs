@@ -1,0 +1,285 @@
+<!-- ============================================================
+     Test 9: Kerning & Ligature (การจัดระยะอักษรและอักษรเชื่อม)
+     ============================================================
+     ทดสอบ: kerning, ligature, letter-spacing, word-spacing,
+     Thai glyph positioning, font stacking, text rendering quality
+     ============================================================ -->
+<html>
+<head><title>Test 9 — Kerning &amp; Ligature</title></head>
+<body>
+
+<h1>Test 9: Kerning &amp; Ligature</h1>
+<p class="text-muted">ทดสอบ kerning, ligature, letter-spacing และคุณภาพการแสดงผลตัวอักษร</p>
+
+<!-- ─── Test 9.1: Kerning Pairs ─── -->
+<div class="test-section">
+  <h3>Test 9.1 — Kerning Pairs (คู่อักษรที่ต้องปรับระยะ)</h3>
+  <p class="test-label">คู่อักษรที่มี kerning — ระยะห่างต้องปรับอัตโนมัติ:</p>
+
+  <div style="padding: 12px; background-color: #f8f9fa; margin-bottom: 12px;">
+    <!-- Latin kerning pairs -->
+    <div style="margin-bottom: 12px;">
+      <span style="font-size: 11px; color: #888;">Latin Kerning Pairs (ขนาด 28px):</span>
+    </div>
+    <div style="font-size: 28px; color: #1a1a2e; font-family: 'Sarabun'; line-height: 1.5; margin-bottom: 8px;">
+      AV AW AY AT AC AO
+    </div>
+    <div style="font-size: 28px; color: #1a1a2e; font-family: 'Sarabun'; line-height: 1.5; margin-bottom: 8px;">
+      VA WA YA TA To Te
+    </div>
+    <div style="font-size: 28px; color: #1a1a2e; font-family: 'Sarabun'; line-height: 1.5; margin-bottom: 8px;">
+      LT LV LW LY Ty Tw
+    </div>
+    <div style="font-size: 28px; color: #1a1a2e; font-family: 'Sarabun'; line-height: 1.5;">
+      PA P. F. r. f. Yo We
+    </div>
+  </div>
+
+  <div style="padding: 12px; background-color: #fff3cd; margin-bottom: 8px;">
+    <span style="font-size: 11px; color: #856404;">เปรียบเทียบ: ตัว A กับ V ควรอยู่ชิดกันมากกว่า A กับ H (kerning negative)</span>
+  </div>
+
+  <div style="display: flex; flex-direction: row; margin-bottom: 12px;">
+    <div style="flex: 1; padding: 12px; border: 1px solid #dee2e6; text-align: center; margin-right: 8px;">
+      <div style="font-size: 48px; color: #1a1a2e; font-family: 'Sarabun'; font-weight: bold;">AV</div>
+      <div><span style="font-size: 10px; color: #666;">Kern: AV (negative)</span></div>
+    </div>
+    <div style="flex: 1; padding: 12px; border: 1px solid #dee2e6; text-align: center; margin-right: 8px;">
+      <div style="font-size: 48px; color: #1a1a2e; font-family: 'Sarabun'; font-weight: bold;">AH</div>
+      <div><span style="font-size: 10px; color: #666;">No kern: AH</span></div>
+    </div>
+    <div style="flex: 1; padding: 12px; border: 1px solid #dee2e6; text-align: center;">
+      <div style="font-size: 48px; color: #1a1a2e; font-family: 'Sarabun'; font-weight: bold;">To</div>
+      <div><span style="font-size: 10px; color: #666;">Kern: To (negative)</span></div>
+    </div>
+  </div>
+
+  <div class="test-expect">✓ คู่อักษร AV, To ต้องมีระยะห่างน้อยกว่า AH (kerning ทำงาน)</div>
+</div>
+
+<!-- ─── Test 9.2: Ligatures ─── -->
+<div class="test-section">
+  <h3>Test 9.2 — Ligatures (อักษรเชื่อม)</h3>
+  <p class="test-label">อักษรที่ควรเชื่อมกัน (ขึ้นอยู่กับฟอนต์ที่รองรับ):</p>
+
+  <div style="padding: 12px; background-color: #f8f9fa; margin-bottom: 12px;">
+    <div style="margin-bottom: 8px;">
+      <span style="font-size: 11px; color: #888;">Standard Ligatures (fi, fl, ff, ffi, ffl):</span>
+    </div>
+    <div style="font-size: 32px; color: #1a1a2e; font-family: 'Sarabun'; line-height: 1.6; margin-bottom: 12px;">
+      fi fl ff ffi ffl
+    </div>
+
+    <div style="margin-bottom: 8px;">
+      <span style="font-size: 11px; color: #888;">ในบริบทคำ (ขนาด 24px):</span>
+    </div>
+    <div style="font-size: 24px; color: #333; font-family: 'Sarabun'; line-height: 1.6;">
+      office • difficult • affluent • waffle • official
+    </div>
+    <div style="font-size: 24px; color: #333; font-family: 'Sarabun'; line-height: 1.6;">
+      suffix • offline • coffee • efficient • butterfly
+    </div>
+  </div>
+
+  <div style="padding: 12px; background-color: #e8f0fe; margin-bottom: 12px;">
+    <span style="font-size: 12px; color: #0f3460;">หมายเหตุ: การแสดง ligature ขึ้นอยู่กับ OpenType features ของฟอนต์ (liga, clig)</span>
+  </div>
+
+  <div class="test-expect">✓ ถ้าฟอนต์รองรับ ligature ตัวอักษร fi, fl, ff ต้องเชื่อมกัน</div>
+</div>
+
+<!-- ─── Test 9.3: Thai Glyph Positioning ─── -->
+<div class="test-section">
+  <h3>Test 9.3 — Thai Glyph Positioning (ตำแหน่งสระ-วรรณยุกต์)</h3>
+  <p class="test-label">สระลอย วรรณยุกต์ต้องอยู่ในตำแหน่งที่ถูกต้อง:</p>
+
+  <div style="padding: 12px; background-color: #f8f9fa; margin-bottom: 12px;">
+    <div style="margin-bottom: 8px;">
+      <span style="font-size: 11px; color: #888;">สระบน + วรรณยุกต์ (ขนาด 28px):</span>
+    </div>
+    <div style="font-size: 28px; color: #1a1a2e; font-family: 'Sarabun'; line-height: 1.8;">
+      กิ ปี มือ ดู เสือ เนื้อ เกี่ยว เรียน
+    </div>
+
+    <div style="margin-bottom: 8px; margin-top: 12px;">
+      <span style="font-size: 11px; color: #888;">วรรณยุกต์ซ้อน (ขนาด 28px):</span>
+    </div>
+    <div style="font-size: 28px; color: #1a1a2e; font-family: 'Sarabun'; line-height: 1.8;">
+      น้ำ ก้าง ปิ้ง ชื้น ค้ำ ยุ่ง จิ๊บ หนู่
+    </div>
+
+    <div style="margin-bottom: 8px; margin-top: 12px;">
+      <span style="font-size: 11px; color: #888;">สระล่าง (ขนาด 28px):</span>
+    </div>
+    <div style="font-size: 28px; color: #1a1a2e; font-family: 'Sarabun'; line-height: 1.8;">
+      สุ ภุ ยุ ธุ ตุ ปุ กุ ลุ
+    </div>
+
+    <div style="margin-bottom: 8px; margin-top: 12px;">
+      <span style="font-size: 11px; color: #888;">ตัวหนังสือที่มีหาง + สระบน + วรรณยุกต์ (ซ้อน 3 ชั้น):</span>
+    </div>
+    <div style="font-size: 28px; color: #1a1a2e; font-family: 'Sarabun'; line-height: 1.8;">
+      ปู่ ผี่ ฝี้ ฟ้า ฬ่อ
+    </div>
+  </div>
+
+  <div class="test-expect">✓ สระลอย วรรณยุกต์ ต้องไม่ทับกับพยัญชนะ ต้องไม่เลื่อนหาย</div>
+</div>
+
+<!-- ─── Test 9.4: Letter Spacing & Word Spacing ─── -->
+<div class="page-break"></div>
+
+<div class="test-section">
+  <h3>Test 9.4 — Letter Spacing (ระยะห่างตัวอักษร)</h3>
+  <p class="test-label">เปรียบเทียบ letter-spacing ค่าต่าง ๆ:</p>
+
+  <div style="padding: 12px; background-color: #f8f9fa;">
+    <div style="margin-bottom: 10px;">
+      <span style="font-size: 11px; color: #888;">letter-spacing: normal</span>
+    </div>
+    <div style="font-size: 18px; color: #333; font-family: 'Sarabun'; margin-bottom: 16px;">
+      การพัฒนาซอฟต์แวร์ | Software Development
+    </div>
+
+    <div style="margin-bottom: 10px;">
+      <span style="font-size: 11px; color: #888;">letter-spacing: 2px</span>
+    </div>
+    <div style="font-size: 18px; color: #333; font-family: 'Sarabun'; letter-spacing: 2px; margin-bottom: 16px;">
+      การพัฒนาซอฟต์แวร์ | Software Development
+    </div>
+
+    <div style="margin-bottom: 10px;">
+      <span style="font-size: 11px; color: #888;">letter-spacing: 5px</span>
+    </div>
+    <div style="font-size: 18px; color: #333; font-family: 'Sarabun'; letter-spacing: 5px; margin-bottom: 16px;">
+      การพัฒนาซอฟต์แวร์ | Software Development
+    </div>
+
+    <div style="margin-bottom: 10px;">
+      <span style="font-size: 11px; color: #888;">letter-spacing: 10px (wide)</span>
+    </div>
+    <div style="font-size: 18px; color: #333; font-family: 'Sarabun'; letter-spacing: 10px;">
+      CERTIFICATE | ประกาศนียบัตร
+    </div>
+  </div>
+
+  <div class="test-expect">✓ ต้องเห็นความแตกต่างของ letter-spacing ชัดเจน</div>
+</div>
+
+<!-- ─── Test 9.5: Multi-font text (Google + TLWG) ─── -->
+<div class="test-section">
+  <h3>Test 9.5 — Multi-font Stacking (ฟอนต์หลายตัว — Google Fonts + TLWG OTF)</h3>
+  <p class="test-label">ทดสอบ kerning/ligature ของฟอนต์หลายตัว:</p>
+
+  <div style="padding: 12px; background-color: #f8f9fa;">
+    <div style="margin-bottom: 6px;"><span style="font-size: 11px; color: #888;">── Google Thai Fonts ──</span></div>
+    <div style="font-family: 'Sarabun'; font-size: 18px; color: #333; margin-bottom: 10px;">
+      <span style="font-weight: bold;">Sarabun:</span> AV To fi fl — น้ำพริก เกี่ยวข้าว ผู้ใหญ่
+    </div>
+    <div style="font-family: 'Prompt'; font-size: 18px; color: #333; margin-bottom: 10px;">
+      <span style="font-weight: bold;">Prompt:</span> AV To fi fl — น้ำพริก เกี่ยวข้าว ผู้ใหญ่
+    </div>
+    <div style="font-family: 'Kanit'; font-size: 18px; color: #333; margin-bottom: 10px;">
+      <span style="font-weight: bold;">Kanit:</span> AV To fi fl — น้ำพริก เกี่ยวข้าว ผู้ใหญ่
+    </div>
+    <div style="font-family: 'Mitr'; font-size: 18px; color: #333; margin-bottom: 10px;">
+      <span style="font-weight: bold;">Mitr:</span> AV To fi fl — น้ำพริก เกี่ยวข้าว ผู้ใหญ่
+    </div>
+    <div style="font-family: 'Chakra Petch'; font-size: 18px; color: #333; margin-bottom: 10px;">
+      <span style="font-weight: bold;">ChakraPetch:</span> AV To fi fl — น้ำพริก เกี่ยวข้าว ผู้ใหญ่
+    </div>
+
+    <div style="margin-bottom: 6px; margin-top: 16px;"><span style="font-size: 11px; color: #888;">── TLWG Thai Fonts (OTF) ──</span></div>
+    <div style="font-family: 'Garuda'; font-size: 18px; color: #333; margin-bottom: 10px;">
+      <span style="font-weight: bold;">Garuda:</span> AV To fi fl — น้ำพริก เกี่ยวข้าว ผู้ใหญ่
+    </div>
+    <div style="font-family: 'Loma'; font-size: 18px; color: #333; margin-bottom: 10px;">
+      <span style="font-weight: bold;">Loma:</span> AV To fi fl — น้ำพริก เกี่ยวข้าว ผู้ใหญ่
+    </div>
+    <div style="font-family: 'Norasi'; font-size: 18px; color: #333; margin-bottom: 10px;">
+      <span style="font-weight: bold;">Norasi:</span> AV To fi fl — น้ำพริก เกี่ยวข้าว ผู้ใหญ่
+    </div>
+    <div style="font-family: 'Kinnari'; font-size: 18px; color: #333; margin-bottom: 10px;">
+      <span style="font-weight: bold;">Kinnari:</span> AV To fi fl — น้ำพริก เกี่ยวข้าว ผู้ใหญ่
+    </div>
+    <div style="font-family: 'Sawasdee'; font-size: 18px; color: #333; margin-bottom: 10px;">
+      <span style="font-weight: bold;">Sawasdee:</span> AV To fi fl — น้ำพริก เกี่ยวข้าว ผู้ใหญ่
+    </div>
+    <div style="font-family: 'Waree'; font-size: 18px; color: #333; margin-bottom: 10px;">
+      <span style="font-weight: bold;">Waree:</span> AV To fi fl — น้ำพริก เกี่ยวข้าว ผู้ใหญ่
+    </div>
+    <div style="font-family: 'Purisa'; font-size: 18px; color: #333; margin-bottom: 10px;">
+      <span style="font-weight: bold;">Purisa:</span> AV To fi fl — น้ำพริก เกี่ยวข้าว ผู้ใหญ่
+    </div>
+    <div style="font-family: 'Umpush'; font-size: 18px; color: #333; margin-bottom: 10px;">
+      <span style="font-weight: bold;">Umpush:</span> AV To fi fl — น้ำพริก เกี่ยวข้าว ผู้ใหญ่
+    </div>
+    <div style="font-family: 'Laksaman'; font-size: 18px; color: #333; margin-bottom: 10px;">
+      <span style="font-weight: bold;">Laksaman:</span> AV To fi fl — น้ำพริก เกี่ยวข้าว ผู้ใหญ่
+    </div>
+    <div style="font-family: 'TlwgMono'; font-size: 18px; color: #333; margin-bottom: 10px;">
+      <span style="font-weight: bold;">TlwgMono:</span> AV To fi fl — น้ำพริก เกี่ยวข้าว ผู้ใหญ่
+    </div>
+  </div>
+
+  <div class="test-expect">✓ แต่ละฟอนต์ต้องแสดงรูปร่างที่แตกต่างกัน, kerning/ligature ต่างกัน</div>
+</div>
+
+<!-- ─── Test 9.6: Font Weight & Style Variations ─── -->
+<div class="test-section">
+  <h3>Test 9.6 — Font Weights &amp; Styles</h3>
+  <p class="test-label">ทดสอบ Regular, Bold, Italic, BoldItalic:</p>
+
+  <div style="padding: 12px; background-color: #f8f9fa;">
+    <div style="font-family: 'Sarabun'; font-size: 20px; margin-bottom: 10px;">
+      <span style="color: #888; font-size: 11px;">Regular 400:</span><br/>
+      The quick brown fox jumps — ทดสอบฟอนต์ปกติ AV fi fl
+    </div>
+    <div style="font-family: 'Sarabun'; font-size: 20px; font-weight: bold; margin-bottom: 10px;">
+      <span style="color: #888; font-size: 11px; font-weight: normal;">Bold 700:</span><br/>
+      The quick brown fox jumps — ทดสอบฟอนต์ตัวหนา AV fi fl
+    </div>
+    <div style="font-family: 'Sarabun'; font-size: 20px; font-style: italic; margin-bottom: 10px;">
+      <span style="color: #888; font-size: 11px; font-style: normal;">Italic:</span><br/>
+      The quick brown fox jumps — ทดสอบฟอนต์ตัวเอียง AV fi fl
+    </div>
+    <div style="font-family: 'Sarabun'; font-size: 20px; font-weight: bold; font-style: italic; margin-bottom: 10px;">
+      <span style="color: #888; font-size: 11px; font-weight: normal; font-style: normal;">Bold Italic:</span><br/>
+      The quick brown fox jumps — ทดสอบฟอนต์ตัวหนาเอียง AV fi fl
+    </div>
+  </div>
+
+  <div class="test-expect">✓ ต้องเห็นความแตกต่างของ weight/style ชัดเจน, kerning ในแต่ละ variant ต้องถูกต้อง</div>
+</div>
+
+<!-- ─── Test 9.7: Large text comparison ─── -->
+<div class="test-section">
+  <h3>Test 9.7 — ขนาดตัวอักษรต่าง ๆ (Kerning at Different Sizes)</h3>
+  <p class="test-label">Kerning ต้องทำงานถูกต้องในทุกขนาด:</p>
+
+  <div style="padding: 12px; background-color: #f8f9fa;">
+    <div style="font-family: 'Sarabun'; font-size: 10px; color: #333; margin-bottom: 6px;">
+      10px: AVATAR — Typography — สวัสดีครับ ผมชื่อสมชาย
+    </div>
+    <div style="font-family: 'Sarabun'; font-size: 14px; color: #333; margin-bottom: 6px;">
+      14px: AVATAR — Typography — สวัสดีครับ ผมชื่อสมชาย
+    </div>
+    <div style="font-family: 'Sarabun'; font-size: 20px; color: #333; margin-bottom: 6px;">
+      20px: AVATAR — Typography — สวัสดีครับ ผมชื่อสมชาย
+    </div>
+    <div style="font-family: 'Sarabun'; font-size: 28px; color: #333; margin-bottom: 6px;">
+      28px: AVATAR — Typography
+    </div>
+    <div style="font-family: 'Sarabun'; font-size: 36px; color: #333; margin-bottom: 6px;">
+      36px: AVATAR — Typography
+    </div>
+    <div style="font-family: 'Sarabun'; font-size: 48px; color: #1a1a2e;">
+      48px: AV To fi
+    </div>
+  </div>
+
+  <div class="test-expect">✓ Kerning ต้องมีสัดส่วนที่ถูกต้องในทุกขนาดตัวอักษร</div>
+</div>
+
+</body>
+</html>

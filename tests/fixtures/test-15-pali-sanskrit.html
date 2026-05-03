@@ -1,0 +1,286 @@
+<!-- ============================================================
+     Test 15: บาลี / สันสกฤต — อักขระพิเศษกับฟอนต์หลายตัว
+     ============================================================
+     ทดสอบ: พยัญชนะเฉพาะ ฎ ฏ ฐ ญ ฬ, สระ-วรรณยุกต์ซ้อน,
+     สัญลักษณ์บาลี ฺ (พินทุ / นิคหิต), ยามักการ ๆ,
+     การแสดงผลกับฟอนต์ Google Thai + TLWG OTF
+     ============================================================ -->
+<html>
+<head>
+  <title>Test 15 — Pali / Sanskrit Thai Script</title>
+  <meta name="description" content="ทดสอบบาลี-สันสกฤตเขียนด้วยอักษรไทย กับฟอนต์หลายตัว">
+</head>
+<body>
+
+<h1>Test 15: บาลี / สันสกฤต — อักขระพิเศษ</h1>
+<p class="text-muted">ทดสอบพยัญชนะที่ใช้ในบาลี-สันสกฤต, สัญลักษณ์พิเศษ, สระ/วรรณยุกต์ซ้อน กับฟอนต์ต่าง ๆ</p>
+
+<!-- ═══════════════════════════════════════════════════════════
+     15.1 — พยัญชนะเฉพาะ: ฎ ฏ ฐ ญ ฬ + สระ/วรรณยุกต์
+     ═══════════════════════════════════════════════════════════ -->
+<div class="test-section">
+  <h3>Test 15.1 — พยัญชนะเฉพาะบาลี/สันสกฤต + สระ/วรรณยุกต์</h3>
+  <p class="test-label">ตัวอักษร ฎ ฏ ฐ ญ ฬ ต้องแสดงถูกต้อง โดยเฉพาะเมื่อมีสระบน/ล่าง/วรรณยุกต์ซ้อน:</p>
+
+  <div style="padding: 12px; background-color: #f8f9fa; margin-bottom: 12px;">
+    <div style="margin-bottom: 8px;">
+      <span style="font-size: 11px; color: #888;">ตัวเดี่ยว (ขนาด 32px) — Sarabun:</span>
+    </div>
+    <div style="font-family: 'Sarabun'; font-size: 32px; color: #1a1a2e; line-height: 1.8; margin-bottom: 12px;">
+      ฎ ฏ ฐ ญ ฬ
+    </div>
+
+    <div style="margin-bottom: 8px;">
+      <span style="font-size: 11px; color: #888;">พยัญชนะ + สระบน + วรรณยุกต์:</span>
+    </div>
+    <div style="font-family: 'Sarabun'; font-size: 28px; color: #1a1a2e; line-height: 2.0; margin-bottom: 12px;">
+      ฎี ฎี่ ฎี้ ฎี๊ ฎี๋ &nbsp; ฏิ ฏิ่ ฏิ้ ฏิ๊ &nbsp; ฐึ ฐึ่ ฐึ้ &nbsp; ญี ญี่ ญี้ &nbsp; ฬิ ฬี ฬี่ ฬี้
+    </div>
+
+    <div style="margin-bottom: 8px;">
+      <span style="font-size: 11px; color: #888;">พยัญชนะ + สระล่าง ( ุ ู ):</span>
+    </div>
+    <div style="font-family: 'Sarabun'; font-size: 28px; color: #1a1a2e; line-height: 2.0; margin-bottom: 12px;">
+      ฎุ ฎู ฏุ ฏู ฐุ ฐู ญุ ญู ฬุ ฬู
+    </div>
+
+    <div style="margin-bottom: 8px;">
+      <span style="font-size: 11px; color: #888;">สระซ้อน 3 ชั้น (สระบน+วรรณยุกต์+การันต์):</span>
+    </div>
+    <div style="font-family: 'Sarabun'; font-size: 28px; color: #1a1a2e; line-height: 2.0;">
+      ฎิ์ ฏิ์ ฐิ์ ญิ์ ฬิ์ &nbsp; ฎี้ ฏี้ ฐี้ ญี้ ฬี้
+    </div>
+  </div>
+
+  <div class="test-expect">✓ สระ/วรรณยุกต์ต้องไม่ทับกับพยัญชนะ, ตำแหน่งต้องถูกต้อง</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     15.2 — สัญลักษณ์บาลีพิเศษ: นิคหิต (ํ), พินทุ (ฺ), ยามักการ (ๆ)
+     ═══════════════════════════════════════════════════════════ -->
+<div class="test-section">
+  <h3>Test 15.2 — สัญลักษณ์บาลี/สันสกฤตพิเศษ</h3>
+  <p class="test-label">นิคหิต ( ํ ), พินทุ ( ฺ ), ทัณฑฆาต ( ์ ), ยามักการ ( ๆ ), อังคั่น ( ฯ )</p>
+
+  <div style="padding: 12px; background-color: #f8f9fa; margin-bottom: 12px;">
+    <div style="margin-bottom: 8px;">
+      <span style="font-size: 11px; color: #888;">นิคหิต ( ํ ) — วงกลมเล็กบนอักษร (ขนาด 28px):</span>
+    </div>
+    <div style="font-family: 'Sarabun'; font-size: 28px; color: #1a1a2e; line-height: 2.0; margin-bottom: 12px;">
+      อํ กํ คํ ปํ สํ ตํ ภํ ธํ
+    </div>
+
+    <div style="margin-bottom: 8px;">
+      <span style="font-size: 11px; color: #888;">นิคหิต + สระบน (ซ้อนกัน):</span>
+    </div>
+    <div style="font-family: 'Sarabun'; font-size: 28px; color: #1a1a2e; line-height: 2.0; margin-bottom: 12px;">
+      กิํ สิํ ปิํ ตุํ กุํ
+    </div>
+
+    <div style="margin-bottom: 8px;">
+      <span style="font-size: 11px; color: #888;">พินทุ ( ฺ ) — จุดข้างล่างอักษร (ใช้ในสันสกฤต):</span>
+    </div>
+    <div style="font-family: 'Sarabun'; font-size: 28px; color: #1a1a2e; line-height: 2.0; margin-bottom: 12px;">
+      กฺ ขฺ คฺ ตฺ ทฺ ปฺ พฺ สฺ
+    </div>
+
+    <div style="margin-bottom: 8px;">
+      <span style="font-size: 11px; color: #888;">ทัณฑฆาต ( ์ ), ยามักการ ( ๆ ), อังคั่น ( ฯ ):</span>
+    </div>
+    <div style="font-family: 'Sarabun'; font-size: 28px; color: #1a1a2e; line-height: 2.0;">
+      สมฺภว กรฺม ธรฺม ฯลฯ &nbsp; นมัสฺการ &nbsp; ญาณ์ จิตฺต สุตฺต
+    </div>
+  </div>
+
+  <div class="test-expect">✓ นิคหิตต้องอยู่บนอักษรถูกต้อง, พินทุต้องอยู่ล่าง, ไม่ทับกัน</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     15.3 — ประโยคบาลี/สันสกฤตจริง กับฟอนต์ต่าง ๆ
+     ═══════════════════════════════════════════════════════════ -->
+<div class="page-break"></div>
+
+<div class="test-section">
+  <h3>Test 15.3 — ประโยคบาลี/สันสกฤตจริง — เปรียบเทียบฟอนต์</h3>
+  <p class="test-label">ข้อความบาลี/สันสกฤตชุดเดียวกัน แสดงด้วยฟอนต์ต่าง ๆ:</p>
+
+  <!-- ข้อความตัวอย่าง -->
+  <!-- บทสวด: นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ -->
+  <!-- สันสกฤต: ธรฺมจกฺรปฺรวรฺตนสูตฺร, สมฺภวามิ ยุเค ยุเค -->
+  <!-- บาลี: สพฺเพ ธมฺมา อนตฺตา, สพฺเพ สงฺขารา อนิจฺจา -->
+
+  <!-- ── Google Thai Fonts ── -->
+  <div style="padding: 12px; background-color: #e8f5e9; margin-bottom: 12px;">
+    <div style="margin-bottom: 6px;"><span style="font-size: 12px; font-weight: bold; color: #2e7d32;">Google Thai Fonts</span></div>
+
+    <div style="font-family: 'Sarabun'; font-size: 18px; color: #333; margin-bottom: 10px; line-height: 1.8;">
+      <span style="font-weight: bold; font-size: 13px; color: #666;">Sarabun:</span><br/>
+      นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ<br/>
+      สพฺเพ ธมฺมา อนตฺตา ฯ สพฺเพ สงฺขารา อนิจฺจา ฯ สพฺเพ สงฺขารา ทุกฺขา ฯ<br/>
+      ธรฺมจกฺรปฺรวรฺตนสูตฺร — กฺริยา ปฺรชฺญา สมฺภว ปฺรตีตฺยสมุทฺปาท
+    </div>
+    <div style="font-family: 'Prompt'; font-size: 18px; color: #333; margin-bottom: 10px; line-height: 1.8;">
+      <span style="font-weight: bold; font-size: 13px; color: #666;">Prompt:</span><br/>
+      นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ<br/>
+      สพฺเพ ธมฺมา อนตฺตา ฯ สพฺเพ สงฺขารา อนิจฺจา ฯ สพฺเพ สงฺขารา ทุกฺขา ฯ<br/>
+      ธรฺมจกฺรปฺรวรฺตนสูตฺร — กฺริยา ปฺรชฺญา สมฺภว ปฺรตีตฺยสมุทฺปาท
+    </div>
+    <div style="font-family: 'Kanit'; font-size: 18px; color: #333; margin-bottom: 10px; line-height: 1.8;">
+      <span style="font-weight: bold; font-size: 13px; color: #666;">Kanit:</span><br/>
+      นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ<br/>
+      สพฺเพ ธมฺมา อนตฺตา ฯ สพฺเพ สงฺขารา อนิจฺจา ฯ สพฺเพ สงฺขารา ทุกฺขา ฯ<br/>
+      ธรฺมจกฺรปฺรวรฺตนสูตฺร — กฺริยา ปฺรชฺญา สมฺภว ปฺรตีตฺยสมุทฺปาท
+    </div>
+  </div>
+
+  <!-- ── TLWG Fonts ── -->
+  <div style="padding: 12px; background-color: #e3f2fd; margin-bottom: 12px;">
+    <div style="margin-bottom: 6px;"><span style="font-size: 12px; font-weight: bold; color: #1565c0;">TLWG Thai Fonts (OTF)</span></div>
+
+    <div style="font-family: 'Garuda'; font-size: 18px; color: #333; margin-bottom: 10px; line-height: 1.8;">
+      <span style="font-weight: bold; font-size: 13px; color: #666;">Garuda:</span><br/>
+      นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ<br/>
+      สพฺเพ ธมฺมา อนตฺตา ฯ สพฺเพ สงฺขารา อนิจฺจา ฯ สพฺเพ สงฺขารา ทุกฺขา ฯ<br/>
+      ธรฺมจกฺรปฺรวรฺตนสูตฺร — กฺริยา ปฺรชฺญา สมฺภว ปฺรตีตฺยสมุทฺปาท
+    </div>
+    <div style="font-family: 'Norasi'; font-size: 18px; color: #333; margin-bottom: 10px; line-height: 1.8;">
+      <span style="font-weight: bold; font-size: 13px; color: #666;">Norasi:</span><br/>
+      นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ<br/>
+      สพฺเพ ธมฺมา อนตฺตา ฯ สพฺเพ สงฺขารา อนิจฺจา ฯ สพฺเพ สงฺขารา ทุกฺขา ฯ<br/>
+      ธรฺมจกฺรปฺรวรฺตนสูตฺร — กฺริยา ปฺรชฺญา สมฺภว ปฺรตีตฺยสมุทฺปาท
+    </div>
+    <div style="font-family: 'Loma'; font-size: 18px; color: #333; margin-bottom: 10px; line-height: 1.8;">
+      <span style="font-weight: bold; font-size: 13px; color: #666;">Loma:</span><br/>
+      นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ<br/>
+      สพฺเพ ธมฺมา อนตฺตา ฯ สพฺเพ สงฺขารา อนิจฺจา ฯ สพฺเพ สงฺขารา ทุกฺขา ฯ<br/>
+      ธรฺมจกฺรปฺรวรฺตนสูตฺร — กฺริยา ปฺรชฺญา สมฺภว ปฺรตีตฺยสมุทฺปาท
+    </div>
+    <div style="font-family: 'Kinnari'; font-size: 18px; color: #333; margin-bottom: 10px; line-height: 1.8;">
+      <span style="font-weight: bold; font-size: 13px; color: #666;">Kinnari:</span><br/>
+      นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ<br/>
+      สพฺเพ ธมฺมา อนตฺตา ฯ สพฺเพ สงฺขารา อนิจฺจา ฯ สพฺเพ สงฺขารา ทุกฺขา ฯ<br/>
+      ธรฺมจกฺรปฺรวรฺตนสูตฺร — กฺริยา ปฺรชฺญา สมฺภว ปฺรตีตฺยสมุทฺปาท
+    </div>
+    <div style="font-family: 'Sawasdee'; font-size: 18px; color: #333; margin-bottom: 10px; line-height: 1.8;">
+      <span style="font-weight: bold; font-size: 13px; color: #666;">Sawasdee:</span><br/>
+      นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ<br/>
+      สพฺเพ ธมฺมา อนตฺตา ฯ สพฺเพ สงฺขารา อนิจฺจา ฯ สพฺเพ สงฺขารา ทุกฺขา ฯ<br/>
+      ธรฺมจกฺรปฺรวรฺตนสูตฺร — กฺริยา ปฺรชฺญา สมฺภว ปฺรตีตฺยสมุทฺปาท
+    </div>
+    <div style="font-family: 'Waree'; font-size: 18px; color: #333; margin-bottom: 10px; line-height: 1.8;">
+      <span style="font-weight: bold; font-size: 13px; color: #666;">Waree:</span><br/>
+      นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ<br/>
+      สพฺเพ ธมฺมา อนตฺตา ฯ สพฺเพ สงฺขารา อนิจฺจา ฯ สพฺเพ สงฺขารา ทุกฺขา ฯ<br/>
+      ธรฺมจกฺรปฺรวรฺตนสูตฺร — กฺริยา ปฺรชฺญา สมฺภว ปฺรตีตฺยสมุทฺปาท
+    </div>
+    <div style="font-family: 'Laksaman'; font-size: 18px; color: #333; margin-bottom: 10px; line-height: 1.8;">
+      <span style="font-weight: bold; font-size: 13px; color: #666;">Laksaman:</span><br/>
+      นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ<br/>
+      สพฺเพ ธมฺมา อนตฺตา ฯ สพฺเพ สงฺขารา อนิจฺจา ฯ สพฺเพ สงฺขารา ทุกฺขา ฯ<br/>
+      ธรฺมจกฺรปฺรวรฺตนสูตฺร — กฺริยา ปฺรชฺญา สมฺภว ปฺรตีตฺยสมุทฺปาท
+    </div>
+    <div style="font-family: 'Purisa'; font-size: 18px; color: #333; margin-bottom: 10px; line-height: 1.8;">
+      <span style="font-weight: bold; font-size: 13px; color: #666;">Purisa:</span><br/>
+      นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ<br/>
+      สพฺเพ ธมฺมา อนตฺตา ฯ สพฺเพ สงฺขารา อนิจฺจา ฯ สพฺเพ สงฺขารา ทุกฺขา ฯ<br/>
+      ธรฺมจกฺรปฺรวรฺตนสูตฺร — กฺริยา ปฺรชฺญา สมฺภว ปฺรตีตฺยสมุทฺปาท
+    </div>
+    <div style="font-family: 'Umpush'; font-size: 18px; color: #333; margin-bottom: 10px; line-height: 1.8;">
+      <span style="font-weight: bold; font-size: 13px; color: #666;">Umpush:</span><br/>
+      นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ<br/>
+      สพฺเพ ธมฺมา อนตฺตา ฯ สพฺเพ สงฺขารา อนิจฺจา ฯ สพฺเพ สงฺขารา ทุกฺขา ฯ<br/>
+      ธรฺมจกฺรปฺรวรฺตนสูตฺร — กฺริยา ปฺรชฺญา สมฺภว ปฺรตีตฺยสมุทฺปาท
+    </div>
+  </div>
+
+  <div class="test-expect">✓ พินทุ (ฺ) ต้องเห็นชัดเจนทุกฟอนต์, นิคหิต/สระ/วรรณยุกต์ไม่ทับกัน</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     15.4 — ข้อความบาลีจริงขนาดใหญ่ (อ่านง่าย)
+     ═══════════════════════════════════════════════════════════ -->
+<div class="page-break"></div>
+
+<div class="test-section">
+  <h3>Test 15.4 — ข้อความบาลียาว (บทสวดมนต์)</h3>
+  <p class="test-label">ข้อความยาวต่อเนื่อง — ทดสอบ line-break + glyph positioning ในบาลี:</p>
+
+  <div style="padding: 16px; background-color: #fff8e1; border: 1px solid #ffe082; margin-bottom: 12px;">
+    <div style="font-family: 'Norasi'; font-size: 20px; color: #333; line-height: 2.0; text-indent: 2em;">
+      นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ ฯ
+    </div>
+    <div style="font-family: 'Norasi'; font-size: 18px; color: #333; line-height: 2.0; text-indent: 2em; margin-top: 12px;">
+      อิติปิ โส ภะคะวา อะระหัง สัมมาสัมพุทโธ วิชชาจะระณะสัมปันโน สุคะโต โลกะวิทู อะนุตตะโร ปุริสะทัมมะสาระถิ สัตถา เทวะมะนุสสานัง พุทโธ ภะคะวาติ ฯ
+    </div>
+    <div style="font-family: 'Norasi'; font-size: 18px; color: #333; line-height: 2.0; text-indent: 2em; margin-top: 8px;">
+      สฺวากฺขาโต ภะคะวะตา ธัมโม สันทิฏฐิโก อะกาลิโก เอหิปัสสิโก โอปะนะยิโก ปัจจัตตัง เวทิตัพโพ วิญญูหีติ ฯ
+    </div>
+    <div style="font-family: 'Norasi'; font-size: 18px; color: #333; line-height: 2.0; text-indent: 2em; margin-top: 8px;">
+      สุปะฏิปันโน ภะคะวะโต สาวะกะสังโฆ อุชุปะฏิปันโน ภะคะวะโต สาวะกะสังโฆ ญายะปะฏิปันโน ภะคะวะโต สาวะกะสังโฆ สามีจิปะฏิปันโน ภะคะวะโต สาวะกะสังโฆ ฯ
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     15.5 — ฎ ฏ ฐ ญ ฬ ขนาดใหญ่ เปรียบเทียบฟอนต์
+     ═══════════════════════════════════════════════════════════ -->
+<div class="test-section">
+  <h3>Test 15.5 — ฎ ฏ ฐ ญ ฬ ขนาดใหญ่ เปรียบเทียบฟอนต์</h3>
+  <p class="test-label">เปรียบเทียบรูปร่างของพยัญชนะพิเศษ ขนาด 36px:</p>
+
+  <div style="padding: 12px; background-color: #f3e5f5; margin-bottom: 12px;">
+    <div style="font-family: 'Sarabun'; font-size: 36px; color: #333; margin-bottom: 8px; line-height: 1.8;">
+      <span style="font-size: 12px; color: #888; vertical-align: top;">Sarabun: </span>ฎีฏีฐีญีฬี ฎุฏุฐุญุฬุ ฎิ้ฏิ้ฐิ้ญิ้ฬิ้
+    </div>
+    <div style="font-family: 'Garuda'; font-size: 36px; color: #333; margin-bottom: 8px; line-height: 1.8;">
+      <span style="font-size: 12px; color: #888; vertical-align: top;">Garuda: </span>ฎีฏีฐีญีฬี ฎุฏุฐุญุฬุ ฎิ้ฏิ้ฐิ้ญิ้ฬิ้
+    </div>
+    <div style="font-family: 'Norasi'; font-size: 36px; color: #333; margin-bottom: 8px; line-height: 1.8;">
+      <span style="font-size: 12px; color: #888; vertical-align: top;">Norasi: </span>ฎีฏีฐีญีฬี ฎุฏุฐุญุฬุ ฎิ้ฏิ้ฐิ้ญิ้ฬิ้
+    </div>
+    <div style="font-family: 'Kinnari'; font-size: 36px; color: #333; margin-bottom: 8px; line-height: 1.8;">
+      <span style="font-size: 12px; color: #888; vertical-align: top;">Kinnari: </span>ฎีฏีฐีญีฬี ฎุฏุฐุญุฬุ ฎิ้ฏิ้ฐิ้ญิ้ฬิ้
+    </div>
+    <div style="font-family: 'Laksaman'; font-size: 36px; color: #333; margin-bottom: 8px; line-height: 1.8;">
+      <span style="font-size: 12px; color: #888; vertical-align: top;">Laksaman: </span>ฎีฏีฐีญีฬี ฎุฏุฐุญุฬุ ฎิ้ฏิ้ฐิ้ญิ้ฬิ้
+    </div>
+    <div style="font-family: 'Loma'; font-size: 36px; color: #333; margin-bottom: 8px; line-height: 1.8;">
+      <span style="font-size: 12px; color: #888; vertical-align: top;">Loma: </span>ฎีฏีฐีญีฬี ฎุฏุฐุญุฬุ ฎิ้ฏิ้ฐิ้ญิ้ฬิ้
+    </div>
+    <div style="font-family: 'Waree'; font-size: 36px; color: #333; margin-bottom: 8px; line-height: 1.8;">
+      <span style="font-size: 12px; color: #888; vertical-align: top;">Waree: </span>ฎีฏีฐีญีฬี ฎุฏุฐุญุฬุ ฎิ้ฏิ้ฐิ้ญิ้ฬิ้
+    </div>
+    <div style="font-family: 'Prompt'; font-size: 36px; color: #333; margin-bottom: 8px; line-height: 1.8;">
+      <span style="font-size: 12px; color: #888; vertical-align: top;">Prompt: </span>ฎีฏีฐีญีฬี ฎุฏุฐุญุฬุ ฎิ้ฏิ้ฐิ้ญิ้ฬิ้
+    </div>
+    <div style="font-family: 'Kanit'; font-size: 36px; color: #333; line-height: 1.8;">
+      <span style="font-size: 12px; color: #888; vertical-align: top;">Kanit: </span>ฎีฏีฐีญีฬี ฎุฏุฐุญุฬุ ฎิ้ฏิ้ฐิ้ญิ้ฬิ้
+    </div>
+  </div>
+
+  <div class="test-expect">✓ ทุกฟอนต์ต้องแสดง ฎ ฏ ฐ ญ ฬ + สระ/วรรณยุกต์ถูกต้อง, เปรียบเทียบรูปร่าง</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     15.6 — คำศัพท์บาลี-สันสกฤตที่ใช้ในภาษาไทย
+     ═══════════════════════════════════════════════════════════ -->
+<div class="test-section">
+  <h3>Test 15.6 — คำศัพท์บาลี-สันสกฤตที่ใช้ในภาษาไทย</h3>
+  <p class="test-label">คำที่ยืมมาจากบาลี/สันสกฤต — มีอักขระพิเศษ:</p>
+
+  <div style="padding: 12px; background-color: #f8f9fa; margin-bottom: 12px;">
+    <div style="font-family: 'Sarabun'; font-size: 20px; color: #333; line-height: 2.0;">
+      <strong>ราชการ:</strong> ราชฎุมภ์ กฎหมาย กฏิกา ฐานะ ฐาปนา อิฐ มุกฎาภิเษก<br/>
+      <strong>ศาสนา:</strong> ญาณ ญาติ ปัญญา วิญญาณ สัญญา มัชฌิมา สมฺปชัญญะ<br/>
+      <strong>วรรณกรรม:</strong> ฬ่อ กิฬา ฬา มฤคฬา จุฬาลงกรณ์ จุฬาราชมนตรี<br/>
+      <strong>ทั่วไป:</strong> ปรากฏ กฎ ฐิติ ฐานันดร อัฏฐ ทิฏฐิ กฏุก วิวัฒน์ ปรัชญา<br/>
+      <strong>สันสกฤต:</strong> ธรฺม กรฺม สมฺภว ปฺรชฺญา จิตฺต สุตฺต นิพฺพาน<br/>
+      <strong>ตัวเลข:</strong> ๑ ๒ ๓ ๔ ๕ ๖ ๗ ๘ ๙ ๐
+    </div>
+  </div>
+
+  <div class="test-expect">✓ คำเหล่านี้ต้องแสดงผลสมบูรณ์ — อักขระพิเศษ + สระ/วรรณยุกต์ไม่ทับกัน</div>
+</div>
+
+</body>
+</html>

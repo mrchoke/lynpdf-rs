@@ -1,0 +1,120 @@
+<!-- ============================================================
+     Test 1: ภาษาไทยและ Typography (Complex Text Layout)
+     ============================================================ -->
+<html>
+<head><title>Test 1 — Thai Typography</title></head>
+<body>
+
+<h1>Test 1: ภาษาไทยและ Typography</h1>
+<p class="text-muted">ทดสอบการวาดตัวอักษรภาษาไทยที่มีสระลอย วรรณยุกต์ซ้อน การตัดคำ และ Font Fallback</p>
+
+<!-- ─── Test 1.1: สระลอยและวรรณยุกต์ซ้อน ─── -->
+<div class="test-section">
+  <h3>Test 1.1 — สระลอยและวรรณยุกต์ซ้อน (Glyph Positioning)</h3>
+
+  <p class="test-label">คำทดสอบพื้นฐาน:</p>
+  <div class="box">
+    <p style="font-size: 24px;">น้ำ ผู้ ป่า ที่ ฎีกา ญัตติ ปู่ ตุ๊ย แป้ง</p>
+  </div>
+
+  <p class="test-label">สระบน + วรรณยุกต์ ซ้อน 2 ชั้น:</p>
+  <div class="box">
+    <p style="font-size: 24px;">น้ำพริก ผู้ใหญ่ บ้านเกิด ลูกศิษย์ ครู่หนึ่ง</p>
+  </div>
+
+  <p class="test-label">สระล่าง (สระ อุ, อู):</p>
+  <div class="box">
+    <p style="font-size: 24px;">ปุ่ม ดุ๊กดิ๊ก พุ่ง สูตร ภูมิ สุก มูลค่า ครุฑ</p>
+  </div>
+
+  <p class="test-label">ตัวเลขไทย:</p>
+  <div class="box">
+    <p style="font-size: 24px;">๑๒๓๔๕๖๗๘๙๐ — หนึ่ง สอง สาม สี่ ห้า หก เจ็ด แปด เก้า สิบ</p>
+  </div>
+
+  <p class="test-label">ขนาดฟอนต์ต่างๆ:</p>
+  <div class="box">
+    <p style="font-size: 10px;">10px: น้ำพริก ผู้ใหญ่ บ้านเกิด — ตัวเล็กยังอ่านออกไหม?</p>
+    <p style="font-size: 14px;">14px: น้ำพริก ผู้ใหญ่ บ้านเกิด — ขนาดมาตรฐาน</p>
+    <p style="font-size: 20px;">20px: น้ำพริก ผู้ใหญ่ บ้านเกิด — ขนาดกลาง</p>
+    <p style="font-size: 32px;">32px: น้ำพริก ผู้ใหญ่ บ้านเกิด — ขนาดใหญ่</p>
+  </div>
+
+  <div class="test-expect">✓ สระบน-ล่างต้องไม่ทับซ้อนกัน ไม่ลอยห่างเกินไป ตำแหน่งถูกต้องตามฟอนต์</div>
+</div>
+
+<!-- ─── Test 1.2: การตัดคำภาษาไทย ─── -->
+<div class="test-section">
+  <h3>Test 1.2 — การตัดคำภาษาไทย (Thai Line Breaking)</h3>
+
+  <p class="test-label">พารากราฟยาวไม่มีเว้นวรรค — ต้องตัดคำได้ถูกต้อง:</p>
+  <div class="box" style="width: 350px;">
+    <p>ประเทศไทยเป็นประเทศที่ตั้งอยู่ในภูมิภาคเอเชียตะวันออกเฉียงใต้มีพรมแดนติดต่อกับประเทศเพื่อนบ้านหลายประเทศทั้งทางบกและทางทะเลมีวัฒนธรรมเก่าแก่ยาวนานหลายพันปีและเป็นประเทศที่ไม่เคยตกเป็นอาณานิคมของชาติตะวันตกในสมัยล่าอาณานิคมซึ่งถือเป็นเอกลักษณ์ที่โดดเด่นในภูมิภาค</p>
+  </div>
+
+  <p class="test-label">คำยาวรวมกัน — จุดตัดต้องเป็นรอยต่อพยางค์:</p>
+  <div class="box" style="width: 300px;">
+    <p>สมเด็จพระเจ้าอยู่หัวทรงมีพระมหากรุณาธิคุณเป็นล้นพ้นต่อปวงชนชาวไทยทั้งประเทศโดยเฉพาะผู้ที่ยากลำบากตามชนบทห่างไกล</p>
+  </div>
+
+  <p class="test-label">ผสม Thai + Latin + ตัวเลข:</p>
+  <div class="box" style="width: 350px;">
+    <p>ในปี2025ประเทศไทยมีประชากรประมาณ70ล้านคนโดยกรุงเทพมหานครเป็นเมืองหลวงที่ใหญ่ที่สุดมีประชากรหนาแน่นเกือบ10ล้านคนในพื้นที่เขตเมือง</p>
+  </div>
+
+  <div class="test-expect">✓ ต้องขึ้นบรรทัดใหม่เป็นคำๆ ไม่ตัดกลางคำ (เช่น "ประเท-ศไทย" ถือว่าผิด)</div>
+</div>
+
+<!-- ─── Test 1.3: Text Alignment (Justify) ─── -->
+<div class="test-section">
+  <h3>Test 1.3 — Text Alignment</h3>
+
+  <p class="test-label">text-align: left (ค่าเริ่มต้น):</p>
+  <div class="box">
+    <p style="text-align: left;">การจัดข้อความชิดซ้ายเป็นรูปแบบมาตรฐานที่ใช้กันทั่วไปในเอกสารภาษาไทย เพราะอ่านง่ายและดูเป็นธรรมชาติ</p>
+  </div>
+
+  <p class="test-label">text-align: center:</p>
+  <div class="box">
+    <p style="text-align: center;">ข้อความจัดกึ่งกลาง<br/>มักใช้กับหัวข้อหรือคำอวยพร<br/>สวัสดีปีใหม่ ๒๕๖๙</p>
+  </div>
+
+  <p class="test-label">text-align: right:</p>
+  <div class="box">
+    <p style="text-align: right;">ข้อความชิดขวา — มักใช้กับตัวเลขหรือวันที่<br/>วันที่ ๒๒ กุมภาพันธ์ ๒๕๖๙</p>
+  </div>
+
+  <p class="test-label">text-align: justify:</p>
+  <div class="box" style="width: 400px;">
+    <p style="text-align: justify;">เอกสาร PDF สำหรับภาษาไทยมีความท้าทายพิเศษในเรื่องการกระจายช่องไฟ เพราะภาษาไทยไม่มีช่องว่างระหว่างคำเหมือนภาษาอังกฤษ ดังนั้นโปรแกรมต้องสามารถจัดการช่องไฟได้อย่างถูกต้องโดยไม่ทำให้สระลอยและวรรณยุกต์หลุดออกจากพยัญชนะต้น</p>
+  </div>
+
+  <div class="test-expect">✓ การ justify ต้องไม่ทำให้สระ/วรรณยุกต์หลุดออกจากพยัญชนะ</div>
+</div>
+
+<!-- ─── Test 1.4: Font Fallback & Multiple Scripts ─── -->
+<div class="test-section">
+  <h3>Test 1.4 — Font Fallback &amp; Multiple Scripts</h3>
+
+  <p class="test-label">ภาษาผสม (Thai + English + Emoji):</p>
+  <div class="box">
+    <p style="font-size: 20px;">สวัสดี Hello World 🎉 ❤️ 🇹🇭</p>
+  </div>
+
+  <p class="test-label">หลายฟอนต์ในบรรทัดเดียว:</p>
+  <div class="box">
+    <p><strong>ตัวหนา:</strong> น้ำพริกปลาทู</p>
+    <p><em>ตัวเอียง:</em> สำนวนสุภาษิตไทย</p>
+    <p><strong><em>หนา+เอียง:</em></strong> กรุงเทพมหานคร</p>
+  </div>
+
+  <p class="test-label">อักษรพิเศษและสัญลักษณ์:</p>
+  <div class="box">
+    <p>บาท: ฿100 — ลิขสิทธิ์: © 2026 — เครื่องหมายการค้า: ™ ® — อุณหภูมิ: 35°C</p>
+  </div>
+
+  <div class="test-expect">✓ ต้องไม่ขึ้นเป็นสี่เหลี่ยม (Tofu) — ทุกอักขระต้องมีฟอนต์รองรับ</div>
+</div>
+
+</body>
+</html>

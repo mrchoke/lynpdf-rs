@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Invoice Enterprise - LynPDF RS</title>
+  <meta name="author" content="LynPDF RS Team">
+  <meta name="description" content="Enterprise invoice template for lynpdf-rs with aligned totals and table spans.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    @page {
+      size: A4;
+      margin: 11mm 12mm;
+    }
+
+    body {
+      font-family: 'Sarabun', sans-serif;
+      font-size: 10.8px;
+      line-height: 1.38;
+      color: #213547;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+    }
+
+    .invoice {
+      border: 1px solid #d7e0ea;
+      background-color: #ffffff;
+    }
+
+    .header {
+      display: flex;
+      flex-direction: row;
+      background-color: #0f2a45;
+      color: #ffffff;
+      padding: 12px 14px;
+    }
+
+    .brand {
+      flex: 1;
+      padding-right: 10px;
+    }
+
+    .brand-row {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 5px;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 17px;
+      color: #ffffff;
+    }
+
+    .brand .sub {
+      margin: 1px 0;
+      font-size: 9px;
+      color: #c8d7e5;
+    }
+
+    .brand .addr {
+      margin: 0;
+      font-size: 9px;
+      color: #a6b8c8;
+      line-height: 1.45;
+    }
+
+    .doc {
+      width: 220px;
+      text-align: right;
+    }
+
+    .doc .kicker {
+      color: #cad9e7;
+      font-size: 8px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .doc .title {
+      color: #f6bf86;
+      font-size: 23px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .doc .id {
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: bold;
+      margin-top: 1px;
+    }
+
+    .doc .meta {
+      color: #c6d5e3;
+      font-size: 9px;
+      margin-top: 1px;
+    }
+
+    .doc .pill {
+      display: inline-block;
+      margin-top: 4px;
+      font-size: 8px;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: #0f2a45;
+      background-color: #ffe7c8;
+      padding: 2px 7px;
+      border-radius: 11px;
+    }
+
+    .accent-1 { height: 4px; background-color: #b87436; }
+    .accent-2 { height: 2px; background-color: #6aa8c7; }
+
+    .party-row {
+      display: flex;
+      flex-direction: row;
+      margin: 0 10px;
+      border-bottom: 1px solid #e1e9f2;
+      padding: 7px 0 8px 0;
+    }
+
+    .party {
+      flex: 1;
+      padding: 0 8px;
+    }
+
+    .party:first-child {
+      border-right: 1px solid #e1e9f2;
+    }
+
+    .party .label {
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #ae7038;
+      font-weight: bold;
+      margin-bottom: 2px;
+    }
+
+    .party .name {
+      font-size: 12px;
+      font-weight: bold;
+      color: #113453;
+      margin-bottom: 1px;
+    }
+
+    .party .name-th {
+      font-size: 10px;
+      color: #4f6379;
+      margin-bottom: 2px;
+    }
+
+    .party .detail {
+      font-size: 9px;
+      color: #64788d;
+      line-height: 1.45;
+    }
+
+    table.items {
+      width: calc(100% - 20px);
+      margin: 8px 10px;
+      border-collapse: collapse;
+    }
+
+    .items th {
+      border: 1px solid #133755;
+      background-color: #133755;
+      color: #ffffff;
+      font-size: 9.5px;
+      padding: 7px 6px;
+      text-align: left;
+    }
+
+    .items td {
+      border: 1px solid #e3ebf3;
+      font-size: 9.8px;
+      padding: 7px 6px;
+      vertical-align: top;
+    }
+
+    .items tr.alt td {
+      background-color: #f8fbfe;
+    }
+
+    .items .desc-title {
+      font-size: 10.2px;
+      font-weight: bold;
+      color: #123756;
+      margin-bottom: 1px;
+    }
+
+    .items .desc-sub {
+      font-size: 9px;
+      color: #5b7086;
+      line-height: 1.45;
+    }
+
+    .items .sum-note {
+      background-color: #f7fbff;
+      color: #5c7186;
+      font-size: 9.1px;
+      line-height: 1.5;
+      border-top: 2px solid #d4e2ef;
+    }
+
+    .items .sum-label {
+      background-color: #f4f8fc;
+      color: #50657a;
+      font-weight: bold;
+      font-size: 9.6px;
+    }
+
+    .items .sum-value {
+      background-color: #ffffff;
+      text-align: right;
+      font-weight: bold;
+      color: #123856;
+      font-size: 9.8px;
+    }
+
+    .items .sum-discount .sum-value {
+      color: #2b8c75;
+    }
+
+    .items .sum-tax .sum-value {
+      color: #5d7289;
+    }
+
+    .items .sum-wht .sum-value {
+      color: #b24a4d;
+    }
+
+    .items .sum-grand .sum-label,
+    .items .sum-grand .sum-value {
+      background-color: #123756;
+      color: #ffffff;
+      border-color: #123756;
+      font-size: 11px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+
+    .items .sum-grand .sum-value {
+      letter-spacing: 0.3px;
+    }
+
+    .footer-row {
+      display: flex;
+      flex-direction: row;
+      margin: 0 10px 8px 10px;
+      border-top: 1px solid #e1e9f2;
+      padding-top: 8px;
+    }
+
+    .signs {
+      flex: 2;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .sign {
+      flex: 1;
+      text-align: center;
+      padding: 0 6px;
+    }
+
+    .sign .line {
+      border-top: 1px solid #92a3b4;
+      margin: 16px 10px 4px 10px;
+    }
+
+    .sign .name {
+      font-size: 9.8px;
+      color: #1f3448;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .sign .role {
+      font-size: 8.8px;
+      color: #6d8094;
+      margin: 0;
+    }
+
+    .foot-meta {
+      flex: 1;
+      border-left: 1px solid #e1e9f2;
+      padding-left: 10px;
+      font-size: 8.8px;
+      color: #6f8398;
+      line-height: 1.45;
+    }
+
+    .foot-meta .brand {
+      color: #2f4a63;
+      font-weight: bold;
+      margin-bottom: 2px;
+      padding-right: 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="invoice">
+  <div class="header">
+    <div class="brand">
+      <div class="brand-row">
+        <svg width="35" height="35" viewBox="0 0 100 100" style="margin-right: 8px;">
+          <rect x="4" y="4" width="92" height="92" rx="10" fill="#b87436"></rect>
+          <rect x="20" y="16" width="40" height="54" rx="3" fill="#ffffff" opacity="0.95"></rect>
+          <rect x="26" y="27" width="26" height="2.5" rx="1" fill="#0f2a45" opacity="0.35"></rect>
+          <rect x="26" y="34" width="28" height="2.5" rx="1" fill="#0f2a45" opacity="0.35"></rect>
+          <rect x="26" y="41" width="19" height="2.5" rx="1" fill="#b87436" opacity="0.8"></rect>
+          <rect x="26" y="48" width="29" height="2.5" rx="1" fill="#0f2a45" opacity="0.35"></rect>
+          <rect x="54" y="54" width="34" height="24" rx="4" fill="#0f2a45"></rect>
+          <text x="71" y="70" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">R</text>
+        </svg>
+        <div>
+          <h1>LynPDF RS Studio</h1>
+          <p class="sub">บริษัท ลินพีดีเอฟ รัสต์ สตูดิโอ จำกัด</p>
+          <p class="sub">Enterprise Document Infrastructure</p>
+        </div>
+      </div>
+      <p class="addr">88 Rust Tower ชั้น 19 ถนนพระราม 4 แขวงคลองเตย เขตคลองเตย กรุงเทพฯ 10110 | TAX ID: 0105570001122 | billing@lynpdf.dev</p>
+    </div>
+
+    <div class="doc">
+      <div class="kicker">Enterprise Billing</div>
+      <div class="title">INVOICE</div>
+      <div class="id">#LPR-ENT-INV-2026-0557</div>
+      <div class="meta">Issue Date: 03 May 2026</div>
+      <div class="meta">Due Date: 02 June 2026</div>
+      <div class="pill">NET 30</div>
+    </div>
+  </div>
+
+  <div class="accent-1"></div>
+  <div class="accent-2"></div>
+
+  <div class="party-row">
+    <div class="party">
+      <div class="label">From</div>
+      <div class="name">LynPDF RS Studio</div>
+      <div class="name-th">บริษัท ลินพีดีเอฟ รัสต์ สตูดิโอ จำกัด</div>
+      <div class="detail">
+        Contact: Finance Operations Team<br>
+        billing@lynpdf.dev | +66 2 911 2048<br>
+        Bank: KBank 742-1-99001-8
+      </div>
+    </div>
+
+    <div class="party">
+      <div class="label">Bill To</div>
+      <div class="name">บริษัท เอ็นเตอร์ไพรซ์ ดาต้า แพลตฟอร์ม จำกัด</div>
+      <div class="name-th">Enterprise Data Platform Co., Ltd.</div>
+      <div class="detail">
+        399 Data Hub Tower ชั้น 11 รัชดาภิเษก ห้วยขวาง กรุงเทพฯ 10310<br>
+        Contract Ref: EDP-LPR-2405 | Project: PDF Platform Modernization
+      </div>
+    </div>
+  </div>
+
+  <table class="items">
+    <thead>
+      <tr>
+        <th style="width: 28px; text-align: center;">#</th>
+        <th style="width: 230px;">Workstream</th>
+        <th>Deliverables</th>
+        <th style="width: 52px; text-align: center;">Qty</th>
+        <th style="width: 106px; text-align: right;">Unit Price</th>
+        <th style="width: 118px; text-align: right;">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: center;">1</td>
+        <td>
+          <div class="desc-title">Core Rendering Migration</div>
+          <div class="desc-sub">Thai shaping, font fallback, deterministic pipeline</div>
+        </td>
+        <td>Rust renderer integration + parity checklist + deployment handover package</td>
+        <td style="text-align: center;">140h</td>
+        <td style="text-align: right;">1,350.00</td>
+        <td style="text-align: right;">189,000.00</td>
+      </tr>
+
+      <tr class="alt">
+        <td style="text-align: center;">2</td>
+        <td>
+          <div class="desc-title">Advanced SVG Effects</div>
+          <div class="desc-sub">transform stacks, gradients, opacity compositing</div>
+        </td>
+        <td>Regression fixtures + integration assertions + rendering diagnostics report</td>
+        <td style="text-align: center;">72h</td>
+        <td style="text-align: right;">1,500.00</td>
+        <td style="text-align: right;">108,000.00</td>
+      </tr>
+
+      <tr>
+        <td style="text-align: center;">3</td>
+        <td>
+          <div class="desc-title">Visual Baseline Governance</div>
+          <div class="desc-sub">locked snapshots for enterprise document templates</div>
+        </td>
+        <td>Baseline update workflow + diff reports + CI gate criteria definition</td>
+        <td style="text-align: center;">54h</td>
+        <td style="text-align: right;">1,250.00</td>
+        <td style="text-align: right;">67,500.00</td>
+      </tr>
+
+      <tr class="alt">
+        <td style="text-align: center;">4</td>
+        <td>
+          <div class="desc-title">Enterprise Support Retainer</div>
+          <div class="desc-sub">priority fixes, weekly QA corpus run, SLA review</div>
+        </td>
+        <td>1-month support window covering production incidents and compliance docs</td>
+        <td style="text-align: center;">1pkg</td>
+        <td style="text-align: right;">28,000.00</td>
+        <td style="text-align: right;">28,000.00</td>
+      </tr>
+
+      <tr class="sum-row">
+        <td class="sum-note" colspan="4" rowspan="5">
+          <strong>Payment Instructions:</strong> Transfer to KBank account 742-1-99001-8 (LynPDF RS Studio Co., Ltd.)
+          and include invoice id in transfer memo.<br>
+          <strong>Commercial Terms:</strong> Late payment fee 1.25% / month. WHT certificate must be delivered within 15 business days.
+        </td>
+        <td class="sum-label">Subtotal</td>
+        <td class="sum-value">392,500.00</td>
+      </tr>
+      <tr class="sum-discount">
+        <td class="sum-label">Special Discount (5%)</td>
+        <td class="sum-value">-19,625.00</td>
+      </tr>
+      <tr class="sum-tax">
+        <td class="sum-label">VAT 7%</td>
+        <td class="sum-value">26,101.25</td>
+      </tr>
+      <tr class="sum-wht">
+        <td class="sum-label">WHT 3%</td>
+        <td class="sum-value">-11,186.25</td>
+      </tr>
+      <tr class="sum-grand">
+        <td class="sum-label">NET PAYABLE</td>
+        <td class="sum-value">387,790.00 THB</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="footer-row">
+    <div class="signs">
+      <div class="sign">
+        <div class="line"></div>
+        <p class="name">Authorized Signatory</p>
+        <p class="role">LynPDF RS Studio</p>
+      </div>
+      <div class="sign">
+        <div class="line"></div>
+        <p class="name">Client Representative</p>
+        <p class="role">Enterprise Data Platform</p>
+      </div>
+      <div class="sign">
+        <div class="line"></div>
+        <p class="name">Finance Controller</p>
+        <p class="role">Accounts & Reconciliation</p>
+      </div>
+    </div>
+
+    <div class="foot-meta">
+      <div class="brand">LynPDF RS Studio</div>
+      REF: LPR-ENT-INV-2026-0557<br>
+      Generated by lynpdf-rs<br>
+      docs: www.lynpdf.dev/enterprise
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

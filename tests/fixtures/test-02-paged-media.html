@@ -1,0 +1,107 @@
+<!-- ============================================================
+     Test 2: Paged Media & Pagination
+     ============================================================ -->
+<html>
+<head><title>Test 2 — Paged Media</title></head>
+<body>
+
+<h1>Test 2: Paged Media &amp; Pagination</h1>
+<p class="text-muted">ทดสอบการจัดการหน้ากระดาษ: ขนาด, margin, การเปลี่ยนหน้า, page-break-inside</p>
+
+<!-- ─── Test 2.1: Page Size & Margins ─── -->
+<div class="test-section">
+  <h3>Test 2.1 — Page Size &amp; Margins</h3>
+
+  <p class="test-label">ข้อมูลหน้ากระดาษ:</p>
+  <div class="box">
+    <p>กระดาษ <strong>A4</strong> — 595.28 × 841.89 pt (210 × 297 mm)</p>
+    <p>Margin: <strong>15mm</strong> ทุกด้าน = 42.52pt</p>
+    <p>พื้นที่ใช้งาน: <strong>510.24 × 756.85 pt</strong></p>
+  </div>
+
+  <p class="test-label">กล่องเต็มความกว้าง (ต้องพอดีกับพื้นที่ใช้งาน):</p>
+  <div class="box bg-blue" style="width: 100%; padding: 20px;">
+    <p>กล่องนี้ต้อง <strong>เต็มความกว้าง</strong> ของพื้นที่เนื้อหา ไม่ล้นขอบหน้ากระดาษ</p>
+  </div>
+
+  <div class="test-expect">✓ ขนาดกระดาษ A4 ถูกต้อง, เนื้อหาอยู่ภายใน margin, กล่องไม่ล้นขอบ</div>
+</div>
+
+<!-- ─── Test 2.2: Page Breaks ─── -->
+<div class="test-section">
+  <h3>Test 2.2 — Page Breaks (บังคับขึ้นหน้าใหม่)</h3>
+
+  <p>เนื้อหาก่อนจุดเปลี่ยนหน้า — ข้อความนี้อยู่หน้าที่ 1</p>
+  <div class="box bg-green">
+    <p><strong>✓ หน้า 1</strong> — กล่องสีเขียวนี้ต้องอยู่หน้าแรก</p>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<div class="test-section">
+  <h3>Test 2.2 (ต่อ) — หลัง page-break</h3>
+
+  <div class="box bg-yellow">
+    <p><strong>✓ หน้า 2</strong> — กล่องสีเหลืองนี้ต้องอยู่หน้าที่ 2</p>
+  </div>
+
+  <p>เนื้อหาหลังจุดเปลี่ยนหน้า ข้อความนี้ต้องอยู่หน้า 2</p>
+
+  <div class="test-expect">✓ page-break-before: always ต้องดีดเนื้อหาไปหน้าถัดไป</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ─── Test 2.3: Page Break Inside Avoid ─── -->
+<div class="test-section">
+  <h3>Test 2.3 — page-break-inside: avoid</h3>
+
+  <p class="test-label">สร้าง Card หลายใบ — Card ที่คาบเส้นหน้าต้องถูกดันไปหน้าถัดไปทั้งใบ:</p>
+
+  <div style="page-break-inside: avoid;" class="box bg-light">
+    <h3>Card #1</h3>
+    <p>เนื้อหาในการ์ดใบที่ 1 ทดสอบว่าการ์ดทั้งใบจะถูกเก็บไว้ด้วยกัน</p>
+    <p>บรรทัดที่ 2 ของการ์ด</p>
+    <p>บรรทัดที่ 3 ของการ์ด</p>
+  </div>
+
+  <div style="page-break-inside: avoid;" class="box bg-light">
+    <h3>Card #2</h3>
+    <p>เนื้อหาในการ์ดใบที่ 2 ทดสอบว่าการ์ดทั้งใบจะถูกเก็บไว้ด้วยกัน</p>
+    <p>บรรทัดที่ 2 ของการ์ด</p>
+    <p>บรรทัดที่ 3 ของการ์ด</p>
+  </div>
+
+  <div style="page-break-inside: avoid;" class="box bg-light">
+    <h3>Card #3</h3>
+    <p>เนื้อหาในการ์ดใบที่ 3 ทดสอบว่าการ์ดทั้งใบจะถูกเก็บไว้ด้วยกัน</p>
+    <p>บรรทัดที่ 2 ของการ์ด</p>
+    <p>บรรทัดที่ 3 ของการ์ด</p>
+  </div>
+
+  <div style="page-break-inside: avoid;" class="box bg-light">
+    <h3>Card #4</h3>
+    <p>เนื้อหาในการ์ดใบที่ 4 ทดสอบว่าการ์ดทั้งใบจะถูกเก็บไว้ด้วยกัน</p>
+    <p>บรรทัดที่ 2 ของการ์ด</p>
+    <p>บรรทัดที่ 3 ของการ์ด</p>
+  </div>
+
+  <div class="test-expect">✓ page-break-inside: avoid ทำงานแล้ว — Card ที่คร่อมขอบหน้าจะถูกเลื่อนไปหน้าถัดไป</div>
+</div>
+
+<!-- ─── Test 2.4: Orphans & Widows ─── -->
+<div class="test-section">
+  <h3>Test 2.4 — Orphans &amp; Widows</h3>
+
+  <p class="test-label">พารากราฟยาวที่ข้ามหน้า:</p>
+  <div class="box" style="orphans: 3; widows: 3;">
+    <p>ย่อหน้านี้มีเนื้อหาจำนวนมากเพื่อให้ข้อความบางส่วนข้ามไปอยู่หน้าถัดไป ระบบ orphans และ widows จะควบคุมไม่ให้มีเพียงหนึ่งหรือสองบรรทัดหลงอยู่ที่ด้านบนหรือด้านล่างสุดของหน้ากระดาษเพียงลำพัง ซึ่งเป็นสิ่งสำคัญสำหรับเอกสารที่ต้องการคุณภาพระดับจัดพิมพ์ หลักการนี้มาจากวงการการพิมพ์แบบดั้งเดิมที่ให้ความสำคัญกับความสวยงามของหน้ากระดาษ เพราะบรรทัดที่หลุดไปอยู่คนเดียวจะทำให้ผู้อ่านเสียอรรถรส และเอกสารดูไม่เป็นมืออาชีพ</p>
+    <p>ย่อหน้าที่สองนี้ก็เช่นกัน เป้าหมายคือเนื้อหาต้องข้ามหน้าโดยมีอย่างน้อย 3 บรรทัดที่ค้างอยู่หน้าเดิม (orphans) และอย่างน้อย 3 บรรทัดที่ขึ้นหน้าใหม่ (widows) ไม่ใช่มีเพียงบรรทัดเดียวหลงอยู่</p>
+  </div>
+
+  <div class="test-expect">✓ orphans/widows ทำงานแล้ว — ควบคุมจำนวนบรรทัดขั้นต่ำก่อน/หลังหน้ากระดาษ</div>
+</div>
+
+</body>
+</html>

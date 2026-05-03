@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  />
+  <title>Test 22: SVG Gradient Stroke</title>
+</head>
+
+<body>
+  <h1>Test 22: SVG Gradient Stroke</h1>
+  <p>Regression fixture for gradient interpolation on both fill and stroke paints.</p>
+
+  <svg
+    width="420"
+    height="260"
+    viewBox="0 0 420 260"
+    role="img"
+    aria-label="Gradient stroke regression artboard"
+  >
+    <defs>
+      <linearGradient
+        id="stroke-grad"
+        x1="0%"
+        y1="0%"
+        x2="100%"
+        y2="0%"
+      >
+        <stop
+          offset="0%"
+          stop-color="#ff2040"
+        />
+        <stop
+          offset="48%"
+          stop-color="#00b8ff"
+          stop-opacity="0.8"
+        />
+        <stop
+          offset="100%"
+          stop-color="#2dd163"
+        />
+      </linearGradient>
+      <linearGradient
+        id="fill-grad"
+        x1="0%"
+        y1="0%"
+        x2="0%"
+        y2="100%"
+      >
+        <stop
+          offset="0%"
+          stop-color="#ffffff"
+          stop-opacity="0.96"
+        />
+        <stop
+          offset="100%"
+          stop-color="#1f2a44"
+          stop-opacity="0.42"
+        />
+      </linearGradient>
+    </defs>
+
+    <path
+      d="M 42 64 C 130 8, 290 8, 376 64"
+      fill="none"
+      stroke="url(#stroke-grad)"
+      stroke-width="18"
+      stroke-linecap="round"
+      opacity="0.82"
+    />
+
+    <circle
+      cx="210"
+      cy="152"
+      r="70"
+      fill="url(#fill-grad)"
+      fill-opacity="0.67"
+      stroke="url(#stroke-grad)"
+      stroke-width="16"
+      stroke-opacity="0.74"
+    />
+
+    <path
+      d="M 110 190 C 170 235, 250 235, 310 190"
+      fill="none"
+      stroke="url(#stroke-grad)"
+      stroke-width="12"
+      stroke-linejoin="round"
+      stroke-linecap="round"
+      stroke-opacity="0.55"
+    />
+  </svg>
+</body>
+
+</html>

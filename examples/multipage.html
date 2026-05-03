@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Multi-page Example</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .page-break { page-break-before: always; }
+        .box { padding: 20px; margin-bottom: 20px; border: 1px solid #ccc; background-color: #f9f9f9; }
+    </style>
+</head>
+<body>
+    <h1>Multi-page Document Test</h1>
+    <p>This is the first page. It should have a header and footer.</p>
+    
+    <div class="box" style="height: 600px;">
+        <h2>Tall Box 1</h2>
+        <p>This box takes up a lot of space to force a page break.</p>
+    </div>
+
+    <div class="box" style="height: 400px;">
+        <h2>Tall Box 2</h2>
+        <p>This box should flow onto the second page.</p>
+    </div>
+
+    <h2 class="page-break">Forced Page Break</h2>
+    <p>This content should be on the third page due to the page-break-before class.</p>
+    
+    <div class="box">
+        <h2>Final Box</h2>
+        <p>End of the document.</p>
+    </div>
+</body>
+</html>

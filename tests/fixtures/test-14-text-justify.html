@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Test 14 - Justify and Line Breaking Matrix</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 28px;
+      font-family: "Sarabun", sans-serif;
+      font-size: 13.5px;
+      line-height: 1.45;
+      color: #1f2937;
+      background: #f8fafc;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      color: #0f172a;
+    }
+
+    h2 {
+      margin: 24px 0 10px;
+      font-size: 17px;
+      color: #1e3a8a;
+      border-bottom: 1px solid #bfdbfe;
+      padding-bottom: 4px;
+    }
+
+    p.meta {
+      margin: 0 0 10px;
+      font-size: 12px;
+      color: #334155;
+    }
+
+    table.matrix {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: auto;
+      margin-bottom: 16px;
+      background: #ffffff;
+    }
+
+    .matrix th,
+    .matrix td {
+      border: 1px solid #cbd5e1;
+      padding: 8px;
+      vertical-align: top;
+    }
+
+    .matrix th {
+      background: #e2e8f0;
+      color: #0f172a;
+      font-size: 12px;
+    }
+
+    .mode {
+      width: 1%;
+      font-family: "Courier New", monospace;
+      font-size: 10.5px;
+      color: #334155;
+      white-space: nowrap;
+      word-break: normal;
+      overflow-wrap: normal;
+    }
+
+    .sample {
+      width: 220px;
+      border: 1px dashed #cbd5e1;
+      padding: 8px;
+      background: #f8fafc;
+      min-height: 86px;
+      margin: 0 auto;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .tight {
+      width: 180px;
+      min-height: 112px;
+    }
+
+    .justify-auto {
+      text-align: justify;
+      text-justify: auto;
+    }
+
+    .justify-word {
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    .justify-char {
+      text-align: justify;
+      text-justify: inter-character;
+    }
+
+    .justify-none {
+      text-align: justify;
+      text-justify: none;
+    }
+
+    .align-left {
+      text-align: left;
+    }
+
+    .align-center {
+      text-align: center;
+    }
+
+    .align-right {
+      text-align: right;
+    }
+
+    .wb-normal {
+      word-break: normal;
+    }
+
+    .wb-break-all {
+      word-break: break-all;
+    }
+
+    .wb-keep-all {
+      word-break: keep-all;
+    }
+
+    .wb-break-word {
+      word-break: break-word;
+    }
+
+    .ow-normal {
+      overflow-wrap: normal;
+    }
+
+    .ow-break-word {
+      overflow-wrap: break-word;
+    }
+
+    .ow-anywhere {
+      overflow-wrap: anywhere;
+    }
+
+    .lb-auto {
+      line-break: auto;
+    }
+
+    .lb-loose {
+      line-break: loose;
+    }
+
+    .lb-normal {
+      line-break: normal;
+    }
+
+    .lb-strict {
+      line-break: strict;
+    }
+
+    .lb-anywhere {
+      line-break: anywhere;
+    }
+
+    .hy-none {
+      hyphens: none;
+    }
+
+    .hy-manual {
+      hyphens: manual;
+    }
+
+    .hy-auto {
+      hyphens: auto;
+    }
+
+    .ws-normal {
+      white-space: normal;
+    }
+
+    .ws-nowrap {
+      white-space: nowrap;
+    }
+
+    .ws-pre {
+      white-space: pre;
+    }
+
+    .ws-pre-wrap {
+      white-space: pre-wrap;
+    }
+
+    .ws-pre-line {
+      white-space: pre-line;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Test 14: ครอบคลุม Justify + ตัดคำ + ตัดบรรทัด (Thai/English)</h1>
+  <p class="meta">เป้าหมาย: ทดสอบ text-align/text-justify, word-break, overflow-wrap, line-break, hyphens และ
+    white-space โดยเทียบพฤติกรรมภาษาไทยและอังกฤษในความกว้างเท่ากัน</p>
+
+  <h2>A) Justify และ Alignment ทุกรูปแบบหลัก</h2>
+  <table class="matrix">
+    <thead>
+      <tr>
+        <th class="mode">Mode</th>
+        <th>Thai</th>
+        <th>English</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="mode">text-align: justify; text-justify: auto;</td>
+        <td>
+          <div class="sample justify-auto">
+            การจัดย่อหน้าให้เต็มบรรทัดต้องกระจายช่องว่างอย่างสมดุลและต้องไม่ทำให้เครื่องหมายวรรณยุกต์เสียตำแหน่งแม้ข้อความจะยาวและต่อเนื่อง
+          </div>
+        </td>
+        <td>
+          <div class="sample justify-auto">Justified layout should distribute spacing smoothly across each line while
+            keeping readability stable for long paragraphs with mixed punctuation and rhythm.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mode">text-align: justify; text-justify: inter-word;</td>
+        <td>
+          <div class="sample justify-word">
+            ระบบต้องเน้นการขยายช่องว่างระดับคำเมื่อมีจุดตัดคำที่ชัดเจนและยังคงความต่อเนื่องของจังหวะการอ่านในเอกสารทางการ
+          </div>
+        </td>
+        <td>
+          <div class="sample justify-word">Inter-word expansion should prioritize word gaps first so the paragraph edges
+            align while preserving predictable spacing and clean visual flow.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mode">text-align: justify; text-justify: inter-character;</td>
+        <td>
+          <div class="sample justify-char">สำหรับภาษาไทยที่ไม่เว้นวรรคระหว่างคำ
+            การกระจายระดับตัวอักษรหรือคลัสเตอร์ช่วยลดช่องโหว่ขนาดใหญ่ที่ทำให้คอลัมน์ดูแตก</div>
+        </td>
+        <td>
+          <div class="sample justify-char">Inter-character mode spreads tracking-like spacing through glyph clusters to
+            avoid giant rivers in narrow columns and stressed paragraphs.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mode">text-align: justify; text-justify: none;</td>
+        <td>
+          <div class="sample justify-none">หากปิดกลไก justify
+            ย่อหน้าควรแสดงตามการคำนวณพื้นฐานโดยไม่ยืดช่องไฟเพิ่มแม้กำหนด text-align เป็น justify</div>
+        </td>
+        <td>
+          <div class="sample justify-none">With justification behavior disabled, alignment remains logically justified
+            but without extra spacing expansion beyond baseline line composition.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mode">text-align: left / center / right;</td>
+        <td>
+          <div class="sample align-left">left: จัดชิดซ้ายเพื่ออ่านเร็วและเป็นค่าปริยายที่เสถียร</div>
+          <div class="sample align-center">center: จัดกึ่งกลางสำหรับหัวข้อหรือคำประกาศ</div>
+          <div class="sample align-right">right: จัดชิดขวาสำหรับเลขหรือหมายเหตุ</div>
+        </td>
+        <td>
+          <div class="sample align-left">left: default block flow for predictable reading in dense text.</div>
+          <div class="sample align-center">center: useful for headings, captions, or certificate lines.</div>
+          <div class="sample align-right">right: useful for totals, labels, and metadata columns.</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <h2>B) word-break, overflow-wrap, line-break, hyphens</h2>
+  <table class="matrix">
+    <thead>
+      <tr>
+        <th class="mode">Mode</th>
+        <th>Thai (long/no-space stress)</th>
+        <th>English (long-word stress)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="mode">word-break: normal; overflow-wrap: normal; line-break: auto;</td>
+        <td>
+          <div class="sample tight wb-normal ow-normal lb-auto">
+            การทดสอบการตัดคำภาษาไทยที่ต่อเนื่องยาวมากโดยไม่มีช่องว่างและมีสระวรรณยุกต์ซ้อนกันเพื่อตรวจสอบความเสถียรของการตัดบรรทัด
+          </div>
+        </td>
+        <td>
+          <div class="sample tight wb-normal ow-normal lb-auto">
+            Supercalifragilisticexpialidocious data-driven architectural patterns without natural break points should
+            reveal default wrap boundaries.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mode">word-break: break-all;</td>
+        <td>
+          <div class="sample tight wb-break-all">
+            การทดสอบการตัดคำภาษาไทยที่ต่อเนื่องยาวมากโดยไม่มีช่องว่างและมีสระวรรณยุกต์ซ้อนกันเพื่อตรวจสอบความเสถียรของการตัดบรรทัด
+          </div>
+        </td>
+        <td>
+          <div class="sample tight wb-break-all">
+            Supercalifragilisticexpialidocious data-driven architectural patterns without natural break points should
+            break aggressively across characters.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mode">word-break: keep-all;</td>
+        <td>
+          <div class="sample tight wb-keep-all">
+            การทดสอบการตัดคำภาษาไทยที่ต่อเนื่องยาวมากโดยไม่มีช่องว่างและมีสระวรรณยุกต์ซ้อนกันเพื่อตรวจสอบความเสถียรของการตัดบรรทัด
+          </div>
+        </td>
+        <td>
+          <div class="sample tight wb-keep-all">
+            Supercalifragilisticexpialidocious data-driven architectural patterns without natural break points should
+            avoid forced breaks where possible.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mode">word-break: break-word;</td>
+        <td>
+          <div class="sample tight wb-break-word">
+            การทดสอบการตัดคำภาษาไทยที่ต่อเนื่องยาวมากโดยไม่มีช่องว่างและมีสระวรรณยุกต์ซ้อนกันเพื่อตรวจสอบความเสถียรของการตัดบรรทัด
+          </div>
+        </td>
+        <td>
+          <div class="sample tight wb-break-word">
+            Supercalifragilisticexpialidocious data-driven architectural patterns without natural break points should
+            fallback to emergency breaks.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mode">overflow-wrap: break-word;</td>
+        <td>
+          <div class="sample tight wb-normal ow-break-word">
+            การทดสอบการตัดคำภาษาไทยที่ต่อเนื่องยาวมากโดยไม่มีช่องว่างและมีสระวรรณยุกต์ซ้อนกันเพื่อตรวจสอบความเสถียรของการตัดบรรทัด
+          </div>
+        </td>
+        <td>
+          <div class="sample tight wb-normal ow-break-word">
+            Supercalifragilisticexpialidocious data-driven architectural patterns without natural break points should
+            break only when overflow happens.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mode">overflow-wrap: anywhere;</td>
+        <td>
+          <div class="sample tight wb-normal ow-anywhere">
+            การทดสอบการตัดคำภาษาไทยที่ต่อเนื่องยาวมากโดยไม่มีช่องว่างและมีสระวรรณยุกต์ซ้อนกันเพื่อตรวจสอบความเสถียรของการตัดบรรทัด
+          </div>
+        </td>
+        <td>
+          <div class="sample tight wb-normal ow-anywhere">
+            Supercalifragilisticexpialidocious data-driven architectural patterns without natural break points should
+            permit wrapping at nearly any point.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mode">line-break: loose / normal / strict / anywhere;</td>
+        <td>
+          <div class="sample tight lb-loose">loose: ภาษาไทย-ทดสอบ, เครื่องหมาย/วงเล็บ(ชุด)และจังหวะคำ</div>
+          <div class="sample tight lb-normal">normal: ภาษาไทย-ทดสอบ, เครื่องหมาย/วงเล็บ(ชุด)และจังหวะคำ</div>
+          <div class="sample tight lb-strict">strict: ภาษาไทย-ทดสอบ, เครื่องหมาย/วงเล็บ(ชุด)และจังหวะคำ</div>
+          <div class="sample tight lb-anywhere">anywhere: ภาษาไทย-ทดสอบ, เครื่องหมาย/วงเล็บ(ชุด)และจังหวะคำ</div>
+        </td>
+        <td>
+          <div class="sample tight lb-loose">loose: punctuation-aware wrapping with commas, dashes, and brackets
+            (alpha/beta/gamma).</div>
+          <div class="sample tight lb-normal">normal: punctuation-aware wrapping with commas, dashes, and brackets
+            (alpha/beta/gamma).</div>
+          <div class="sample tight lb-strict">strict: punctuation-aware wrapping with commas, dashes, and brackets
+            (alpha/beta/gamma).</div>
+          <div class="sample tight lb-anywhere">anywhere: punctuation-aware wrapping with commas, dashes, and brackets
+            (alpha/beta/gamma).</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mode">hyphens: none / manual / auto;</td>
+        <td>
+          <div class="sample tight hy-none">hyphens none: ภาษาไทยทดสอบการเว้นช่วงโดยไม่ใช้เครื่องหมายขีดแบ่งคำ</div>
+          <div class="sample tight hy-manual">hyphens manual: ภาษาไทยทดสอบการเว้นช่วงโดยไม่ใช้เครื่องหมายขีดแบ่งคำ</div>
+          <div class="sample tight hy-auto">hyphens auto: ภาษาไทยทดสอบการเว้นช่วงโดยไม่ใช้เครื่องหมายขีดแบ่งคำ</div>
+        </td>
+        <td>
+          <div class="sample tight hy-none">none: electroencephalographically internationalization microarchitecture.
+          </div>
+          <div class="sample tight hy-manual">manual:
+            elec&shy;tro&shy;en&shy;ceph&shy;a&shy;lo&shy;graph&shy;i&shy;cal&shy;ly internationalization.</div>
+          <div class="sample tight hy-auto">auto: electroencephalographically internationalization microarchitecture.
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <h2>C) white-space modes</h2>
+  <table class="matrix">
+    <thead>
+      <tr>
+        <th class="mode">Mode</th>
+        <th>Thai</th>
+        <th>English</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="mode">white-space: normal;</td>
+        <td>
+          <div class="sample ws-normal">บรรทัดหนึ่ง มีช่องว่างหลายช่วง และ
+            ขึ้นบรรทัดใหม่เพื่อดูการยุบช่องไฟ</div>
+        </td>
+        <td>
+          <div class="sample ws-normal">Line one has irregular spaces and
+            line breaks that should collapse in normal mode.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mode">white-space: nowrap;</td>
+        <td>
+          <div class="sample ws-nowrap">
+            ข้อความยาวมากที่ไม่ควรถูกตัดบรรทัดอัตโนมัติแม้พื้นที่แนวนอนจะจำกัดมากและอาจล้นกล่องเพื่อดูพฤติกรรม nowrap
+          </div>
+        </td>
+        <td>
+          <div class="sample ws-nowrap">This is a very long sentence that should not automatically wrap even in a narrow
+            container and may overflow in nowrap mode.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mode">white-space: pre;</td>
+        <td>
+          <div class="sample ws-pre">บรรทัดที่ 1 ช่องว่างเยอะ
+            บรรทัดที่ 2 ต้องคงไว้
+            บรรทัดที่ 3 ทดสอบ pre</div>
+        </td>
+        <td>
+          <div class="sample ws-pre">Line 1 keeps spaces
+            Line 2 keeps breaks
+            Line 3 checks pre</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mode">white-space: pre-wrap;</td>
+        <td>
+          <div class="sample ws-pre-wrap">บรรทัดที่ 1 ช่องว่างเยอะ
+            บรรทัดที่ 2 ต้องคงไว้และยังตัดบรรทัดได้เมื่อยาวมากเป็นพิเศษ</div>
+        </td>
+        <td>
+          <div class="sample ws-pre-wrap">Line 1 keeps spaces
+            Line 2 keeps breaks and still wraps if the line is too long for the box.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="mode">white-space: pre-line;</td>
+        <td>
+          <div class="sample ws-pre-line">บรรทัดที่ 1 มีช่องว่างเยอะ
+            บรรทัดที่ 2 ต้องเก็บขึ้นบรรทัดใหม่แต่ยุบช่องว่าง</div>
+        </td>
+        <td>
+          <div class="sample ws-pre-line">Line 1 has extra spaces
+            Line 2 keeps new lines but collapses repeated spaces.</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>

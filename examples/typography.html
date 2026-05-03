@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Typography & Languages</title>
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
+  <style>
+    .font-sarabun {
+      font-family: 'Sarabun', sans-serif;
+    }
+
+    .font-prompt {
+      font-family: 'Prompt', sans-serif;
+    }
+
+    .font-kanit {
+      font-family: 'Kanit', sans-serif;
+    }
+
+    .font-cjk {
+      font-family: 'Noto Sans CJK', 'Sarabun', sans-serif;
+    }
+
+    .font-emoji {
+      font-family: 'Noto Color Emoji', 'NotoEmoji', 'Sarabun', sans-serif;
+    }
+
+    .sample-box {
+      border: 1px solid #d8e2ec;
+      background: #fbfdff;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+    }
+
+    .color-line {
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Typography & Multi-language Test</h1>
+
+  <h2>1. Thai Text Shaping (Complex Vowels & Tones)</h2>
+  <div class="sample-box">
+    <p class="font-sarabun"><strong>Sarabun:</strong> ผู้ใหญ่หาผ้าใหม่ ให้สะใภ้ใช้คล้องคอ ใฝ่ใจเอาใส่ห่อ มิหลงใหลใครขอดู
+      (ทดสอบ ญัตติ, ฐาน, ป่าไม้, น้ำตก)</p>
+    <p class="font-prompt"><strong>Prompt:</strong> สวัสดีครับ นี่คือการทดสอบฟอนต์ Prompt สำหรับการสร้าง PDF</p>
+    <p class="font-kanit"><strong>Kanit:</strong> ทดสอบฟอนต์ Kanit ตัวหนาและตัวเอียง <em>เอียง</em> <strong>หนา</strong>
+    </p>
+  </div>
+
+  <h2>2. CJK Text (Noto Sans CJK)</h2>
+  <div class="sample-box font-cjk">
+    <p><strong>Japanese:</strong> こんにちは、世界。これは PDF レンダリング品質の確認です。</p>
+    <p><strong>Chinese:</strong> 你好，世界。这是用于检查 PDF 排版与断行效果的示例段落。</p>
+    <p><strong>Korean:</strong> 안녕하세요, 세계. 이 문장은 PDF 줄바꿈과 글꼴 렌더링을 확인하기 위한 예시입니다.</p>
+  </div>
+
+  <h2>3. Emoji (Color Emoji)</h2>
+  <div class="sample-box font-emoji">
+    <p style="font-size: 22px;">😀 🚀 🌍 📄 🎉 🧠 ✅ ⚠️ ❌ 🇹🇭 🇯🇵 🇨🇳 🇰🇷</p>
+    <p>Emoji mixed text: build success ✅, deploy pending 🚀, incident closed 🎉.</p>
+  </div>
+
+  <h2>4. Lists (Thai + CJK + English)</h2>
+  <div class="sample-box">
+    <ul>
+      <li>ไทย: ตรวจสอบการตัดคำและการจัดบรรทัดในคอลัมน์แคบ</li>
+      <li class="font-cjk">日本語: 箇条書きのレイアウトと句読点の折り返しを確認する</li>
+      <li class="font-cjk">中文: 验证列表项目在分页时的稳定性和可读性</li>
+      <li>English: verify bullet indentation, spacing rhythm, and readability.</li>
+    </ul>
+  </div>
+
+  <h2>5. Color Text</h2>
+  <div class="sample-box">
+    <p
+      class="color-line"
+      style="color: #c03a3a;"
+    >Critical: API timeout exceeded threshold.</p>
+    <p
+      class="color-line"
+      style="color: #1f8f63;"
+    >Success: nightly render batch completed.</p>
+    <p
+      class="color-line"
+      style="color: #1d4a73;"
+    >Info: typography baseline updated for CJK pages.</p>
+    <p
+      class="color-line"
+      style="color: #b87436; margin-bottom: 0;"
+    >Warning: check long-word wrapping in narrow tables.</p>
+  </div>
+</body>
+
+</html>
