@@ -1,8 +1,29 @@
-# LynPDF RS API Guide v0.1.0
+# LynPDF RS API Guide v0.1.1
 
-คู่มือฉบับขยายนี้ครอบคลุม API ที่ใช้งานได้จริงของ LynPDF RS 0.1.0 ตั้งแต่ quick start ไปจนถึงงานเอกสารภาษาไทย, syntax highlight, fit-to-page, diagnostics, และ certificate template แบบ production
+คู่มือฉบับขยายนี้ครอบคลุม API ที่ใช้งานได้จริงของ LynPDF RS 0.1.1 ตั้งแต่ quick start ไปจนถึงงานเอกสารภาษาไทย, syntax highlight, fit-to-page, diagnostics, และ certificate template แบบ production
 
-ไฟล์นี้คือ API Guide หลักของโปรเจกต์ (`docs/api-guide-v0.1.0.md`)
+ไฟล์นี้คือ API Guide หลักของโปรเจกต์ (`docs/api-guide-v0.1.1.md`)
+
+<!-- PDF rendering guard: enforce stable code-block layout and wrapping for long samples. -->
+<style>
+pre {
+    margin: 0 0 12px;
+    padding: 10px 12px;
+    border: 1px solid #d0d7de;
+    background: #f6f8fa;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+pre code {
+    display: block;
+    white-space: inherit;
+    font-family: "IBM Plex Mono", "JetBrains Mono", "Fira Code", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", monospace;
+    font-size: 12px;
+    line-height: 1.55;
+}
+</style>
 
 ## Companion Example Repository
 
@@ -37,7 +58,7 @@ LynPDF RS เวอร์ชัน production setup รองรับการ�
 
 ```toml
 [dependencies]
-lynpdf-rs = "0.1.0"
+lynpdf-rs = "0.1.1"
 ```
 
 ### ตรวจสอบเวอร์ชันจาก runtime
@@ -52,7 +73,7 @@ fn main() {
 
 ---
 
-## 2) Public API Surface (ครบตาม v0.1.0)
+## 2) Public API Surface (ครบตาม v0.1.1)
 
 ### Core functions
 
@@ -283,7 +304,7 @@ pre code {
 }
 ```
 
-เพิ่มเติมใน v0.1.0: ถ้า `<pre>`/`<code>` ไม่มี `style` ระบบจะเติม default style ที่ปลอดภัยให้อัตโนมัติระหว่าง preprocess syntax highlight แต่ถ้ามี `style` อยู่แล้ว ระบบจะไม่ทับของเดิม
+เพิ่มเติมใน v0.1.1: ถ้า `<pre>`/`<code>` ไม่มี `style` ระบบจะเติม default style ที่ปลอดภัยให้อัตโนมัติระหว่าง preprocess syntax highlight แต่ถ้ามี `style` อยู่แล้ว ระบบจะไม่ทับของเดิม
 
 ---
 
@@ -341,8 +362,8 @@ Diagnostic codes ที่เจอบ่อย:
 
 Metadata default เมื่อเอกสารไม่กำหนดเอง:
 
-- Creator: `LynPDF 0.1.0`
-- Producer: `LynPDF RS 0.1.0`
+- Creator: `LynPDF 0.1.1`
+- Producer: `LynPDF RS 0.1.1`
 
 ---
 
@@ -389,4 +410,4 @@ Flags ที่รองรับ:
 
 ---
 
-เอกสารนี้อ้างอิง LynPDF RS 0.1.0 โดยตรง
+เอกสารนี้อ้างอิง LynPDF RS 0.1.1 โดยตรง

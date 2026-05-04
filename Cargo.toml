@@ -1,6 +1,6 @@
 [package]
 name = "lynpdf-rs"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["Supphachoke Suntiwichaya <mrchoke@gmail.com>"]
 description = "Pure Rust HTML/CSS to PDF renderer focused on Thai text layout"
@@ -28,23 +28,23 @@ name = "lynpdf-rs"
 path = "src/main.rs"
 
 [dependencies]
-html5ever = "0.26"
-markup5ever_rcdom = "0.2"
+html5ever = "0.38"
+markup5ever_rcdom = "0.38"
 lightningcss = "1.0.0-alpha.68"
-rustybuzz = "0.14"
+rustybuzz = "0.20"
 ttf-parser = "0.25"
 unicode-normalization = "0.1"
 unicode-segmentation = "1.12"
 thiserror = "2"
 image = { version = "0.25", default-features = false, features = ["png"] }
-pulldown-cmark = "0.12"
+pulldown-cmark = "0.13"
 syntect = "5.2"
 
 # Kept as architecture dependencies for the next layout/text backend steps.
 # The MVP uses a compact block layout and direct rustybuzz shaping so the crate
 # can start producing PDFs before full CSS layout parity is implemented.
-taffy = { version = "0.5", optional = true }
-cosmic-text = { version = "0.12", default-features = false, optional = true }
+taffy = { version = "0.10", optional = true }
+cosmic-text = { version = "0.19", default-features = false, optional = true }
 
 [features]
 default = []
