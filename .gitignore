@@ -11,6 +11,8 @@
 /examples/output/*
 !/examples/output/.gitkeep
 
+/examples/md_with_img
+
 # Downloaded runtime fonts (external policy)
 /fonts/*
 !/fonts/.gitkeep

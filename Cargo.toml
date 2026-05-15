@@ -28,17 +28,18 @@ name = "lynpdf-rs"
 path = "src/main.rs"
 
 [dependencies]
-html5ever = "0.38"
-markup5ever_rcdom = "0.38"
+html5ever = "0.39"
+markup5ever_rcdom = "0.39"
 lightningcss = "1.0.0-alpha.68"
 rustybuzz = "0.20"
 ttf-parser = "0.25"
 unicode-normalization = "0.1"
 unicode-segmentation = "1.12"
 thiserror = "2"
-image = { version = "0.25", default-features = false, features = ["png"] }
+image = { version = "0.25", default-features = false, features = ["png", "jpeg"] }
 pulldown-cmark = "0.13"
 syntect = "5.2"
+flate2 = "1.0"
 
 # Kept as architecture dependencies for the next layout/text backend steps.
 # The MVP uses a compact block layout and direct rustybuzz shaping so the crate

@@ -386,8 +386,11 @@ impl<'a> LayoutContext<'a> {
         width: f32,
     ) -> Result<()> {
         ancestors.push(node);
-        for child in &node.children {
-            self.layout_node(child, ancestors, parent_style, x, width)?;
+        for (index, child) in node.children.iter().enumerate() {
+            let next_flow_sibling = node.children[index + 1..]
+                .iter()
+                .find(|candidate| is_flow_sibling_candidate(candidate));
+            self.layout_node(child, ancestors, parent_style, x, width, next_flow_sibling)?;
         }
         ancestors.pop();
         Ok(())
@@ -400,6 +403,7 @@ impl<'a> LayoutContext<'a> {
         parent_style: &ComputedStyle,
         x: f32,
         width: f32,
+        next_flow_sibling: Option<&'a HtmlNode>,
     ) -> Result<()> {
         if matches!(node.kind, HtmlNodeKind::Text(_)) {
             return Ok(());
@@ -426,6 +430,17 @@ impl<'a> LayoutContext<'a> {
 
         if style.page_break_before && self.cursor_y > self.document.margin_pt + 1.0 {
             self.new_page();
+        }
+
+        if is_heading_tag(tag) {
+            self.keep_heading_with_next(
+                node,
+                &style,
+                next_flow_sibling,
+                ancestors,
+                parent_style,
+                width,
+            )?;
         }
 
         if tag == "table" {
@@ -464,54 +479,168 @@ impl<'a> LayoutContext<'a> {
                     &color_spans,
                     anchor_name.as_deref(),
                 )?;
+            } else if has_renderable_inline_media(node) {
+                // Markdown often wraps standalone images in a <p>; lay out children so
+                // replaced elements (img/svg) are rendered instead of being dropped.
+                self.layout_block_container(node, ancestors, &style, x, width, anchor_name.as_deref())?;
             }
             return Ok(());
         }
 
         if is_block_tag(tag) {
-            let box_width = resolve_style_width_pt(&style, width).min(width).max(0.0);
-            let content_x = x + style.margin.left + style.border_width_pt + style.padding.left;
-            let content_width = (box_width
-                - style.margin.horizontal()
-                - style.padding.horizontal()
-                - style.border_width_pt * 2.0)
-                .max(1.0);
-            self.cursor_y += style.margin.top;
-            let start_y = self.cursor_y;
-            if let Some(anchor_name) = anchor_name.as_ref() {
-                self.current_ops().push(PaintOp::Anchor {
-                    name: anchor_name.clone(),
-                    y: start_y,
-                });
-            }
-            self.cursor_y += style.border_width_pt + style.padding.top;
-
-            let rect_page_index = self.document.pages.len() - 1;
-            let op_index = self.current_ops().len();
-            if style.background_color.is_some() || has_visible_border(&style) {
-                self.current_ops().push(PaintOp::Rect {
-                    x: x + style.margin.left,
-                    y: start_y,
-                    width: box_width - style.margin.horizontal(),
-                    height: 0.0,
-                    fill: style.background_color,
-                    stroke: has_visible_border(&style).then_some(style.border_color),
-                    stroke_width: style.border_width_pt,
-                });
-            }
-
-            self.layout_children(node, ancestors, &style, content_x, content_width)?;
-            self.cursor_y += style.padding.bottom + style.border_width_pt;
-
-            if rect_page_index == self.document.pages.len() - 1 {
-                let rect_height = (self.cursor_y - start_y).max(0.0);
-                if let Some(PaintOp::Rect { height, .. }) = self.current_ops().get_mut(op_index) {
-                    *height = rect_height;
-                }
-            }
-            self.cursor_y += style.margin.bottom;
+            self.layout_block_container(node, ancestors, &style, x, width, anchor_name.as_deref())?;
         }
 
+        Ok(())
+    }
+
+    fn keep_heading_with_next(
+        &mut self,
+        heading: &'a HtmlNode,
+        heading_style: &ComputedStyle,
+        next_flow_sibling: Option<&'a HtmlNode>,
+        ancestors: &[&'a HtmlNode],
+        parent_style: &ComputedStyle,
+        width: f32,
+    ) -> Result<()> {
+        if self.cursor_y <= self.document.margin_pt + 1.0 {
+            return Ok(());
+        }
+
+        let Some(next_node) = next_flow_sibling else {
+            return Ok(());
+        };
+
+        let next_style = compute_style(next_node, ancestors, self.sheet, parent_style);
+        if next_style.display == Display::None || next_style.page_break_before {
+            return Ok(());
+        }
+
+        let heading_height = self.estimate_node_keep_with_next_height(heading, heading_style, width)?;
+        let next_height = self.estimate_node_keep_with_next_height(next_node, &next_style, width)?;
+
+        if heading_height <= 0.0 || next_height <= 0.0 {
+            return Ok(());
+        }
+
+        if should_break_for_keep_with_next(
+            self.cursor_y,
+            self.page_bottom(),
+            heading_height,
+            next_height,
+        ) {
+            self.new_page();
+        }
+
+        Ok(())
+    }
+
+    fn estimate_node_keep_with_next_height(
+        &self,
+        node: &'a HtmlNode,
+        style: &ComputedStyle,
+        width: f32,
+    ) -> Result<f32> {
+        let Some(tag) = node.tag_name() else {
+            return Ok(0.0);
+        };
+
+        let block_width = resolve_style_width_pt(style, width).min(width).max(1.0);
+        let content_width = (block_width
+            - style.margin.horizontal()
+            - style.padding.horizontal()
+            - style.border_width_pt * 2.0)
+            .max(1.0);
+        let base_height = style.margin.vertical() + style.padding.vertical() + style.border_width_pt * 2.0;
+
+        if tag == "img" {
+            let content_height = node
+                .attr("height")
+                .and_then(parse_attr_length_pt)
+                .unwrap_or(content_width * 0.6)
+                .max(1.0);
+            return Ok(base_height + content_height);
+        }
+
+        if tag == "svg" {
+            let content_height = node
+                .attr("height")
+                .and_then(parse_attr_length_pt)
+                .unwrap_or(content_width * 0.6)
+                .max(1.0);
+            return Ok(base_height + content_height);
+        }
+
+        if is_text_container(tag) || has_only_inline_children(node) {
+            let text = collect_text_for_style(node, style);
+            let text_height = if text.trim().is_empty() {
+                style.line_height_pt
+            } else {
+                let lines = shape_lines(&text, style, content_width, self.fonts, self.options)?;
+                let line_count = lines.len().max(1) as f32;
+                line_count * style.line_height_pt
+            };
+            return Ok(base_height + text_height);
+        }
+
+        if is_block_tag(tag) {
+            return Ok(base_height + style.line_height_pt.max(12.0));
+        }
+
+        Ok(0.0)
+    }
+
+    fn layout_block_container(
+        &mut self,
+        node: &'a HtmlNode,
+        ancestors: &mut Vec<&'a HtmlNode>,
+        style: &ComputedStyle,
+        x: f32,
+        width: f32,
+        anchor_name: Option<&str>,
+    ) -> Result<()> {
+        let box_width = resolve_style_width_pt(style, width).min(width).max(0.0);
+        let content_x = x + style.margin.left + style.border_width_pt + style.padding.left;
+        let content_width = (box_width
+            - style.margin.horizontal()
+            - style.padding.horizontal()
+            - style.border_width_pt * 2.0)
+            .max(1.0);
+
+        self.cursor_y += style.margin.top;
+        let start_y = self.cursor_y;
+        if let Some(anchor_name) = anchor_name {
+            self.current_ops().push(PaintOp::Anchor {
+                name: anchor_name.to_string(),
+                y: start_y,
+            });
+        }
+        self.cursor_y += style.border_width_pt + style.padding.top;
+
+        let rect_page_index = self.document.pages.len() - 1;
+        let op_index = self.current_ops().len();
+        if style.background_color.is_some() || has_visible_border(style) {
+            self.current_ops().push(PaintOp::Rect {
+                x: x + style.margin.left,
+                y: start_y,
+                width: box_width - style.margin.horizontal(),
+                height: 0.0,
+                fill: style.background_color,
+                stroke: has_visible_border(style).then_some(style.border_color),
+                stroke_width: style.border_width_pt,
+            });
+        }
+
+        self.layout_children(node, ancestors, style, content_x, content_width)?;
+        self.cursor_y += style.padding.bottom + style.border_width_pt;
+
+        if rect_page_index == self.document.pages.len() - 1 {
+            let rect_height = (self.cursor_y - start_y).max(0.0);
+            if let Some(PaintOp::Rect { height, .. }) = self.current_ops().get_mut(op_index) {
+                *height = rect_height;
+            }
+        }
+        self.cursor_y += style.margin.bottom;
         Ok(())
     }
 
@@ -833,13 +962,18 @@ impl<'a> LayoutContext<'a> {
 
         let intrinsic_width_pt = raster.pixel_width as f32 * 0.75;
         let intrinsic_height_pt = raster.pixel_height as f32 * 0.75;
+        let max_content_width = (width
+            - style.margin.horizontal()
+            - style.padding.horizontal()
+            - style.border_width_pt * 2.0)
+            .max(1.0);
         let resolved_width = resolve_declared_width_pt(style, width)
             .or_else(|| node.attr("width").and_then(parse_attr_length_pt))
             .unwrap_or(intrinsic_width_pt)
             .max(1.0);
 
-        let content_width = resolved_width.min(width.max(1.0));
-        let content_height = node
+        let mut content_width = resolved_width.min(max_content_width).max(1.0);
+        let mut content_height = node
             .attr("height")
             .and_then(parse_attr_length_pt)
             .unwrap_or_else(|| {
@@ -848,6 +982,26 @@ impl<'a> LayoutContext<'a> {
             })
             .max(1.0);
 
+        let mut block_height = style.padding.vertical() + style.border_width_pt * 2.0 + content_height;
+        if self.cursor_y + style.margin.top + block_height + style.margin.bottom
+            > self.page_bottom()
+            && self.cursor_y > self.document.margin_pt + 1.0
+        {
+            self.new_page();
+        }
+
+        let available_block_height =
+            (self.page_bottom() - self.cursor_y - style.margin.top - style.margin.bottom).max(1.0);
+        let max_content_height =
+            (available_block_height - style.padding.vertical() - style.border_width_pt * 2.0).max(1.0);
+        (content_width, content_height) = fit_size_preserving_aspect(
+            content_width,
+            content_height,
+            max_content_width,
+            max_content_height,
+        );
+        block_height = style.padding.vertical() + style.border_width_pt * 2.0 + content_height;
+
         let container_width = (width - style.margin.horizontal()).max(content_width);
         let outer_x = align_inline_x(
             x + style.margin.left,
@@ -855,14 +1009,6 @@ impl<'a> LayoutContext<'a> {
             content_width + style.padding.horizontal() + style.border_width_pt * 2.0,
             style.text_align,
         );
-
-        let block_height = style.padding.vertical() + style.border_width_pt * 2.0 + content_height;
-        if self.cursor_y + style.margin.top + block_height + style.margin.bottom
-            > self.page_bottom()
-            && self.cursor_y > self.document.margin_pt + 1.0
-        {
-            self.new_page();
-        }
 
         self.cursor_y += style.margin.top;
         let start_y = self.cursor_y;
@@ -2734,6 +2880,26 @@ fn is_thai_script_char(ch: char) -> bool {
     ('\u{0E00}'..='\u{0E7F}').contains(&ch)
 }
 
+fn is_heading_tag(tag: &str) -> bool {
+    matches!(tag, "h1" | "h2" | "h3" | "h4" | "h5" | "h6")
+}
+
+fn should_break_for_keep_with_next(
+    cursor_y: f32,
+    page_bottom: f32,
+    heading_height: f32,
+    next_height: f32,
+) -> bool {
+    cursor_y + heading_height + next_height > page_bottom
+}
+
+fn is_flow_sibling_candidate(node: &HtmlNode) -> bool {
+    matches!(
+        node.tag_name(),
+        Some(tag) if !matches!(tag, "script" | "style")
+    )
+}
+
 fn has_only_inline_children(node: &HtmlNode) -> bool {
     node.children.iter().all(|child| match &child.kind {
         HtmlNodeKind::Text(_) => true,
@@ -2746,6 +2912,42 @@ fn has_only_inline_children(node: &HtmlNode) -> bool {
         }
         HtmlNodeKind::Document => true,
     })
+}
+
+fn has_renderable_inline_media(node: &HtmlNode) -> bool {
+    node.children.iter().any(child_has_renderable_media)
+}
+
+fn child_has_renderable_media(node: &HtmlNode) -> bool {
+    match &node.kind {
+        HtmlNodeKind::Element(tag) if tag == "img" || tag == "svg" => true,
+        HtmlNodeKind::Element(tag) if tag == "script" || tag == "style" => false,
+        HtmlNodeKind::Element(_) | HtmlNodeKind::Document => {
+            node.children.iter().any(child_has_renderable_media)
+        }
+        HtmlNodeKind::Text(_) => false,
+    }
+}
+
+fn fit_size_preserving_aspect(
+    width_pt: f32,
+    height_pt: f32,
+    max_width_pt: f32,
+    max_height_pt: f32,
+) -> (f32, f32) {
+    let safe_width = width_pt.max(1.0);
+    let safe_height = height_pt.max(1.0);
+    let max_width = max_width_pt.max(1.0);
+    let max_height = max_height_pt.max(1.0);
+    let scale = (max_width / safe_width)
+        .min(max_height / safe_height)
+        .min(1.0)
+        .max(0.0);
+
+    (
+        (safe_width * scale).max(1.0),
+        (safe_height * scale).max(1.0),
+    )
 }
 
 fn resolve_text_link_spans(text: &str, links: &[HtmlLink]) -> Vec<TextLinkSpan> {
@@ -2994,18 +3196,93 @@ fn align_inline_x(base_x: f32, available_width: f32, content_width: f32, align: 
 }
 
 fn resolve_asset_path(base_dir: &Path, src: &str) -> Option<PathBuf> {
-    let source_path = Path::new(src);
+    let source_path = normalize_asset_source_path(src)?;
     if source_path.is_absolute() {
-        return source_path.exists().then(|| source_path.to_path_buf());
+        return source_path.exists().then_some(source_path);
     }
 
     for ancestor in base_dir.ancestors() {
-        let candidate = ancestor.join(source_path);
+        let candidate = ancestor.join(&source_path);
         if candidate.exists() {
             return Some(candidate);
         }
     }
+
+    if !base_dir.is_absolute() {
+        if let Ok(cwd) = std::env::current_dir() {
+            let absolute_base_dir = cwd.join(base_dir);
+            for ancestor in absolute_base_dir.ancestors() {
+                let candidate = ancestor.join(&source_path);
+                if candidate.exists() {
+                    return Some(candidate);
+                }
+            }
+        }
+    }
+
     None
+}
+
+fn normalize_asset_source_path(src: &str) -> Option<PathBuf> {
+    let trimmed = src.trim();
+    if trimmed.is_empty() {
+        return None;
+    }
+
+    if trimmed.starts_with("http://") || trimmed.starts_with("https://") {
+        return None;
+    }
+
+    let without_fragment = trimmed.split('#').next().unwrap_or(trimmed);
+    let without_query = without_fragment.split('?').next().unwrap_or(without_fragment);
+    if without_query.is_empty() {
+        return None;
+    }
+
+    let mut path_text = without_query;
+    if let Some(file_uri_path) = without_query.strip_prefix("file://") {
+        path_text = file_uri_path.strip_prefix("localhost/").unwrap_or(file_uri_path);
+    }
+
+    let decoded = percent_decode_lossy(path_text);
+    if decoded.is_empty() {
+        return None;
+    }
+
+    Some(PathBuf::from(decoded))
+}
+
+fn percent_decode_lossy(raw: &str) -> String {
+    let bytes = raw.as_bytes();
+    let mut output = Vec::with_capacity(bytes.len());
+    let mut index = 0usize;
+
+    while index < bytes.len() {
+        if bytes[index] == b'%' && index + 2 < bytes.len() {
+            if let (Some(hi), Some(lo)) = (
+                decode_hex_nibble(bytes[index + 1]),
+                decode_hex_nibble(bytes[index + 2]),
+            ) {
+                output.push((hi << 4) | lo);
+                index += 3;
+                continue;
+            }
+        }
+
+        output.push(bytes[index]);
+        index += 1;
+    }
+
+    String::from_utf8_lossy(&output).into_owned()
+}
+
+fn decode_hex_nibble(value: u8) -> Option<u8> {
+    match value {
+        b'0'..=b'9' => Some(value - b'0'),
+        b'a'..=b'f' => Some(value - b'a' + 10),
+        b'A'..=b'F' => Some(value - b'A' + 10),
+        _ => None,
+    }
 }
 
 fn parse_attr_length_pt(raw: &str) -> Option<f32> {
@@ -4458,6 +4735,11 @@ fn tokenize_svg_path_data(data: &str) -> Vec<SvgPathToken> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::fonts::FontRegistry;
+    use crate::html::{find_body, parse_html};
+    use crate::style::StyleSheet;
+    use crate::types::RenderOptions;
+    use std::path::Path;
 
     fn element(tag: &str, attrs: &[(&str, &str)], children: Vec<HtmlNode>) -> HtmlNode {
         let mut map = std::collections::HashMap::new();
@@ -4686,5 +4968,98 @@ mod tests {
         assert!((x - 16.0).abs() < 0.001);
         assert!((y - 13.0).abs() < 0.001);
         assert!((context.inherited_opacity - 0.3).abs() < 0.001);
+    }
+
+    #[test]
+    fn detects_renderable_inline_media_in_nested_children() {
+        let node = element(
+            "p",
+            &[],
+            vec![element(
+                "a",
+                &[("href", "https://example.com")],
+                vec![element(
+                    "img",
+                    &[("src", "assets/example.png")],
+                    Vec::new(),
+                )],
+            )],
+        );
+
+        assert!(has_renderable_inline_media(&node));
+    }
+
+    #[test]
+    fn fit_size_preserving_aspect_scales_down_to_bounds() {
+        let (width, height) = fit_size_preserving_aspect(900.0, 1600.0, 500.0, 600.0);
+
+        assert!((width - 337.5).abs() < 0.01);
+        assert!((height - 600.0).abs() < 0.01);
+    }
+
+    #[test]
+    fn normalizes_asset_source_path_for_file_uri_and_encoded_chars() {
+        let path = normalize_asset_source_path("file:///tmp/face%20search/a.png?raw=1#preview")
+            .expect("expected normalized path");
+
+        assert_eq!(path, PathBuf::from("/tmp/face search/a.png"));
+    }
+
+    #[test]
+    fn keep_with_next_break_decision_requires_enough_room_for_both_blocks() {
+        assert!(should_break_for_keep_with_next(690.0, 740.0, 24.0, 32.0));
+        assert!(!should_break_for_keep_with_next(690.0, 760.0, 24.0, 32.0));
+    }
+
+    #[test]
+    fn heading_anchor_stays_with_next_paragraph_anchor() {
+        let mut fonts = FontRegistry::discover("Sarabun").expect("font discovery should not fail");
+        if fonts.finalize_default_font("Sarabun").is_err() {
+            // Skip in environments without any usable fonts.
+            return;
+        }
+
+        let mut html = String::from("<html><body>");
+        for index in 0..9 {
+            html.push_str(&format!("<p>filler {index}</p>"));
+        }
+        html.push_str("<h1 id=\"hdr\">Header keep</h1><p id=\"para\">paragraph keep</p>");
+        html.push_str("</body></html>");
+
+        let css = r#"
+@page { size: 220pt 260pt; margin: 20pt; }
+body { font-size: 12pt; line-height: 14pt; }
+p { margin: 0 0 6pt; }
+h1 { font-size: 18pt; line-height: 20pt; margin: 0 0 4pt; }
+"#;
+
+        let root = parse_html(&html).expect("html should parse");
+        let body = find_body(&root);
+        let sheet = StyleSheet::parse(css);
+        let options = RenderOptions::default();
+        let layout = layout_document(body, &sheet, &fonts, &options, Path::new("."))
+            .expect("layout should succeed");
+
+        let heading_page = layout
+            .pages
+            .iter()
+            .position(|page| {
+                page.ops.iter().any(|op| {
+                    matches!(op, PaintOp::Anchor { name, .. } if name == "hdr")
+                })
+            })
+            .expect("heading anchor should exist");
+
+        let paragraph_page = layout
+            .pages
+            .iter()
+            .position(|page| {
+                page.ops.iter().any(|op| {
+                    matches!(op, PaintOp::Anchor { name, .. } if name == "para")
+                })
+            })
+            .expect("paragraph anchor should exist");
+
+        assert_eq!(heading_page, paragraph_page);
     }
 }

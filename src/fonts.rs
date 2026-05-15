@@ -1,7 +1,7 @@
 use crate::error::{LynPdfError, Result};
 use crate::style::{FontFaceRule, FontFaceSource, FontStyle, FontWeight};
 use crate::types::{Diagnostic, RenderFontStyle, UserFontMapping};
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use std::fs;
 use std::path::{Path, PathBuf};
 use ttf_parser::{Face, GlyphId};
@@ -40,11 +40,14 @@ impl FontRegistry {
             registry.register_fonts_from_dir(&root, false)?;
         }
 
+        if registry.fonts.is_empty() {
+            for root in system_font_roots() {
+                registry.register_fonts_from_dir(&root, false)?;
+            }
+        }
+
         if !registry.fonts.is_empty() {
-            registry.default_key = registry
-                .resolve(default_family, FontWeight::Regular, FontStyle::Normal)
-                .or_else(|| registry.resolve("Sarabun", FontWeight::Regular, FontStyle::Normal))
-                .unwrap_or(FontKey(0));
+            registry.default_key = registry.resolve_default_key(default_family).unwrap_or(FontKey(0));
         }
 
         Ok(registry)
@@ -55,12 +58,40 @@ impl FontRegistry {
             return Err(LynPdfError::FontNotFound(missing_font_message()));
         }
 
-        self.default_key = self
-            .resolve(default_family, FontWeight::Regular, FontStyle::Normal)
-            .or_else(|| self.resolve("Sarabun", FontWeight::Regular, FontStyle::Normal))
-            .unwrap_or(FontKey(0));
+        self.default_key = self.resolve_default_key(default_family).unwrap_or(FontKey(0));
 
         Ok(())
+    }
+
+    fn resolve_default_key(&self, default_family: &str) -> Option<FontKey> {
+        let mut normalized_seen = HashSet::new();
+        let mut candidates = Vec::new();
+
+        for family in [
+            default_family,
+            "Sarabun",
+            "Waree",
+            "Noto Sans Thai",
+            "Noto Sans",
+            "DejaVu Sans",
+            "Liberation Sans",
+            "Arial",
+            "Helvetica",
+        ] {
+            let normalized = normalize_family(family);
+            if normalized.is_empty() || !normalized_seen.insert(normalized) {
+                continue;
+            }
+            candidates.push(family);
+        }
+
+        for family in candidates {
+            if let Some(key) = self.resolve(family, FontWeight::Regular, FontStyle::Normal) {
+                return Some(key);
+            }
+        }
+
+        None
     }
 
     pub fn resolve(&self, family: &str, weight: FontWeight, style: FontStyle) -> Option<FontKey> {
@@ -453,7 +484,28 @@ fn is_emoji_sequence_control_char(ch: char) -> bool {
 fn font_roots() -> Vec<PathBuf> {
     let manifest = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
     let cwd = std::env::current_dir().unwrap_or_else(|_| manifest.clone());
-    let mut roots = vec![manifest.join("fonts"), cwd.join("fonts")];
+    let mut roots = Vec::new();
+    let mut seen = HashSet::new();
+
+    push_unique_root(&mut roots, &mut seen, manifest.join("fonts"));
+    push_unique_root(&mut roots, &mut seen, manifest.join("..").join("fonts"));
+    push_unique_root(&mut roots, &mut seen, cwd.join("fonts"));
+    push_unique_root(&mut roots, &mut seen, cwd.join("lynpdf-rs").join("fonts"));
+
+    for ancestor in cwd.ancestors() {
+        push_unique_root(&mut roots, &mut seen, ancestor.join("fonts"));
+        push_unique_root(
+            &mut roots,
+            &mut seen,
+            ancestor.join("lynpdf-rs").join("fonts"),
+        );
+    }
+
+    if let Ok(exe_path) = std::env::current_exe() {
+        for ancestor in exe_path.ancestors() {
+            push_unique_root(&mut roots, &mut seen, ancestor.join("fonts"));
+        }
+    }
 
     if let Some(raw) = std::env::var_os("LYNPDF_FONT_DIRS") {
         for path in split_font_dirs(raw.to_string_lossy().as_ref()) {
@@ -462,14 +514,63 @@ fn font_roots() -> Vec<PathBuf> {
                 continue;
             }
             if font_dir.is_absolute() {
-                roots.push(font_dir);
+                push_unique_root(&mut roots, &mut seen, font_dir);
             } else {
-                roots.push(cwd.join(font_dir));
+                push_unique_root(&mut roots, &mut seen, cwd.join(font_dir));
             }
         }
     }
 
     roots
+}
+
+fn system_font_roots() -> Vec<PathBuf> {
+    let mut roots = Vec::new();
+    let mut seen = HashSet::new();
+
+    #[cfg(target_os = "linux")]
+    {
+        push_unique_root(&mut roots, &mut seen, PathBuf::from("/usr/share/fonts"));
+        push_unique_root(&mut roots, &mut seen, PathBuf::from("/usr/local/share/fonts"));
+        if let Some(home) = std::env::var_os("HOME") {
+            let home = PathBuf::from(home);
+            push_unique_root(&mut roots, &mut seen, home.join(".fonts"));
+            push_unique_root(&mut roots, &mut seen, home.join(".local/share/fonts"));
+        }
+    }
+
+    #[cfg(target_os = "macos")]
+    {
+        push_unique_root(&mut roots, &mut seen, PathBuf::from("/System/Library/Fonts"));
+        push_unique_root(&mut roots, &mut seen, PathBuf::from("/Library/Fonts"));
+        if let Some(home) = std::env::var_os("HOME") {
+            push_unique_root(
+                &mut roots,
+                &mut seen,
+                PathBuf::from(home).join("Library/Fonts"),
+            );
+        }
+    }
+
+    #[cfg(target_os = "windows")]
+    {
+        if let Some(win_dir) = std::env::var_os("WINDIR") {
+            push_unique_root(
+                &mut roots,
+                &mut seen,
+                PathBuf::from(win_dir).join("Fonts"),
+            );
+        }
+    }
+
+    roots
+}
+
+fn push_unique_root(roots: &mut Vec<PathBuf>, seen: &mut HashSet<PathBuf>, root: PathBuf) {
+    if !seen.insert(root.clone()) {
+        return;
+    }
+    roots.push(root);
 }
 
 fn split_font_dirs(value: &str) -> Vec<&str> {
@@ -485,7 +586,7 @@ fn split_font_dirs(value: &str) -> Vec<&str> {
 }
 
 fn missing_font_message() -> String {
-    "No usable fonts found. Configure fonts via --font-dir, --font-map, CSS @font-face, or LYNPDF_FONT_DIRS. See README Font Setup section.".to_string()
+    "No usable fonts found after scanning bundled/workspace/system font directories. Configure fonts via --font-dir, --font-map, CSS @font-face, or LYNPDF_FONT_DIRS. See README Font Setup section.".to_string()
 }
 
 fn normalize_family(family: &str) -> String {

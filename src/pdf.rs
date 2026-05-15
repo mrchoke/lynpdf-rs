@@ -6,7 +6,13 @@ use crate::layout::{
 };
 use crate::style::{BorderStyle, Color};
 use crate::types::DocumentMetadata;
+use flate2::write::ZlibEncoder;
+use flate2::Compression;
+use image::{codecs::jpeg::JpegEncoder, ExtendedColorType};
 use std::collections::HashMap;
+use std::io::Write;
+
+const JPEG_IMAGE_QUALITY: u8 = 84;
 
 #[derive(Debug, Clone, Hash, PartialEq, Eq)]
 struct CidKey {
@@ -885,6 +891,17 @@ fn emit_image_xobject(
     rgb_data: &[u8],
     alpha_data: Option<&[u8]>,
 ) -> usize {
+    if alpha_data.is_none() {
+        if let Some(encoded_jpeg) =
+            encode_rgb_to_jpeg(pixel_width, pixel_height, rgb_data, JPEG_IMAGE_QUALITY)
+        {
+            let dict = format!(
+                "/Type /XObject /Subtype /Image /Width {pixel_width} /Height {pixel_height} /ColorSpace /DeviceRGB /BitsPerComponent 8"
+            );
+            return pdf.add_stream_with_filter(dict, &encoded_jpeg, "/DCTDecode");
+        }
+    }
+
     let smask_id = alpha_data.map(|alpha| {
         let dict = format!(
             "/Type /XObject /Subtype /Image /Width {pixel_width} /Height {pixel_height} /ColorSpace /DeviceGray /BitsPerComponent 8"
@@ -1357,6 +1374,23 @@ impl PdfBuilder {
     }
 
     fn add_stream(&mut self, dict: String, data: &[u8]) -> usize {
+        if let Some(compressed) = flate_compress_stream(data) {
+            return self.add_stream_with_filter(dict, &compressed, "/FlateDecode");
+        }
+
+        self.add_stream_uncompressed(dict, data)
+    }
+
+    fn add_stream_with_filter(&mut self, dict: String, data: &[u8], filter: &str) -> usize {
+        let mut bytes =
+            format!("<< {dict} /Filter {filter} /Length {} >>\nstream\n", data.len())
+                .into_bytes();
+        bytes.extend_from_slice(data);
+        bytes.extend_from_slice(b"\nendstream");
+        self.add(bytes)
+    }
+
+    fn add_stream_uncompressed(&mut self, dict: String, data: &[u8]) -> usize {
         let mut bytes = format!("<< {dict} /Length {} >>\nstream\n", data.len()).into_bytes();
         bytes.extend_from_slice(data);
         bytes.extend_from_slice(b"\nendstream");
@@ -1462,4 +1496,37 @@ fn pdf_name(name: &str) -> String {
             }
         })
         .collect()
+}
+
+fn flate_compress_stream(data: &[u8]) -> Option<Vec<u8>> {
+    if data.len() < 96 {
+        return None;
+    }
+
+    let mut encoder = ZlibEncoder::new(Vec::new(), Compression::fast());
+    encoder.write_all(data).ok()?;
+    let compressed = encoder.finish().ok()?;
+
+    (compressed.len() + 16 < data.len()).then_some(compressed)
+}
+
+fn encode_rgb_to_jpeg(
+    pixel_width: u32,
+    pixel_height: u32,
+    rgb_data: &[u8],
+    quality: u8,
+) -> Option<Vec<u8>> {
+    let expected_len = (pixel_width as usize)
+        .checked_mul(pixel_height as usize)?
+        .checked_mul(3)?;
+    if rgb_data.len() != expected_len {
+        return None;
+    }
+
+    let mut encoded = Vec::new();
+    let mut encoder = JpegEncoder::new_with_quality(&mut encoded, quality);
+    encoder
+        .encode(rgb_data, pixel_width, pixel_height, ExtendedColorType::Rgb8)
+        .ok()?;
+    Some(encoded)
 }
