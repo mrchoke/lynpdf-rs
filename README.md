@@ -1,4 +1,4 @@
-# LynPDF RS v0.1.1
+# LynPDF RS v0.1.2
 
 Pure Rust HTML/CSS to PDF renderer focused on Thai documents.
 
@@ -22,7 +22,7 @@ cargo run
 
 ```toml
 [dependencies]
-lynpdf-rs = "0.1.0"
+lynpdf-rs = "0.1.2"
 ```
 
 ```sh
@@ -135,7 +135,7 @@ Current Phase B behavior:
 
 ## Syntax Highlighting (HTML + Markdown)
 
-- Enabled by default in v0.1.1 for `<pre><code>` blocks.
+- Enabled by default in v0.1.2 for `<pre><code>` blocks.
 - HTML and Markdown share the same preprocessing path (`render_html_to_pdf` calls `apply_syntax_highlighting_to_html` first).
 - API: `RenderOptions.enable_syntax_highlighting` and `RenderOptions.syntax_highlight_theme`.
 - Builder helpers: `with_syntax_highlighting(...)` and `with_syntax_highlight_theme(...)`.
@@ -144,7 +144,7 @@ Current Phase B behavior:
 
 ## Single-Page Certificate API
 
-v0.1.1 includes certificate template APIs for full-page A4 portrait/landscape output:
+v0.1.2 includes certificate template APIs for full-page A4 portrait/landscape output:
 
 - `CertificateTemplateOptions`
 - `CertificateOrientation::{Portrait, Landscape}`
@@ -162,6 +162,6 @@ See [docs/rust-architecture.md](docs/rust-architecture.md) for backend decisions
 
 For detailed fixture/example coverage and phased implementation planning, see [docs/feature-coverage-and-roadmap.md](docs/feature-coverage-and-roadmap.md).
 
-Primary API guide: [docs/api-guide-v0.1.1.md](docs/api-guide-v0.1.1.md).
+Primary API guide: [docs/api-guide-v0.1.2.md](docs/api-guide-v0.1.2.md).
 
 Public GitHub Pages guide: https://mrchoke.github.io/lynpdf-rs/

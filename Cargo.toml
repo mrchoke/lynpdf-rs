@@ -1,6 +1,6 @@
 [package]
 name = "lynpdf-rs"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 authors = ["Supphachoke Suntiwichaya <mrchoke@gmail.com>"]
 description = "Pure Rust HTML/CSS to PDF renderer focused on Thai text layout"

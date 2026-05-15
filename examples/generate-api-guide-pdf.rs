@@ -9,14 +9,14 @@ fn main() -> Result<()> {
         .with_syntax_highlight_theme("lynpdf-light");
 
     let pdf = render_file_to_pdf(
-        "docs/api-guide-v0.1.1.md",
+        "docs/api-guide-v0.1.2.md",
         Some("docs/api-guide-theme.css"),
-        "docs/output/api-guide-v0.1.1.pdf",
+        "docs/output/api-guide-v0.1.2.pdf",
         options,
     )?;
 
     println!(
-        "generated docs/output/api-guide-v0.1.1.pdf (pages={}, bytes={})",
+        "generated docs/output/api-guide-v0.1.2.pdf (pages={}, bytes={})",
         pdf.pages,
         pdf.bytes.len()
     );

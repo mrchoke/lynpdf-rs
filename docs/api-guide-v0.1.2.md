@@ -1,8 +1,8 @@
-# LynPDF RS API Guide v0.1.1
+# LynPDF RS API Guide v0.1.2
 
-คู่มือฉบับขยายนี้ครอบคลุม API ที่ใช้งานได้จริงของ LynPDF RS 0.1.1 ตั้งแต่ quick start ไปจนถึงงานเอกสารภาษาไทย, syntax highlight, fit-to-page, diagnostics, และ certificate template แบบ production
+คู่มือฉบับขยายนี้ครอบคลุม API ที่ใช้งานได้จริงของ LynPDF RS 0.1.2 ตั้งแต่ quick start ไปจนถึงงานเอกสารภาษาไทย, syntax highlight, fit-to-page, diagnostics, และ certificate template แบบ production
 
-ไฟล์นี้คือ API Guide หลักของโปรเจกต์ (`docs/api-guide-v0.1.1.md`)
+ไฟล์นี้คือ API Guide หลักของโปรเจกต์ (`docs/api-guide-v0.1.2.md`)
 
 <!-- PDF rendering guard: enforce stable code-block layout and wrapping for long samples. -->
 <style>
@@ -58,7 +58,7 @@ LynPDF RS เวอร์ชัน production setup รองรับการ�
 
 ```toml
 [dependencies]
-lynpdf-rs = "0.1.1"
+lynpdf-rs = "0.1.2"
 ```
 
 ### ตรวจสอบเวอร์ชันจาก runtime
@@ -73,7 +73,7 @@ fn main() {
 
 ---
 
-## 2) Public API Surface (ครบตาม v0.1.1)
+## 2) Public API Surface (ครบตาม v0.1.2)
 
 ### Core functions
 
@@ -304,7 +304,7 @@ pre code {
 }
 ```
 
-เพิ่มเติมใน v0.1.1: ถ้า `<pre>`/`<code>` ไม่มี `style` ระบบจะเติม default style ที่ปลอดภัยให้อัตโนมัติระหว่าง preprocess syntax highlight แต่ถ้ามี `style` อยู่แล้ว ระบบจะไม่ทับของเดิม
+เพิ่มเติมใน v0.1.2: ถ้า `<pre>`/`<code>` ไม่มี `style` ระบบจะเติม default style ที่ปลอดภัยให้อัตโนมัติระหว่าง preprocess syntax highlight แต่ถ้ามี `style` อยู่แล้ว ระบบจะไม่ทับของเดิม
 
 ---
 
@@ -362,8 +362,8 @@ Diagnostic codes ที่เจอบ่อย:
 
 Metadata default เมื่อเอกสารไม่กำหนดเอง:
 
-- Creator: `LynPDF 0.1.1`
-- Producer: `LynPDF RS 0.1.1`
+- Creator: `LynPDF 0.1.2`
+- Producer: `LynPDF RS 0.1.2`
 
 ---
 
@@ -410,4 +410,4 @@ Flags ที่รองรับ:
 
 ---
 
-เอกสารนี้อ้างอิง LynPDF RS 0.1.1 โดยตรง
+เอกสารนี้อ้างอิง LynPDF RS 0.1.2 โดยตรง
